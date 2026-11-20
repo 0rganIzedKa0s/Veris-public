@@ -1,0 +1,3281 @@
+{
+ "recorded_on": "2026-11-20",
+ "device": "Jetson Orin Nano 8GB devkit, 15 W",
+ "model": "gate, detector, text reader and outdoor/indoor/reader adapters on Qwen2.5-VL-3B (Q4_K_M)",
+ "note": "Captured from the board over the same /api/describe path the live demo uses; cold cache, one run each, text and timings verbatim.",
+ "samples": {
+  "outdoor": {
+   "file": "outdoor.jpg",
+   "mode": "outdoor_nav",
+   "title": "Street corner",
+   "alt": "A residential street corner photographed at eye level: a kerb and paved footway in the foreground, a driveway crossing, two parked cars, a white bench and signposts on the right, houses on the left.",
+   "blurb": "A quiet street corner — kerb, driveway crossing, parked cars, a bench.",
+   "credit": "Photo: ManuelB701, CC0",
+   "credit_url": "https://commons.wikimedia.org/wiki/File:Hillesheim_(Rheinhessen),_Continuous_Sidewalk.jpg",
+   "runs": {
+    "outdoor_nav": {
+     "text": "Two cars are ahead of you. A traffic sign is on your right side. The path is clear with no obstacles. This is a residential area with houses on your left.",
+     "trace": {
+      "gate": {
+       "usable": true,
+       "issue": null,
+       "indoor_p": 0.0,
+       "text_p": 0.0,
+       "sharpness": 1.0
+      },
+      "objects": [
+       "car ahead",
+       "car right",
+       "traffic sign right"
+      ],
+      "expert": "outdoor",
+      "backends": {
+       "gate": "tensorrt-fp16",
+       "detector": "tensorrt-fp16",
+       "ocr": "onnxruntime-cpu"
+      }
+     },
+     "ttft_s": 1.59,
+     "total_s": 4.2,
+     "sources": [
+      "expert:outdoor"
+     ],
+     "deltas": [
+      [
+       1.656,
+       "Two"
+      ],
+      [
+       1.739,
+       " cars"
+      ],
+      [
+       1.828,
+       " are"
+      ],
+      [
+       1.902,
+       " ahead"
+      ],
+      [
+       1.975,
+       " of"
+      ],
+      [
+       2.049,
+       " you"
+      ],
+      [
+       2.123,
+       "."
+      ],
+      [
+       2.197,
+       " A"
+      ],
+      [
+       2.271,
+       " traffic"
+      ],
+      [
+       2.344,
+       " sign"
+      ],
+      [
+       2.418,
+       " is"
+      ],
+      [
+       2.492,
+       " on"
+      ],
+      [
+       2.565,
+       " your"
+      ],
+      [
+       2.639,
+       " right"
+      ],
+      [
+       2.712,
+       " side"
+      ],
+      [
+       2.786,
+       "."
+      ],
+      [
+       2.86,
+       " The"
+      ],
+      [
+       2.933,
+       " path"
+      ],
+      [
+       3.007,
+       " is"
+      ],
+      [
+       3.081,
+       " clear"
+      ],
+      [
+       3.155,
+       " with"
+      ],
+      [
+       3.228,
+       " no"
+      ],
+      [
+       3.301,
+       " obstacles"
+      ],
+      [
+       3.375,
+       "."
+      ],
+      [
+       3.449,
+       " This"
+      ],
+      [
+       3.523,
+       " is"
+      ],
+      [
+       3.596,
+       " a"
+      ],
+      [
+       3.67,
+       " residential"
+      ],
+      [
+       3.743,
+       " area"
+      ],
+      [
+       3.817,
+       " with"
+      ],
+      [
+       3.891,
+       " houses"
+      ],
+      [
+       3.965,
+       " on"
+      ],
+      [
+       4.039,
+       " your"
+      ],
+      [
+       4.112,
+       " left"
+      ],
+      [
+       4.186,
+       "."
+      ]
+     ]
+    },
+    "general": {
+     "text": "The image depicts a quiet residential street in a suburban area. The street is paved with asphalt and has a sidewalk on the right side. There are a few parked cars along the street, and the houses on either side are modest in size, with white exteriors and small front yards. The street is lined with trees and bushes, and there is a small bench on the sidewalk. The overall atmosphere is calm and peaceful.",
+     "ttft_s": 3.55,
+     "total_s": 9.46,
+     "deltas": [
+      [
+       3.656,
+       "The"
+      ],
+      [
+       3.732,
+       " image"
+      ],
+      [
+       3.811,
+       " depicts"
+      ],
+      [
+       3.881,
+       " a"
+      ],
+      [
+       3.951,
+       " quiet"
+      ],
+      [
+       4.022,
+       " residential"
+      ],
+      [
+       4.092,
+       " street"
+      ],
+      [
+       4.163,
+       " in"
+      ],
+      [
+       4.232,
+       " a"
+      ],
+      [
+       4.301,
+       " suburban"
+      ],
+      [
+       4.371,
+       " area"
+      ],
+      [
+       4.44,
+       "."
+      ],
+      [
+       4.51,
+       " The"
+      ],
+      [
+       4.579,
+       " street"
+      ],
+      [
+       4.649,
+       " is"
+      ],
+      [
+       4.719,
+       " paved"
+      ],
+      [
+       4.789,
+       " with"
+      ],
+      [
+       4.859,
+       " asphalt"
+      ],
+      [
+       4.929,
+       " and"
+      ],
+      [
+       4.999,
+       " has"
+      ],
+      [
+       5.069,
+       " a"
+      ],
+      [
+       5.14,
+       " sidewalk"
+      ],
+      [
+       5.21,
+       " on"
+      ],
+      [
+       5.28,
+       " the"
+      ],
+      [
+       5.351,
+       " right"
+      ],
+      [
+       5.421,
+       " side"
+      ],
+      [
+       5.491,
+       "."
+      ],
+      [
+       5.561,
+       " There"
+      ],
+      [
+       5.631,
+       " are"
+      ],
+      [
+       5.701,
+       " a"
+      ],
+      [
+       5.772,
+       " few"
+      ],
+      [
+       5.843,
+       " parked"
+      ],
+      [
+       5.913,
+       " cars"
+      ],
+      [
+       5.983,
+       " along"
+      ],
+      [
+       6.053,
+       " the"
+      ],
+      [
+       6.124,
+       " street"
+      ],
+      [
+       6.194,
+       ","
+      ],
+      [
+       6.264,
+       " and"
+      ],
+      [
+       6.334,
+       " the"
+      ],
+      [
+       6.404,
+       " houses"
+      ],
+      [
+       6.475,
+       " on"
+      ],
+      [
+       6.545,
+       " either"
+      ],
+      [
+       6.616,
+       " side"
+      ],
+      [
+       6.686,
+       " are"
+      ],
+      [
+       6.757,
+       " modest"
+      ],
+      [
+       6.827,
+       " in"
+      ],
+      [
+       6.897,
+       " size"
+      ],
+      [
+       6.967,
+       ","
+      ],
+      [
+       7.038,
+       " with"
+      ],
+      [
+       7.108,
+       " white"
+      ],
+      [
+       7.178,
+       " exter"
+      ],
+      [
+       7.249,
+       "iors"
+      ],
+      [
+       7.319,
+       " and"
+      ],
+      [
+       7.389,
+       " small"
+      ],
+      [
+       7.46,
+       " front"
+      ],
+      [
+       7.53,
+       " yards"
+      ],
+      [
+       7.6,
+       "."
+      ],
+      [
+       7.669,
+       " The"
+      ],
+      [
+       7.74,
+       " street"
+      ],
+      [
+       7.811,
+       " is"
+      ],
+      [
+       7.881,
+       " lined"
+      ],
+      [
+       7.951,
+       " with"
+      ],
+      [
+       8.021,
+       " trees"
+      ],
+      [
+       8.092,
+       " and"
+      ],
+      [
+       8.162,
+       " bushes"
+      ],
+      [
+       8.232,
+       ","
+      ],
+      [
+       8.302,
+       " and"
+      ],
+      [
+       8.372,
+       " there"
+      ],
+      [
+       8.443,
+       " is"
+      ],
+      [
+       8.512,
+       " a"
+      ],
+      [
+       8.583,
+       " small"
+      ],
+      [
+       8.653,
+       " bench"
+      ],
+      [
+       8.723,
+       " on"
+      ],
+      [
+       8.794,
+       " the"
+      ],
+      [
+       8.864,
+       " sidewalk"
+      ],
+      [
+       8.935,
+       "."
+      ],
+      [
+       9.005,
+       " The"
+      ],
+      [
+       9.075,
+       " overall"
+      ],
+      [
+       9.145,
+       " atmosphere"
+      ],
+      [
+       9.215,
+       " is"
+      ],
+      [
+       9.286,
+       " calm"
+      ],
+      [
+       9.356,
+       " and"
+      ],
+      [
+       9.426,
+       " peaceful"
+      ],
+      [
+       9.496,
+       "."
+      ]
+     ]
+    }
+   }
+  },
+  "indoor": {
+   "file": "indoor.jpg",
+   "mode": "indoor_nav",
+   "title": "Indoor hall",
+   "alt": "The interior of a large stone hall with a high coffered ceiling, two chandeliers, a wooden bench on the left, café tables and chairs on the right, and an archway at the far end with people walking through it.",
+   "blurb": "A public hall — chandeliers, a bench, café tables, a doorway ahead.",
+   "credit": "Photo: w_lemay, CC BY-SA 2.0",
+   "credit_url": "https://commons.wikimedia.org/wiki/File:Interior,_Grove_Arcade,_Asheville,_NC_-_53418766888.jpg",
+   "runs": {
+    "indoor_nav": {
+     "text": "Person, 12 o'clock, three meters. This is a hallway with a chandelier hanging from the ceiling. There are two people ahead, one near the entrance and another further back. To your right, there are two chairs and a table. To your left, there's another chair and a table. The hallway extends ahead, leading to an open area.",
+     "trace": {
+      "gate": {
+       "usable": true,
+       "issue": null,
+       "indoor_p": 0.98,
+       "text_p": 0.01,
+       "sharpness": 1.0
+      },
+      "objects": [
+       "person ahead 3 m (in path)",
+       "person ahead 3 m (in path)",
+       "chair right 2 m",
+       "table right 2 m",
+       "chair left 2 m",
+       "table right 2 m"
+      ],
+      "expert": "indoor",
+      "backends": {
+       "gate": "tensorrt-fp16",
+       "detector": "tensorrt-fp16",
+       "ocr": "onnxruntime-cpu"
+      }
+     },
+     "ttft_s": 0.23,
+     "total_s": 7.02,
+     "sources": [
+      "reflex",
+      "expert:indoor"
+     ],
+     "deltas": [
+      [
+       0.263,
+       "Person, 12 o'clock, three meters."
+      ],
+      [
+       2.332,
+       " This"
+      ],
+      [
+       2.413,
+       " is"
+      ],
+      [
+       2.497,
+       " a"
+      ],
+      [
+       2.571,
+       " hallway"
+      ],
+      [
+       2.646,
+       " with"
+      ],
+      [
+       2.72,
+       " a"
+      ],
+      [
+       2.795,
+       " ch"
+      ],
+      [
+       2.869,
+       "andelier"
+      ],
+      [
+       2.944,
+       " hanging"
+      ],
+      [
+       3.018,
+       " from"
+      ],
+      [
+       3.092,
+       " the"
+      ],
+      [
+       3.167,
+       " ceiling"
+      ],
+      [
+       3.242,
+       "."
+      ],
+      [
+       3.317,
+       " There"
+      ],
+      [
+       3.391,
+       " are"
+      ],
+      [
+       3.466,
+       " two"
+      ],
+      [
+       3.541,
+       " people"
+      ],
+      [
+       3.616,
+       " ahead"
+      ],
+      [
+       3.69,
+       ","
+      ],
+      [
+       3.765,
+       " one"
+      ],
+      [
+       3.84,
+       " near"
+      ],
+      [
+       3.914,
+       " the"
+      ],
+      [
+       3.988,
+       " entrance"
+      ],
+      [
+       4.063,
+       " and"
+      ],
+      [
+       4.138,
+       " another"
+      ],
+      [
+       4.213,
+       " further"
+      ],
+      [
+       4.287,
+       " back"
+      ],
+      [
+       4.362,
+       "."
+      ],
+      [
+       4.437,
+       " To"
+      ],
+      [
+       4.512,
+       " your"
+      ],
+      [
+       4.586,
+       " right"
+      ],
+      [
+       4.66,
+       ","
+      ],
+      [
+       4.735,
+       " there"
+      ],
+      [
+       4.809,
+       " are"
+      ],
+      [
+       4.883,
+       " two"
+      ],
+      [
+       4.958,
+       " chairs"
+      ],
+      [
+       5.033,
+       " and"
+      ],
+      [
+       5.107,
+       " a"
+      ],
+      [
+       5.182,
+       " table"
+      ],
+      [
+       5.257,
+       "."
+      ],
+      [
+       5.331,
+       " To"
+      ],
+      [
+       5.406,
+       " your"
+      ],
+      [
+       5.482,
+       " left"
+      ],
+      [
+       5.557,
+       ","
+      ],
+      [
+       5.631,
+       " there"
+      ],
+      [
+       5.706,
+       "'s"
+      ],
+      [
+       5.781,
+       " another"
+      ],
+      [
+       5.856,
+       " chair"
+      ],
+      [
+       5.93,
+       " and"
+      ],
+      [
+       6.005,
+       " a"
+      ],
+      [
+       6.079,
+       " table"
+      ],
+      [
+       6.154,
+       "."
+      ],
+      [
+       6.229,
+       " The"
+      ],
+      [
+       6.303,
+       " hallway"
+      ],
+      [
+       6.378,
+       " extends"
+      ],
+      [
+       6.452,
+       " ahead"
+      ],
+      [
+       6.527,
+       ","
+      ],
+      [
+       6.601,
+       " leading"
+      ],
+      [
+       6.675,
+       " to"
+      ],
+      [
+       6.75,
+       " an"
+      ],
+      [
+       6.824,
+       " open"
+      ],
+      [
+       6.898,
+       " area"
+      ],
+      [
+       6.973,
+       "."
+      ]
+     ]
+    },
+    "general": {
+     "text": "The image depicts a spacious, well-lit interior, likely a public building or a large hall. The ceiling features a grid of square panels, and there are two ornate chandeliers hanging from the ceiling, one of which is more prominent and larger than the other. The walls are adorned with decorative moldings and arches, adding to the architectural elegance of the space.\n\nOn the left side of the image, there is a wooden bench with a simple design. In the center, there is a large, open space with a few people visible in the distance, suggesting a social or communal area. The floor is polished and reflective, enhancing the spaciousness of the room.\n\nOn the right side, there is a seating area with several tables and chairs. The tables are simple and functional, and there are a few people seated, indicating that this area is used for dining or casual meetings. The walls in this area are decorated with posters or signs, possibly indicating the name of the building or the",
+     "ttft_s": 3.56,
+     "total_s": 17.59,
+     "deltas": [
+      [
+       3.665,
+       "The"
+      ],
+      [
+       3.741,
+       " image"
+      ],
+      [
+       3.82,
+       " depicts"
+      ],
+      [
+       3.891,
+       " a"
+      ],
+      [
+       3.961,
+       " spacious"
+      ],
+      [
+       4.032,
+       ","
+      ],
+      [
+       4.102,
+       " well"
+      ],
+      [
+       4.173,
+       "-l"
+      ],
+      [
+       4.243,
+       "it"
+      ],
+      [
+       4.313,
+       " interior"
+      ],
+      [
+       4.383,
+       ","
+      ],
+      [
+       4.454,
+       " likely"
+      ],
+      [
+       4.524,
+       " a"
+      ],
+      [
+       4.594,
+       " public"
+      ],
+      [
+       4.664,
+       " building"
+      ],
+      [
+       4.735,
+       " or"
+      ],
+      [
+       4.805,
+       " a"
+      ],
+      [
+       4.875,
+       " large"
+      ],
+      [
+       4.946,
+       " hall"
+      ],
+      [
+       5.016,
+       "."
+      ],
+      [
+       5.086,
+       " The"
+      ],
+      [
+       5.157,
+       " ceiling"
+      ],
+      [
+       5.227,
+       " features"
+      ],
+      [
+       5.298,
+       " a"
+      ],
+      [
+       5.368,
+       " grid"
+      ],
+      [
+       5.438,
+       " of"
+      ],
+      [
+       5.509,
+       " square"
+      ],
+      [
+       5.579,
+       " panels"
+      ],
+      [
+       5.649,
+       ","
+      ],
+      [
+       5.72,
+       " and"
+      ],
+      [
+       5.79,
+       " there"
+      ],
+      [
+       5.86,
+       " are"
+      ],
+      [
+       5.93,
+       " two"
+      ],
+      [
+       6.001,
+       " orn"
+      ],
+      [
+       6.071,
+       "ate"
+      ],
+      [
+       6.141,
+       " ch"
+      ],
+      [
+       6.212,
+       "andel"
+      ],
+      [
+       6.282,
+       "iers"
+      ],
+      [
+       6.352,
+       " hanging"
+      ],
+      [
+       6.422,
+       " from"
+      ],
+      [
+       6.493,
+       " the"
+      ],
+      [
+       6.563,
+       " ceiling"
+      ],
+      [
+       6.633,
+       ","
+      ],
+      [
+       6.704,
+       " one"
+      ],
+      [
+       6.774,
+       " of"
+      ],
+      [
+       6.844,
+       " which"
+      ],
+      [
+       6.915,
+       " is"
+      ],
+      [
+       6.985,
+       " more"
+      ],
+      [
+       7.055,
+       " prominent"
+      ],
+      [
+       7.125,
+       " and"
+      ],
+      [
+       7.196,
+       " larger"
+      ],
+      [
+       7.266,
+       " than"
+      ],
+      [
+       7.337,
+       " the"
+      ],
+      [
+       7.407,
+       " other"
+      ],
+      [
+       7.477,
+       "."
+      ],
+      [
+       7.547,
+       " The"
+      ],
+      [
+       7.618,
+       " walls"
+      ],
+      [
+       7.688,
+       " are"
+      ],
+      [
+       7.758,
+       " adorned"
+      ],
+      [
+       7.828,
+       " with"
+      ],
+      [
+       7.899,
+       " decorative"
+      ],
+      [
+       7.969,
+       " mold"
+      ],
+      [
+       8.04,
+       "ings"
+      ],
+      [
+       8.11,
+       " and"
+      ],
+      [
+       8.18,
+       " arch"
+      ],
+      [
+       8.25,
+       "es"
+      ],
+      [
+       8.321,
+       ","
+      ],
+      [
+       8.391,
+       " adding"
+      ],
+      [
+       8.461,
+       " to"
+      ],
+      [
+       8.532,
+       " the"
+      ],
+      [
+       8.602,
+       " architectural"
+      ],
+      [
+       8.672,
+       " elegance"
+      ],
+      [
+       8.743,
+       " of"
+      ],
+      [
+       8.813,
+       " the"
+      ],
+      [
+       8.884,
+       " space"
+      ],
+      [
+       8.954,
+       ".\n\n"
+      ],
+      [
+       9.024,
+       "On"
+      ],
+      [
+       9.094,
+       " the"
+      ],
+      [
+       9.164,
+       " left"
+      ],
+      [
+       9.234,
+       " side"
+      ],
+      [
+       9.305,
+       " of"
+      ],
+      [
+       9.376,
+       " the"
+      ],
+      [
+       9.446,
+       " image"
+      ],
+      [
+       9.516,
+       ","
+      ],
+      [
+       9.586,
+       " there"
+      ],
+      [
+       9.657,
+       " is"
+      ],
+      [
+       9.727,
+       " a"
+      ],
+      [
+       9.797,
+       " wooden"
+      ],
+      [
+       9.868,
+       " bench"
+      ],
+      [
+       9.938,
+       " with"
+      ],
+      [
+       10.009,
+       " a"
+      ],
+      [
+       10.079,
+       " simple"
+      ],
+      [
+       10.149,
+       " design"
+      ],
+      [
+       10.22,
+       "."
+      ],
+      [
+       10.29,
+       " In"
+      ],
+      [
+       10.364,
+       " the"
+      ],
+      [
+       10.434,
+       " center"
+      ],
+      [
+       10.505,
+       ","
+      ],
+      [
+       10.575,
+       " there"
+      ],
+      [
+       10.645,
+       " is"
+      ],
+      [
+       10.715,
+       " a"
+      ],
+      [
+       10.785,
+       " large"
+      ],
+      [
+       10.855,
+       ","
+      ],
+      [
+       10.925,
+       " open"
+      ],
+      [
+       10.996,
+       " space"
+      ],
+      [
+       11.066,
+       " with"
+      ],
+      [
+       11.136,
+       " a"
+      ],
+      [
+       11.206,
+       " few"
+      ],
+      [
+       11.277,
+       " people"
+      ],
+      [
+       11.348,
+       " visible"
+      ],
+      [
+       11.418,
+       " in"
+      ],
+      [
+       11.488,
+       " the"
+      ],
+      [
+       11.558,
+       " distance"
+      ],
+      [
+       11.628,
+       ","
+      ],
+      [
+       11.699,
+       " suggesting"
+      ],
+      [
+       11.769,
+       " a"
+      ],
+      [
+       11.84,
+       " social"
+      ],
+      [
+       11.91,
+       " or"
+      ],
+      [
+       11.98,
+       " communal"
+      ],
+      [
+       12.051,
+       " area"
+      ],
+      [
+       12.121,
+       "."
+      ],
+      [
+       12.191,
+       " The"
+      ],
+      [
+       12.261,
+       " floor"
+      ],
+      [
+       12.332,
+       " is"
+      ],
+      [
+       12.402,
+       " polished"
+      ],
+      [
+       12.472,
+       " and"
+      ],
+      [
+       12.542,
+       " reflective"
+      ],
+      [
+       12.613,
+       ","
+      ],
+      [
+       12.684,
+       " enhancing"
+      ],
+      [
+       12.754,
+       " the"
+      ],
+      [
+       12.824,
+       " spacious"
+      ],
+      [
+       12.895,
+       "ness"
+      ],
+      [
+       12.965,
+       " of"
+      ],
+      [
+       13.035,
+       " the"
+      ],
+      [
+       13.105,
+       " room"
+      ],
+      [
+       13.176,
+       ".\n\n"
+      ],
+      [
+       13.246,
+       "On"
+      ],
+      [
+       13.316,
+       " the"
+      ],
+      [
+       13.387,
+       " right"
+      ],
+      [
+       13.457,
+       " side"
+      ],
+      [
+       13.527,
+       ","
+      ],
+      [
+       13.597,
+       " there"
+      ],
+      [
+       13.667,
+       " is"
+      ],
+      [
+       13.737,
+       " a"
+      ],
+      [
+       13.808,
+       " seating"
+      ],
+      [
+       13.878,
+       " area"
+      ],
+      [
+       13.948,
+       " with"
+      ],
+      [
+       14.019,
+       " several"
+      ],
+      [
+       14.089,
+       " tables"
+      ],
+      [
+       14.16,
+       " and"
+      ],
+      [
+       14.23,
+       " chairs"
+      ],
+      [
+       14.3,
+       "."
+      ],
+      [
+       14.37,
+       " The"
+      ],
+      [
+       14.441,
+       " tables"
+      ],
+      [
+       14.511,
+       " are"
+      ],
+      [
+       14.582,
+       " simple"
+      ],
+      [
+       14.652,
+       " and"
+      ],
+      [
+       14.722,
+       " functional"
+      ],
+      [
+       14.792,
+       ","
+      ],
+      [
+       14.862,
+       " and"
+      ],
+      [
+       14.931,
+       " there"
+      ],
+      [
+       15.002,
+       " are"
+      ],
+      [
+       15.072,
+       " a"
+      ],
+      [
+       15.143,
+       " few"
+      ],
+      [
+       15.214,
+       " people"
+      ],
+      [
+       15.284,
+       " seated"
+      ],
+      [
+       15.354,
+       ","
+      ],
+      [
+       15.425,
+       " indicating"
+      ],
+      [
+       15.495,
+       " that"
+      ],
+      [
+       15.565,
+       " this"
+      ],
+      [
+       15.635,
+       " area"
+      ],
+      [
+       15.706,
+       " is"
+      ],
+      [
+       15.777,
+       " used"
+      ],
+      [
+       15.847,
+       " for"
+      ],
+      [
+       15.917,
+       " dining"
+      ],
+      [
+       15.988,
+       " or"
+      ],
+      [
+       16.058,
+       " casual"
+      ],
+      [
+       16.134,
+       " meetings"
+      ],
+      [
+       16.211,
+       "."
+      ],
+      [
+       16.282,
+       " The"
+      ],
+      [
+       16.352,
+       " walls"
+      ],
+      [
+       16.423,
+       " in"
+      ],
+      [
+       16.493,
+       " this"
+      ],
+      [
+       16.564,
+       " area"
+      ],
+      [
+       16.635,
+       " are"
+      ],
+      [
+       16.706,
+       " decorated"
+      ],
+      [
+       16.776,
+       " with"
+      ],
+      [
+       16.847,
+       " posters"
+      ],
+      [
+       16.918,
+       " or"
+      ],
+      [
+       16.988,
+       " signs"
+      ],
+      [
+       17.059,
+       ","
+      ],
+      [
+       17.129,
+       " possibly"
+      ],
+      [
+       17.2,
+       " indicating"
+      ],
+      [
+       17.271,
+       " the"
+      ],
+      [
+       17.341,
+       " name"
+      ],
+      [
+       17.412,
+       " of"
+      ],
+      [
+       17.482,
+       " the"
+      ],
+      [
+       17.552,
+       " building"
+      ],
+      [
+       17.622,
+       " or"
+      ],
+      [
+       17.693,
+       " the"
+      ]
+     ]
+    }
+   }
+  },
+  "text": {
+   "file": "text.jpg",
+   "mode": "text_reading",
+   "title": "Menu board",
+   "alt": "A café chalkboard menu seen from the side, listing focaccias, croissants, a platter of dips, eggs and bacon, cakes and coffee, home-style bread, iced coffee and iced chocolate. The top and right edge of the board are cut off. Behind it a blurred street with pedestrians and a bicycle.",
+   "blurb": "A handwritten café menu — with its top line cut off by the frame.",
+   "credit": "Photo: Peter Miranda, CC0",
+   "credit_url": "https://commons.wikimedia.org/wiki/File:Cafe_menu_(Unsplash).jpg",
+   "runs": {
+    "text_reading": {
+     "text": "Person, 11 o'clock, two meters. FOCACCIA, PIES, CRUSTANS, PLOTTER OF DIPS, EGGS AND BACON, CAKES AND COFFEE, HOMEMADE BREAD, NED COFFEE, LVED CHOCOLATE, CAKES MADE TO ORDER.",
+     "trace": {
+      "gate": {
+       "usable": true,
+       "issue": null,
+       "indoor_p": 0.12,
+       "text_p": 0.01,
+       "sharpness": 0.06
+      },
+      "objects": [
+       "person right 3 m (in path)",
+       "person left 3 m (in path)",
+       "person left 3 m"
+      ],
+      "expert": "reader",
+      "backends": {
+       "gate": "tensorrt-fp16",
+       "detector": "tensorrt-fp16",
+       "ocr": "onnxruntime-cpu"
+      }
+     },
+     "ttft_s": 0.21,
+     "total_s": 6.49,
+     "sources": [
+      "reflex",
+      "expert:reader"
+     ],
+     "deltas": [
+      [
+       0.239,
+       "Person, 11 o'clock, two meters."
+      ],
+      [
+       2.024,
+       " FO"
+      ],
+      [
+       2.107,
+       "C"
+      ],
+      [
+       2.196,
+       "ACC"
+      ],
+      [
+       2.271,
+       "IA"
+      ],
+      [
+       2.345,
+       ","
+      ],
+      [
+       2.419,
+       " P"
+      ],
+      [
+       2.494,
+       "IES"
+      ],
+      [
+       2.568,
+       ","
+      ],
+      [
+       2.642,
+       " CR"
+      ],
+      [
+       2.717,
+       "UST"
+      ],
+      [
+       2.791,
+       "ANS"
+      ],
+      [
+       2.865,
+       ","
+      ],
+      [
+       2.939,
+       " P"
+      ],
+      [
+       3.014,
+       "LOT"
+      ],
+      [
+       3.088,
+       "TER"
+      ],
+      [
+       3.162,
+       " OF"
+      ],
+      [
+       3.236,
+       " D"
+      ],
+      [
+       3.31,
+       "IPS"
+      ],
+      [
+       3.384,
+       ","
+      ],
+      [
+       3.458,
+       " EG"
+      ],
+      [
+       3.532,
+       "GS"
+      ],
+      [
+       3.607,
+       " AND"
+      ],
+      [
+       3.682,
+       " B"
+      ],
+      [
+       3.755,
+       "AC"
+      ],
+      [
+       3.829,
+       "ON"
+      ],
+      [
+       3.904,
+       ","
+      ],
+      [
+       3.978,
+       " CA"
+      ],
+      [
+       4.052,
+       "K"
+      ],
+      [
+       4.126,
+       "ES"
+      ],
+      [
+       4.201,
+       " AND"
+      ],
+      [
+       4.275,
+       " CO"
+      ],
+      [
+       4.349,
+       "FF"
+      ],
+      [
+       4.423,
+       "EE"
+      ],
+      [
+       4.497,
+       ","
+      ],
+      [
+       4.571,
+       " H"
+      ],
+      [
+       4.646,
+       "OMEM"
+      ],
+      [
+       4.72,
+       "ADE"
+      ],
+      [
+       4.794,
+       " B"
+      ],
+      [
+       4.868,
+       "READ"
+      ],
+      [
+       4.942,
+       ","
+      ],
+      [
+       5.015,
+       " N"
+      ],
+      [
+       5.09,
+       "ED"
+      ],
+      [
+       5.164,
+       " CO"
+      ],
+      [
+       5.238,
+       "FF"
+      ],
+      [
+       5.313,
+       "EE"
+      ],
+      [
+       5.387,
+       ","
+      ],
+      [
+       5.461,
+       " L"
+      ],
+      [
+       5.535,
+       "VED"
+      ],
+      [
+       5.61,
+       " CH"
+      ],
+      [
+       5.684,
+       "OC"
+      ],
+      [
+       5.758,
+       "OL"
+      ],
+      [
+       5.833,
+       "ATE"
+      ],
+      [
+       5.907,
+       ","
+      ],
+      [
+       5.981,
+       " CA"
+      ],
+      [
+       6.057,
+       "K"
+      ],
+      [
+       6.131,
+       "ES"
+      ],
+      [
+       6.205,
+       " MADE"
+      ],
+      [
+       6.289,
+       " TO"
+      ],
+      [
+       6.374,
+       " ORDER"
+      ],
+      [
+       6.449,
+       "."
+      ]
+     ]
+    },
+    "general": {
+     "text": "The image depicts a street scene with a focus on a chalkboard menu. The menu lists various food items, including pastries, pies, dips, eggs and bacon, cakes, coffee, and other baked goods. The background is blurred, showing people walking and a bus, suggesting an urban setting. The overall atmosphere appears to be casual and bustling, typical of a busy street in a city.",
+     "ttft_s": 2.96,
+     "total_s": 8.54,
+     "deltas": [
+      [
+       3.068,
+       "The"
+      ],
+      [
+       3.145,
+       " image"
+      ],
+      [
+       3.222,
+       " depicts"
+      ],
+      [
+       3.302,
+       " a"
+      ],
+      [
+       3.372,
+       " street"
+      ],
+      [
+       3.443,
+       " scene"
+      ],
+      [
+       3.513,
+       " with"
+      ],
+      [
+       3.583,
+       " a"
+      ],
+      [
+       3.654,
+       " focus"
+      ],
+      [
+       3.724,
+       " on"
+      ],
+      [
+       3.794,
+       " a"
+      ],
+      [
+       3.865,
+       " chalk"
+      ],
+      [
+       3.935,
+       "board"
+      ],
+      [
+       4.005,
+       " menu"
+      ],
+      [
+       4.076,
+       "."
+      ],
+      [
+       4.146,
+       " The"
+      ],
+      [
+       4.216,
+       " menu"
+      ],
+      [
+       4.286,
+       " lists"
+      ],
+      [
+       4.357,
+       " various"
+      ],
+      [
+       4.428,
+       " food"
+      ],
+      [
+       4.497,
+       " items"
+      ],
+      [
+       4.568,
+       ","
+      ],
+      [
+       4.639,
+       " including"
+      ],
+      [
+       4.709,
+       " past"
+      ],
+      [
+       4.779,
+       "ries"
+      ],
+      [
+       4.849,
+       ","
+      ],
+      [
+       4.92,
+       " pies"
+      ],
+      [
+       4.99,
+       ","
+      ],
+      [
+       5.061,
+       " dips"
+      ],
+      [
+       5.131,
+       ","
+      ],
+      [
+       5.201,
+       " eggs"
+      ],
+      [
+       5.275,
+       " and"
+      ],
+      [
+       5.346,
+       " bacon"
+      ],
+      [
+       5.416,
+       ","
+      ],
+      [
+       5.486,
+       " cakes"
+      ],
+      [
+       5.557,
+       ","
+      ],
+      [
+       5.626,
+       " coffee"
+      ],
+      [
+       5.697,
+       ","
+      ],
+      [
+       5.767,
+       " and"
+      ],
+      [
+       5.838,
+       " other"
+      ],
+      [
+       5.908,
+       " baked"
+      ],
+      [
+       5.978,
+       " goods"
+      ],
+      [
+       6.049,
+       "."
+      ],
+      [
+       6.119,
+       " The"
+      ],
+      [
+       6.189,
+       " background"
+      ],
+      [
+       6.26,
+       " is"
+      ],
+      [
+       6.33,
+       " blurred"
+      ],
+      [
+       6.4,
+       ","
+      ],
+      [
+       6.471,
+       " showing"
+      ],
+      [
+       6.541,
+       " people"
+      ],
+      [
+       6.611,
+       " walking"
+      ],
+      [
+       6.682,
+       " and"
+      ],
+      [
+       6.752,
+       " a"
+      ],
+      [
+       6.822,
+       " bus"
+      ],
+      [
+       6.893,
+       ","
+      ],
+      [
+       6.962,
+       " suggesting"
+      ],
+      [
+       7.033,
+       " an"
+      ],
+      [
+       7.103,
+       " urban"
+      ],
+      [
+       7.174,
+       " setting"
+      ],
+      [
+       7.244,
+       "."
+      ],
+      [
+       7.314,
+       " The"
+      ],
+      [
+       7.385,
+       " overall"
+      ],
+      [
+       7.456,
+       " atmosphere"
+      ],
+      [
+       7.525,
+       " appears"
+      ],
+      [
+       7.596,
+       " to"
+      ],
+      [
+       7.666,
+       " be"
+      ],
+      [
+       7.736,
+       " casual"
+      ],
+      [
+       7.806,
+       " and"
+      ],
+      [
+       7.877,
+       " bustling"
+      ],
+      [
+       7.947,
+       ","
+      ],
+      [
+       8.017,
+       " typical"
+      ],
+      [
+       8.088,
+       " of"
+      ],
+      [
+       8.158,
+       " a"
+      ],
+      [
+       8.228,
+       " busy"
+      ],
+      [
+       8.299,
+       " street"
+      ],
+      [
+       8.369,
+       " in"
+      ],
+      [
+       8.439,
+       " a"
+      ],
+      [
+       8.51,
+       " city"
+      ],
+      [
+       8.58,
+       "."
+      ]
+     ]
+    }
+   }
+  },
+  "scene": {
+   "file": "scene.jpg",
+   "mode": "describe",
+   "title": "Café interior",
+   "alt": "A small café interior: a lit serving counter on the left with someone working behind it, three occupied tables with cups and a laptop, paintings on the grey walls and a wooden ceiling.",
+   "blurb": "A small café — a counter, three occupied tables, art on the walls.",
+   "credit": "Photo: Petterin, CC BY-SA 4.0",
+   "credit_url": "https://commons.wikimedia.org/wiki/File:Myyr_York_Cafe.jpg",
+   "runs": {
+    "describe": {
+     "text": "Chair, 12 o'clock, two meters. This is a dining area. There are two chairs directly ahead, blocking your path. To the left, there's a dining table with a chair. To the right, there's another dining table with a chair. Ahead, there's a person sitting at a table. To the right, there's a dining table with a chair.",
+     "trace": {
+      "gate": {
+       "usable": true,
+       "issue": null,
+       "indoor_p": 1.0,
+       "text_p": 0.07,
+       "sharpness": 1.0
+      },
+      "objects": [
+       "chair left within reach (in path)",
+       "table left within reach (in path)",
+       "chair right 3 m (in path)",
+       "person ahead 3 m (in path)",
+       "table left 3 m (in path)",
+       "chair left 4 m (in path)"
+      ],
+      "expert": "indoor",
+      "backends": {
+       "gate": "tensorrt-fp16",
+       "detector": "tensorrt-fp16",
+       "ocr": "onnxruntime-cpu"
+      }
+     },
+     "ttft_s": 0.24,
+     "total_s": 7.35,
+     "sources": [
+      "reflex",
+      "expert:indoor"
+     ],
+     "deltas": [
+      [
+       0.278,
+       "Chair, 12 o'clock, two meters."
+      ],
+      [
+       2.379,
+       " This"
+      ],
+      [
+       2.461,
+       " is"
+      ],
+      [
+       2.546,
+       " a"
+      ],
+      [
+       2.621,
+       " dining"
+      ],
+      [
+       2.695,
+       " area"
+      ],
+      [
+       2.77,
+       "."
+      ],
+      [
+       2.844,
+       " There"
+      ],
+      [
+       2.919,
+       " are"
+      ],
+      [
+       2.993,
+       " two"
+      ],
+      [
+       3.067,
+       " chairs"
+      ],
+      [
+       3.141,
+       " directly"
+      ],
+      [
+       3.216,
+       " ahead"
+      ],
+      [
+       3.291,
+       ","
+      ],
+      [
+       3.365,
+       " blocking"
+      ],
+      [
+       3.44,
+       " your"
+      ],
+      [
+       3.514,
+       " path"
+      ],
+      [
+       3.588,
+       "."
+      ],
+      [
+       3.663,
+       " To"
+      ],
+      [
+       3.737,
+       " the"
+      ],
+      [
+       3.812,
+       " left"
+      ],
+      [
+       3.886,
+       ","
+      ],
+      [
+       3.961,
+       " there"
+      ],
+      [
+       4.035,
+       "'s"
+      ],
+      [
+       4.109,
+       " a"
+      ],
+      [
+       4.184,
+       " dining"
+      ],
+      [
+       4.258,
+       " table"
+      ],
+      [
+       4.333,
+       " with"
+      ],
+      [
+       4.407,
+       " a"
+      ],
+      [
+       4.481,
+       " chair"
+      ],
+      [
+       4.556,
+       "."
+      ],
+      [
+       4.63,
+       " To"
+      ],
+      [
+       4.704,
+       " the"
+      ],
+      [
+       4.779,
+       " right"
+      ],
+      [
+       4.853,
+       ","
+      ],
+      [
+       4.928,
+       " there"
+      ],
+      [
+       5.002,
+       "'s"
+      ],
+      [
+       5.076,
+       " another"
+      ],
+      [
+       5.15,
+       " dining"
+      ],
+      [
+       5.224,
+       " table"
+      ],
+      [
+       5.299,
+       " with"
+      ],
+      [
+       5.374,
+       " a"
+      ],
+      [
+       5.448,
+       " chair"
+      ],
+      [
+       5.523,
+       "."
+      ],
+      [
+       5.597,
+       " Ahead"
+      ],
+      [
+       5.671,
+       ","
+      ],
+      [
+       5.745,
+       " there"
+      ],
+      [
+       5.82,
+       "'s"
+      ],
+      [
+       5.894,
+       " a"
+      ],
+      [
+       5.969,
+       " person"
+      ],
+      [
+       6.043,
+       " sitting"
+      ],
+      [
+       6.117,
+       " at"
+      ],
+      [
+       6.191,
+       " a"
+      ],
+      [
+       6.266,
+       " table"
+      ],
+      [
+       6.339,
+       "."
+      ],
+      [
+       6.415,
+       " To"
+      ],
+      [
+       6.489,
+       " the"
+      ],
+      [
+       6.563,
+       " right"
+      ],
+      [
+       6.637,
+       ","
+      ],
+      [
+       6.712,
+       " there"
+      ],
+      [
+       6.786,
+       "'s"
+      ],
+      [
+       6.86,
+       " a"
+      ],
+      [
+       6.935,
+       " dining"
+      ],
+      [
+       7.009,
+       " table"
+      ],
+      [
+       7.083,
+       " with"
+      ],
+      [
+       7.158,
+       " a"
+      ],
+      [
+       7.232,
+       " chair"
+      ],
+      [
+       7.307,
+       "."
+      ]
+     ]
+    },
+    "general": {
+     "text": "The image depicts a cozy, modern café or restaurant with a warm and inviting atmosphere. The interior features a mix of contemporary and retro design elements. \n\nIn the foreground, there are several tables and chairs arranged in a semi-circle, with a few patrons seated. The tables are set with simple, elegant tableware, including white plates, cups, and a few small items like napkins and cutlery. The chairs are a mix of modern and vintage styles, with some having a retro orange hue and others in a more contemporary design.\n\nThe walls are adorned with various pieces of art, including abstract paintings in vibrant colors. The ceiling is wooden, adding to the warm ambiance. There is a counter area with a few shelves displaying various items, possibly for sale or as decorative elements.\n\nThe overall setting suggests a relaxed and comfortable environment, ideal for a casual meal or a quiet conversation.",
+     "ttft_s": 3.56,
+     "total_s": 16.03,
+     "deltas": [
+      [
+       3.665,
+       "The"
+      ],
+      [
+       3.74,
+       " image"
+      ],
+      [
+       3.819,
+       " depicts"
+      ],
+      [
+       3.889,
+       " a"
+      ],
+      [
+       3.96,
+       " cozy"
+      ],
+      [
+       4.03,
+       ","
+      ],
+      [
+       4.1,
+       " modern"
+      ],
+      [
+       4.171,
+       " café"
+      ],
+      [
+       4.241,
+       " or"
+      ],
+      [
+       4.311,
+       " restaurant"
+      ],
+      [
+       4.381,
+       " with"
+      ],
+      [
+       4.452,
+       " a"
+      ],
+      [
+       4.522,
+       " warm"
+      ],
+      [
+       4.593,
+       " and"
+      ],
+      [
+       4.663,
+       " inviting"
+      ],
+      [
+       4.733,
+       " atmosphere"
+      ],
+      [
+       4.804,
+       "."
+      ],
+      [
+       4.874,
+       " The"
+      ],
+      [
+       4.945,
+       " interior"
+      ],
+      [
+       5.015,
+       " features"
+      ],
+      [
+       5.085,
+       " a"
+      ],
+      [
+       5.156,
+       " mix"
+      ],
+      [
+       5.226,
+       " of"
+      ],
+      [
+       5.296,
+       " contemporary"
+      ],
+      [
+       5.367,
+       " and"
+      ],
+      [
+       5.437,
+       " retro"
+      ],
+      [
+       5.507,
+       " design"
+      ],
+      [
+       5.577,
+       " elements"
+      ],
+      [
+       5.647,
+       "."
+      ],
+      [
+       5.718,
+       " \n\n"
+      ],
+      [
+       5.788,
+       "In"
+      ],
+      [
+       5.858,
+       " the"
+      ],
+      [
+       5.928,
+       " foreground"
+      ],
+      [
+       5.998,
+       ","
+      ],
+      [
+       6.068,
+       " there"
+      ],
+      [
+       6.139,
+       " are"
+      ],
+      [
+       6.209,
+       " several"
+      ],
+      [
+       6.28,
+       " tables"
+      ],
+      [
+       6.35,
+       " and"
+      ],
+      [
+       6.42,
+       " chairs"
+      ],
+      [
+       6.49,
+       " arranged"
+      ],
+      [
+       6.56,
+       " in"
+      ],
+      [
+       6.631,
+       " a"
+      ],
+      [
+       6.701,
+       " semi"
+      ],
+      [
+       6.771,
+       "-circle"
+      ],
+      [
+       6.841,
+       ","
+      ],
+      [
+       6.911,
+       " with"
+      ],
+      [
+       6.982,
+       " a"
+      ],
+      [
+       7.052,
+       " few"
+      ],
+      [
+       7.122,
+       " patrons"
+      ],
+      [
+       7.193,
+       " seated"
+      ],
+      [
+       7.263,
+       "."
+      ],
+      [
+       7.333,
+       " The"
+      ],
+      [
+       7.404,
+       " tables"
+      ],
+      [
+       7.474,
+       " are"
+      ],
+      [
+       7.544,
+       " set"
+      ],
+      [
+       7.615,
+       " with"
+      ],
+      [
+       7.685,
+       " simple"
+      ],
+      [
+       7.755,
+       ","
+      ],
+      [
+       7.825,
+       " elegant"
+      ],
+      [
+       7.896,
+       " table"
+      ],
+      [
+       7.966,
+       "ware"
+      ],
+      [
+       8.037,
+       ","
+      ],
+      [
+       8.107,
+       " including"
+      ],
+      [
+       8.177,
+       " white"
+      ],
+      [
+       8.248,
+       " plates"
+      ],
+      [
+       8.318,
+       ","
+      ],
+      [
+       8.388,
+       " cups"
+      ],
+      [
+       8.459,
+       ","
+      ],
+      [
+       8.529,
+       " and"
+      ],
+      [
+       8.599,
+       " a"
+      ],
+      [
+       8.669,
+       " few"
+      ],
+      [
+       8.739,
+       " small"
+      ],
+      [
+       8.809,
+       " items"
+      ],
+      [
+       8.88,
+       " like"
+      ],
+      [
+       8.95,
+       " nap"
+      ],
+      [
+       9.02,
+       "kins"
+      ],
+      [
+       9.09,
+       " and"
+      ],
+      [
+       9.161,
+       " cut"
+      ],
+      [
+       9.231,
+       "l"
+      ],
+      [
+       9.301,
+       "ery"
+      ],
+      [
+       9.372,
+       "."
+      ],
+      [
+       9.442,
+       " The"
+      ],
+      [
+       9.512,
+       " chairs"
+      ],
+      [
+       9.582,
+       " are"
+      ],
+      [
+       9.653,
+       " a"
+      ],
+      [
+       9.723,
+       " mix"
+      ],
+      [
+       9.793,
+       " of"
+      ],
+      [
+       9.864,
+       " modern"
+      ],
+      [
+       9.934,
+       " and"
+      ],
+      [
+       10.004,
+       " vintage"
+      ],
+      [
+       10.075,
+       " styles"
+      ],
+      [
+       10.145,
+       ","
+      ],
+      [
+       10.216,
+       " with"
+      ],
+      [
+       10.286,
+       " some"
+      ],
+      [
+       10.36,
+       " having"
+      ],
+      [
+       10.43,
+       " a"
+      ],
+      [
+       10.501,
+       " retro"
+      ],
+      [
+       10.571,
+       " orange"
+      ],
+      [
+       10.641,
+       " hue"
+      ],
+      [
+       10.711,
+       " and"
+      ],
+      [
+       10.782,
+       " others"
+      ],
+      [
+       10.852,
+       " in"
+      ],
+      [
+       10.922,
+       " a"
+      ],
+      [
+       10.992,
+       " more"
+      ],
+      [
+       11.063,
+       " contemporary"
+      ],
+      [
+       11.133,
+       " design"
+      ],
+      [
+       11.203,
+       ".\n\n"
+      ],
+      [
+       11.273,
+       "The"
+      ],
+      [
+       11.344,
+       " walls"
+      ],
+      [
+       11.414,
+       " are"
+      ],
+      [
+       11.484,
+       " adorned"
+      ],
+      [
+       11.554,
+       " with"
+      ],
+      [
+       11.625,
+       " various"
+      ],
+      [
+       11.695,
+       " pieces"
+      ],
+      [
+       11.765,
+       " of"
+      ],
+      [
+       11.836,
+       " art"
+      ],
+      [
+       11.905,
+       ","
+      ],
+      [
+       11.975,
+       " including"
+      ],
+      [
+       12.045,
+       " abstract"
+      ],
+      [
+       12.115,
+       " paintings"
+      ],
+      [
+       12.186,
+       " in"
+      ],
+      [
+       12.256,
+       " vibrant"
+      ],
+      [
+       12.326,
+       " colors"
+      ],
+      [
+       12.397,
+       "."
+      ],
+      [
+       12.467,
+       " The"
+      ],
+      [
+       12.537,
+       " ceiling"
+      ],
+      [
+       12.607,
+       " is"
+      ],
+      [
+       12.678,
+       " wooden"
+      ],
+      [
+       12.748,
+       ","
+      ],
+      [
+       12.818,
+       " adding"
+      ],
+      [
+       12.888,
+       " to"
+      ],
+      [
+       12.958,
+       " the"
+      ],
+      [
+       13.029,
+       " warm"
+      ],
+      [
+       13.1,
+       " ambiance"
+      ],
+      [
+       13.17,
+       "."
+      ],
+      [
+       13.24,
+       " There"
+      ],
+      [
+       13.311,
+       " is"
+      ],
+      [
+       13.381,
+       " a"
+      ],
+      [
+       13.452,
+       " counter"
+      ],
+      [
+       13.522,
+       " area"
+      ],
+      [
+       13.592,
+       " with"
+      ],
+      [
+       13.663,
+       " a"
+      ],
+      [
+       13.733,
+       " few"
+      ],
+      [
+       13.803,
+       " shelves"
+      ],
+      [
+       13.873,
+       " displaying"
+      ],
+      [
+       13.944,
+       " various"
+      ],
+      [
+       14.014,
+       " items"
+      ],
+      [
+       14.085,
+       ","
+      ],
+      [
+       14.155,
+       " possibly"
+      ],
+      [
+       14.225,
+       " for"
+      ],
+      [
+       14.296,
+       " sale"
+      ],
+      [
+       14.366,
+       " or"
+      ],
+      [
+       14.437,
+       " as"
+      ],
+      [
+       14.507,
+       " decorative"
+      ],
+      [
+       14.577,
+       " elements"
+      ],
+      [
+       14.648,
+       ".\n\n"
+      ],
+      [
+       14.718,
+       "The"
+      ],
+      [
+       14.788,
+       " overall"
+      ],
+      [
+       14.858,
+       " setting"
+      ],
+      [
+       14.928,
+       " suggests"
+      ],
+      [
+       14.999,
+       " a"
+      ],
+      [
+       15.069,
+       " relaxed"
+      ],
+      [
+       15.14,
+       " and"
+      ],
+      [
+       15.21,
+       " comfortable"
+      ],
+      [
+       15.281,
+       " environment"
+      ],
+      [
+       15.351,
+       ","
+      ],
+      [
+       15.421,
+       " ideal"
+      ],
+      [
+       15.492,
+       " for"
+      ],
+      [
+       15.562,
+       " a"
+      ],
+      [
+       15.632,
+       " casual"
+      ],
+      [
+       15.703,
+       " meal"
+      ],
+      [
+       15.773,
+       " or"
+      ],
+      [
+       15.843,
+       " a"
+      ],
+      [
+       15.914,
+       " quiet"
+      ],
+      [
+       15.984,
+       " conversation"
+      ],
+      [
+       16.054,
+       "."
+      ]
+     ]
+    }
+   }
+  }
+ }
+}

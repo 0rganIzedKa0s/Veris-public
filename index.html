@@ -1,0 +1,1656 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veris</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a1a1a'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='none' stroke='%23fff' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='2.2' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    /* --ink-2 darkened from #6b6b6b (4.97:1 on card) to #5f5f5f (5.97:1 on card, 6.4:1 on white) */
+    --ink: #1a1a1a; --ink-2: #5f5f5f; --line: #e4e4e4;
+    /* control borders: #e4e4e4 was 1.27:1 vs white (fails WCAG 1.4.11); #8a8a8a is 3.45:1 */
+    --ctl-line: #8a8a8a;
+    --bg: #ffffff; --card: #f7f7f7; --accent: #1f1f1f;
+    /* 4.7:1 on white, so white button text and the outline both stay legible */
+    --warn: #b45309;
+  }
+  body {
+    margin: 0 auto; max-width: 680px; padding: 12px 16px 40px;
+    background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; }
+
+  /* ── layout ──────────────────────────────────────────────────────────
+     Everything is visible in one flat flow — no disclosures, no conditional
+     overlays. Hiding controls read as "removed" to the user, and Google
+     Lookout dropped its mode carousel for the same reason: hidden = unused
+     (design.google/library/google-lookout-design-accessibility).
+     The bottom bar (mode chips + Describe/Ask/Compare) is sticky in the
+     thumb zone — the Be My AI shutter-strip pattern — so the mode and the
+     shutter are on screen at the same time as the preview WITHOUT eating
+     the top of a short viewport. That guarantee is what fixes the 26/35
+     stuck-on-describe field batch. */
+  html { scroll-padding-bottom: 210px; /* focus scrolls clear the bottom bar */ }
+  /* Honest preview: object-fit contain (letterbox), because the FULL sensor
+     frame is what gets uploaded — a cover-crop preview makes testers rate
+     descriptions of objects they never saw, poisoning the ratings. svh not
+     vh: plain vh is iOS's LARGE viewport and overshoots while the address
+     bar is visible; dvh visibly jumps as the bar animates. */
+  video, #samplePreview {
+    display: block; width: 100%; height: auto;
+    max-height: 34vh; max-height: 34svh;
+    object-fit: contain; background: #0c0c0c;
+  }
+  .bar {
+    position: sticky; bottom: 0; z-index: 10;
+    background: var(--bg); border-top: 1px solid var(--line);
+    margin: 0 -16px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+  .actions .primary { flex: 2; }
+  /* Mode chips: native radios under pill labels — the W3C-APG-preferred
+     pattern (role=radiogroup + roving tabindex has documented TalkBack
+     breakage). All five always visible; wrap, never scroll. */
+  .modrow { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; }
+  /* the fieldset keeps the radios grouped for screen readers but lays out as
+     part of the shared row, so the auto-mode toggle can sit OUTSIDE it (it is
+     not a mode and must not inherit the "Description mode" group label) */
+  .modes { display: contents; border: 0; padding: 0; margin: 0; }
+  .chip {
+    position: relative; display: inline-flex; align-items: center;
+    min-height: 44px; padding: 0 14px; font-size: 15px; color: var(--ink);
+    border: 1.5px solid var(--ctl-line); border-radius: 999px; background: var(--bg);
+    cursor: pointer;
+  }
+  .chip input {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0; margin: 0; cursor: pointer;
+  }
+  /* checked = fill + weight, not colour alone (WCAG 1.4.1) */
+  .chip:has(input:checked) {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+    font-weight: 700;
+  }
+  .chip:has(input:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
+  /* the auto-mode toggle must not read as a sixth mode: dashed when off,
+     light fill + heavy border when on — never the radios' dark fill */
+  .chip.tog { border-style: dashed; margin-left: auto; }
+  .chip.tog:has(input:checked) {
+    background: var(--card); color: var(--ink);
+    border: 2px solid var(--ink); border-style: solid; font-weight: 700;
+  }
+  .chip.tog:has(input:checked)::before { content: "✓ "; }
+  /* compact chips on narrow phones: five modes must fit two rows at 360px —
+     a third row makes the bar eat ~36% of a 640px viewport */
+  @media (max-width: 400px) {
+    .chip { font-size: 14px; padding: 0 10px; }
+    .modrow { gap: 6px; }
+  }
+  /* status pills sit in flow next to their controls; idle is genuinely dim
+     (dashed + faded), active is loud (bold ink on card) — a pill that only
+     appears on data reads as removed, and idle-vs-active must survive a
+     glance at arm's length in sunlight */
+  .pill.dim { opacity: .6; border-style: dashed; }
+  .pill.live {
+    color: var(--ink); font-weight: 700; font-size: 14px;
+    border: 1.5px solid var(--ctl-line); background: var(--card);
+  }
+  .pill.warn { border-color: var(--warn); color: var(--warn); }
+
+  @media (min-width: 900px) {
+    body { max-width: 1080px; }
+    main { display: grid; grid-template-columns: minmax(340px, 460px) 1fr;
+           gap: 0 18px; align-items: start; grid-auto-flow: dense; }
+    .col-l { grid-column: 1; }
+    .col-r { grid-column: 2; }
+  }
+  .brand { font-size: 15px; font-weight: 700; letter-spacing: .22em; margin: 0; }
+  .pill {
+    font-size: 12px; color: var(--ink-2); border: 1px solid var(--line);
+    padding: 3px 10px; border-radius: 999px; background: var(--bg);
+    /* wraps: "busy intersection → outdoor_nav" must never truncate or force
+       horizontal scroll at 360px (only #health is guaranteed short) */
+  }
+  #health { white-space: nowrap; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 14px; margin-bottom: 12px;
+  }
+  .media { padding: 0; overflow: hidden; background: #0c0c0c; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .row + .row { margin-top: 10px; }
+  select, input[type=text], input[type=number], button {
+    font: inherit; font-size: 16px; color: var(--ink);
+    background: var(--bg); border: 1px solid var(--ctl-line);
+    border-radius: 9px; padding: 9px 12px;
+    min-height: 44px;
+  }
+  ::placeholder { color: var(--ink-2); opacity: 1; }
+  /* visible keyboard focus (old #b5b5b5 border was 2.05:1 — failed 3:1) */
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  select:focus, input:focus { border-color: var(--ink); }
+  button { cursor: pointer; transition: background .12s; min-width: 44px; }
+  @media (prefers-reduced-motion: reduce) { button { transition: none; } }
+  button:hover { background: var(--card); }
+  button:disabled { opacity: .45; cursor: default; }
+  button.primary {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+    font-weight: 600; padding: 12px 26px; flex: 1; min-height: 48px;
+  }
+  button.primary:hover { background: #3a3a3a; }
+  label { font-size: 14px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+  label.check { min-height: 44px; padding: 4px 2px; }
+  label input { accent-color: var(--accent); }
+  input[type=checkbox] { width: 22px; height: 22px; min-height: 0; }
+  input[type=number] { width: 3.6em; padding: 6px 8px; }
+  .grow { flex: 1; min-width: 160px; }
+  .section-t {
+    font-size: 11px; font-weight: 600; letter-spacing: .12em; color: var(--ink-2);
+    text-transform: uppercase; margin: 0 0 8px;
+  }
+  #out {
+    min-height: 4.2em; font-size: 16px; line-height: 1.55; white-space: pre-wrap;
+  }
+  #out:focus { outline: none; }
+  /* visible working state for the 2-3s TTFT gap (a bare .busy class with no
+     rule left low-vision testers wondering whether the tap registered) */
+  #out.busy:empty::before { content: "Describing…"; color: var(--ink-2); }
+  /* action buttons use aria-disabled (not the disabled attribute): disabling
+     a focused button drops keyboard/SR focus to <body>, which the
+     auto-describe timer would do every tick */
+  [aria-disabled="true"] { opacity: .45; }
+  #rateMsg { flex-basis: 100%; font-size: 14px; color: var(--warn); font-weight: 600; }
+  #stats, #tele { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  #stats { margin-left: auto; }
+  #trace { font-size: 12px; color: var(--ink-2); margin-top: 8px; line-height: 1.5; }
+  #trace:empty { display: none; }
+  .ghost { border: 1px solid var(--ctl-line); background: var(--bg); border-radius: 9px; }
+  /* Unrated capture: the rating row is the only way forward, so make it loud
+     for sighted testers (screen-reader users get the assertive announcement).
+     This used to read var(--accent, #c8892a) — but --accent is defined (near
+     black), so the fallback never applied and "loud" rendered as the same dark
+     grey as every other control. */
+  #rateRow.needs-rating { outline: 2px solid var(--warn); outline-offset: 6px; border-radius: 10px; }
+  #rateRow.needs-rating [data-r] { background: var(--warn); color: #fff; border-color: transparent; }
+  [hidden] { display: none !important; }
+  footer { text-align: center; margin-top: 8px; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; margin: -1px;
+    padding: 0; border: 0; clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+  }
+
+  /* ── offline banner ───────────────────────────────────────────────────
+     The board is a physical device on a desk, not a cloud service, so it is
+     legitimately off sometimes. "orin ✗" in a 12px pill told a first-time
+     visitor nothing — this says what is down, why, and what still works. */
+  .banner {
+    border: 1.5px solid var(--warn); border-left-width: 5px; border-radius: 10px;
+    background: #fff8f0; padding: 12px 14px; margin: 0 0 12px; font-size: 15px;
+    line-height: 1.5;
+  }
+  .banner h2 { font-size: 15px; margin: 0 0 4px; color: var(--warn); }
+  .banner p { margin: 0 0 6px; }
+  .banner p:last-child { margin-bottom: 0; }
+  .banner.ok { border-color: var(--line); background: var(--card); }
+  .banner.ok h2 { color: var(--ink); }
+  .banner.live { border-color: var(--accent); background: var(--card); }
+  .banner.live h2 { color: var(--ink); }
+  .banner a.golive {
+    display: inline-block; margin: 6px 0 2px; padding: 12px 22px; min-height: 48px;
+    box-sizing: border-box; border-radius: 10px; background: var(--accent); color: #fff;
+    font-weight: 600; text-decoration: none;
+  }
+  .banner a.golive:hover { background: #3a3a3a; }
+  .banner a.golive:focus-visible { outline: 3px solid var(--warn); outline-offset: 2px; }
+
+  /* sample-image caption: a blind user cannot see which frame is loaded, so
+     the description of the picture is part of the control, not decoration */
+  .samplenote { font-size: 14px; color: var(--ink-2); line-height: 1.5; margin: 10px 0 0; }
+  .samplenote a { color: var(--ink-2); }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; border: 1.5px solid var(--warn); color: var(--warn);
+    border-radius: 5px; padding: 1px 6px; margin-left: 8px; vertical-align: 2px;
+  }
+
+  /* ── walkthrough ──────────────────────────────────────────────────────
+     A panel pinned above the sticky bar, not a centred modal: the steps point
+     at real controls, and a centred box on a phone covers the very thing it
+     is describing. */
+  .tour-back {
+    position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 40;
+  }
+  .tour {
+    position: fixed; z-index: 45; left: 50%; transform: translateX(-50%);
+    bottom: 16px; width: min(560px, calc(100vw - 24px));
+    background: var(--bg); color: var(--ink);
+    border: 1px solid var(--ctl-line); border-radius: 14px;
+    padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 10px 40px rgba(0,0,0,.28);
+    max-height: min(80vh, 640px); overflow-y: auto;
+  }
+  .tour.top { bottom: auto; top: 16px; }
+  .tour h2 { font-size: 18px; margin: 0 0 8px; }
+  .tour p { font-size: 15px; line-height: 1.55; margin: 0 0 10px; }
+  .tour ul { font-size: 15px; line-height: 1.55; margin: 0 0 10px; padding-left: 20px; }
+  .tour li { margin-bottom: 4px; }
+  .tour .trow { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+  .tour .dots { font-size: 13px; color: var(--ink-2); margin-right: auto;
+                font-variant-numeric: tabular-nums; }
+  .tour button { font-size: 15px; min-height: 44px; }
+  /* the highlight has to survive on top of the dimming backdrop, so the target
+     is raised above it rather than cut out of it */
+  /* a control inside the sticky bar cannot paint above the backdrop on its
+     own — the bar's own z-index caps it — so the bar is raised as a unit and
+     the ring is drawn on the part being described */
+  .bar.tour-raise { z-index: 41; }
+  .tour-spot {
+    position: relative; z-index: 42; border-radius: 12px;
+    outline: 3px solid var(--ink); outline-offset: 4px;
+    background: var(--bg); box-shadow: 0 0 0 9999px rgba(0,0,0,.01);
+  }
+  .bar.tour-spot { background: var(--bg); }
+  @media (prefers-reduced-motion: reduce) { .tour, .tour-spot { transition: none; } }
+  #tourBtn { font-size: 13px; min-height: 36px; padding: 6px 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1 class="brand">VERIS</h1>
+  <div class="row" style="gap:8px">
+    <button id="tourBtn" class="ghost">What is this?</button>
+    <span id="health" class="pill" role="status" aria-label="Device connection status">checking…</span>
+  </div>
+</header>
+
+<!-- Connection explainer. role=status (not alert): it appears on a poll the
+     user did not initiate, and an assertive region would cut across whatever
+     a screen-reader user was reading. Starts hidden and is only ever filled
+     with a heading + prose, never a bare "✗". -->
+<div id="banner" class="banner" role="status" aria-live="polite" hidden></div>
+
+<main>
+<div class="card media col-l">
+  <video id="v" autoplay playsinline muted aria-hidden="true"></video>
+  <img id="samplePreview" hidden alt="">
+</div>
+<p id="sampleNote" class="samplenote col-l" hidden></p>
+
+<section class="card col-l" aria-labelledby="t-source">
+  <h2 class="section-t" id="t-source">Camera &amp; capture</h2>
+  <div class="row">
+    <label class="visually-hidden" for="cam">Camera source</label>
+    <select id="cam" class="grow"></select>
+  </div>
+  <div class="row">
+    <label class="check"><input type="checkbox" id="speak" checked> speak
+      <span class="visually-hidden">(turn off if you are using a screen reader — descriptions are announced automatically)</span></label>
+    <label class="check"><input type="checkbox" id="clock"> clock-face</label>
+    <label class="check"><input type="checkbox" id="steps"> steps</label>
+    <label class="check"><input type="checkbox" id="auto" aria-label="Auto-describe repeatedly"> auto-describe</label>
+    <label class="check">every
+      <input type="number" id="autos" value="20" min="5" max="600" aria-label="Auto-describe interval in seconds"> s</label>
+  </div>
+  <div class="row">
+    <button id="walk">Start walk capture</button>
+    <label class="check">every
+      <input type="number" id="walks" value="4" min="2" max="60"
+             aria-label="Walk capture interval in seconds"> s</label>
+    <span id="walkstat" class="pill dim">walk off</span>
+  </div>
+  <div class="row">
+    <span id="situation" class="pill dim">GPS not set — tap Use GPS below</span>
+  </div>
+</section>
+
+<section class="card col-r" aria-labelledby="t-ask">
+  <h2 class="section-t" id="t-ask">Ask</h2>
+  <div class="row">
+    <label class="visually-hidden" for="q">Question about the scene (optional)</label>
+    <input type="text" id="q" class="grow" placeholder="Type a question — or use 🎤 Ask below">
+  </div>
+  <div class="row">
+    <label class="visually-hidden" for="ctx">Location context (optional)</label>
+    <input type="text" id="ctx" class="grow" placeholder="Location context">
+    <button id="gps">Use GPS</button>
+  </div>
+</section>
+
+<section class="card col-r" aria-labelledby="t-desc">
+  <div class="row" style="margin-bottom:6px">
+    <h2 class="section-t" id="t-desc" style="margin:0">Description</h2>
+    <span id="stats" aria-label="Timing"></span>
+  </div>
+  <div id="out" tabindex="-1">Point a camera and press Describe.</div>
+  <div id="trace" aria-label="How this was answered"></div>
+  <div class="row" id="replayRow" hidden style="margin-top:8px">
+    <button id="skipReplay" class="ghost">Skip to the end of the recording</button>
+  </div>
+  <div class="row" style="margin-top:12px" id="rateRow" tabindex="-1"
+       aria-label="Rate this description">
+    <span id="rateMsg" hidden></span>
+    <button class="ghost" id="rup" data-r="up" disabled><span aria-hidden="true">👍</span> Helpful</button>
+    <button class="ghost" data-r="down" disabled><span aria-hidden="true">👎</span> Not helpful</button>
+    <label class="visually-hidden" for="note">Feedback on this description</label>
+    <input type="text" id="note" class="grow" placeholder="What would you change?" disabled>
+    <button id="send" class="ghost" disabled>Send</button>
+  </div>
+</section>
+</main>
+
+<footer><span id="tele" aria-label="Device telemetry"></span></footer>
+
+<!-- Screen-reader announcements: completed clauses are appended here as the
+     description streams in, so TalkBack/VoiceOver speak it as it arrives.
+     aria-atomic=false is explicit because role=status/alert default it to
+     true, and an atomic region re-announces its whole buffer per append.
+     (#out is deliberately NOT a live region: aria-busy gating is silently
+     unimplemented in Safari/VoiceOver, so it double-announced instead.) -->
+<div id="live" class="visually-hidden" aria-live="polite" aria-atomic="false"></div>
+<div id="alert" class="visually-hidden" role="alert" aria-atomic="false"></div>
+
+<!-- Walkthrough. aria-modal hides the rest of the page from assistive tech
+     while it is open, so each step has to SAY what it is pointing at rather
+     than rely on the highlight ring alone. -->
+<div id="tourBack" class="tour-back" hidden></div>
+<div id="tour" class="tour" role="dialog" aria-modal="true" aria-labelledby="tourTitle" hidden>
+  <h2 id="tourTitle" tabindex="-1"></h2>
+  <div id="tourBody"></div>
+  <div class="trow">
+    <span class="dots" id="tourDots"></span>
+    <button id="tourPrev" class="ghost">Back</button>
+    <button id="tourSkip" class="ghost">Close</button>
+    <button id="tourNext" class="primary" style="flex:0 0 auto">Next</button>
+  </div>
+</div>
+
+<!-- Sticky bottom bar: the shutter and the mode live in the thumb zone and
+     never leave the screen (Be My AI's full-width Take Picture strip). -->
+<div class="bar">
+  <div class="modrow">
+    <fieldset class="modes">
+      <legend class="visually-hidden">Description mode</legend>
+      <label class="chip"><input type="radio" name="mode" value="outdoor_nav">outdoor nav</label>
+      <label class="chip"><input type="radio" name="mode" value="indoor_nav">indoor nav</label>
+      <label class="chip"><input type="radio" name="mode" value="text_reading">text</label>
+      <label class="chip"><input type="radio" name="mode" value="describe" checked>scene</label>
+      <label class="chip"><input type="radio" name="mode" value="general">generic</label>
+    </fieldset>
+    <label class="chip tog"><input type="checkbox" id="automode" checked
+      aria-label="Auto-select mode from GPS">auto-mode</label>
+  </div>
+  <div class="row actions">
+    <button class="primary" id="go">Describe</button>
+    <button id="mic" title="Ask by voice via the device microphone"><span aria-hidden="true">🎤</span> Ask</button>
+    <button id="compare" title="Same frame: untuned model vs the blind-optimized mode">Compare</button>
+  </div>
+</div>
+
+<script>window.VERIS_STATIC = true; window.VERIS_LIVE_URL = 'https://veris-orin.tail68ae71.ts.net/';</script>
+<script>
+const $ = id => document.getElementById(id);
+// ── static mode ──
+// The build in ops/build_static_demo.sh sets window.VERIS_STATIC and ships this
+// page with no server behind it at all, so the demo survives the board being
+// unplugged and boxed up. Everything that needs the hub is hidden rather than
+// left to fail: a control that cannot work is worse than a missing one.
+const STATIC = !!window.VERIS_STATIC;
+const LIVE_URL = window.VERIS_LIVE_URL || "";
+let stream, lastOutput = "", lastMode = "", lastFrame = "", lastRecorded = false;
+// null = not polled yet; only a definite false short-circuits a live call.
+let boardUp = null, hubUp = null;
+
+// ── mode chips (native radios styled as pills) ──
+// "describe" displays as "scene": the chip sat directly above the Describe
+// shutter with case as the only difference — a name collision for both
+// sighted testers and screen readers ("describe, radio" then "Describe,
+// button"). The backend mode value is unchanged.
+const MODE_LABELS = { outdoor_nav: "outdoor nav", indoor_nav: "indoor nav",
+                      text_reading: "text reading", describe: "scene",
+                      general: "generic (untuned)" };
+function getMode() {
+  const r = document.querySelector('input[name="mode"]:checked');
+  return r ? r.value : "describe";
+}
+// Programmatic changes (auto-mode from GPS) are announced; direct taps are
+// not — the screen reader already voices a radio the user just selected.
+function setMode(v) {
+  const r = document.querySelector(`input[name="mode"][value="${v}"]`);
+  if (r && !r.checked) { r.checked = true; announce("Mode: " + (MODE_LABELS[v] || v)); }
+}
+
+// Rating-control enablement, one rule each:
+//   thumbs — exactly while the current capture is unrated (needsRating);
+//   note   — once any capture exists;
+//   send   — note is non-empty (an empty-note Send posted junk rows).
+function syncRatingControls() {
+  // A replayed recording is not an inference anyone just made, so it must not
+  // be ratable — a thumbs-up on it would enter the flywheel as a judgement of
+  // a model run that did not happen.
+  const ratable = !!lastOutput && !lastRecorded;
+  $("rup").disabled = !needsRating;
+  document.querySelector('[data-r="down"]').disabled = !needsRating;
+  $("note").disabled = !ratable;
+  $("send").disabled = !ratable || !$("note").value.trim();
+}
+
+// ── screen wake lock ──
+// Without it, iOS locks the screen mid-walk and suspends getUserMedia and
+// timers — the walk silently dies. Auto-released on tab switch, so it is
+// re-acquired on visibilitychange while a walk is running.
+let wakeLock = null;
+async function keepAwake(on) {
+  try {
+    if (on && "wakeLock" in navigator && !wakeLock) {
+      wakeLock = await navigator.wakeLock.request("screen");
+      wakeLock.addEventListener("release", () => { wakeLock = null; });
+    } else if (!on && wakeLock) { await wakeLock.release(); wakeLock = null; }
+  } catch {}
+}
+// Every capture must be rated before the next manual one — unrated captures
+// can't become training or eval data (the first field batch came back 0/35
+// rated). Not a trap: a second press of Describe skips through, and the skip
+// is recorded as rating="skipped" so we can tell refusal from never-asked.
+let needsRating = false, ratingNudged = false;
+
+// ── screen-reader announcements ──
+function announce(msg, assertive) {
+  const region = $(assertive ? "alert" : "live");
+  const node = document.createElement("span");
+  node.textContent = msg + " ";
+  region.appendChild(node);
+  while (region.childNodes.length > 30) region.removeChild(region.firstChild);
+}
+// Clause extraction for incremental speech/announcements. Offsets are kept
+// against the RAW streamed text (never the variant-transformed text, whose
+// prefix can change length mid-stream). A '.' or ',' followed by a digit
+// (e.g. "1.5 m", "1,500") is part of the clause, not a boundary, and a
+// terminator only completes a clause once a following whitespace character
+// has arrived — so "The door is 1." is never spoken before the "5" arrives.
+// The [DONE] flush takes care of the final clause.
+const CLAUSE_RE = /(?:[^.!?;,]|[.!?;,](?=\d))+[.!?;,]+(?=\s)/g;
+function nextClauses(text, from, flush) {
+  const pending = text.slice(from);
+  if (flush) return { clauses: pending ? [pending] : [], upto: text.length };
+  const clauses = [];
+  let upto = from, m;
+  CLAUSE_RE.lastIndex = 0;
+  while ((m = CLAUSE_RE.exec(pending))) {
+    clauses.push(m[0]);
+    upto = from + CLAUSE_RE.lastIndex;
+  }
+  return { clauses, upto };
+}
+let announcedUpto = 0;
+function announceChunk(text, flush) {
+  const { clauses, upto } = nextClauses(text, announcedUpto, flush);
+  announcedUpto = upto;
+  for (const clause of clauses) {
+    // variants are applied per completed clause, so text that has already
+    // been announced can never be rewritten underneath the offset
+    const said = applyVariants(clause).trim();
+    if (said) announce(said);
+  }
+}
+// Visual-only busy state. #out is not a live region and carries no aria-busy:
+// Safari/VoiceOver never implemented aria-busy (no AXElementBusy), and NVDA
+// has a bug where a busy region is suppressed and then never announced — the
+// clause-by-clause #live pipeline is the one announcement path.
+function setBusy(busy) { $("out").classList.toggle("busy", !!busy); }
+function showError(msg) {
+  setBusy(false);
+  $("out").textContent = msg;
+  announce(msg, true);
+}
+
+// ── sample images ──
+// A laptop with no webcam, or a phone that denied camera permission, used to
+// hit a dead end: the whole demo is a shutter button. These four photos (one
+// per mode, openly licensed — see static/samples/CREDITS.md) stand in for a
+// camera frame and go through the exact same /api/describe path.
+const SAMPLE_PREFIX = "__sample__";
+const SAMPLES = [
+  { slug: "outdoor", label: "Street corner",  mode: "outdoor_nav" },
+  { slug: "indoor",  label: "Indoor hall",    mode: "indoor_nav" },
+  { slug: "text",    label: "Menu board",     mode: "text_reading" },
+  { slug: "scene",   label: "Café interior",  mode: "describe" },
+];
+// Saved real runs of those four, for when the board is off. Fetched, not
+// inlined, so a failure here degrades to "samples work only while live"
+// instead of breaking the page.
+let RECORDED = null;
+function usingSample() { return $("cam").value.startsWith(SAMPLE_PREFIX); }
+function currentSample() {
+  const slug = $("cam").value.slice(SAMPLE_PREFIX.length);
+  return SAMPLES.find(s => s.slug === slug) || null;
+}
+function sampleMeta(slug) { return (RECORDED && RECORDED.samples || {})[slug] || null; }
+function recordedRun(slug, mode) {
+  const m = sampleMeta(slug);
+  return m && m.runs && m.runs[mode] ? m.runs[mode] : null;
+}
+
+// The caption is a control, not decoration: a blind user cannot see which
+// frame is loaded, so the picture's description and its credit are text.
+function showSampleNote(sample) {
+  const note = $("sampleNote");
+  if (!sample) { note.hidden = true; note.textContent = ""; return; }
+  const meta = sampleMeta(sample.slug);
+  note.innerHTML = "";
+  const b = document.createElement("span");
+  b.textContent = meta ? meta.blurb : sample.label + " — sample image.";
+  note.appendChild(b);
+  if (boardUp === false && recordedRun(sample.slug, sample.mode)) {
+    note.appendChild(document.createTextNode(" "));
+    const badge = document.createElement("span");
+    badge.className = "badge";
+    badge.textContent = "recorded";
+    // the badge is three syllables of context for a sighted reader and needs
+    // to be a whole sentence for a screen reader
+    const hint = document.createElement("span");
+    hint.className = "visually-hidden";
+    hint.textContent = " — a run recorded on the board is available for this sample.";
+    badge.appendChild(hint);
+    note.appendChild(badge);
+  }
+  if (meta && meta.credit) {
+    const c = document.createElement("span");
+    c.textContent = " ";
+    const a = document.createElement("a");
+    a.href = meta.credit_url; a.textContent = meta.credit;
+    a.rel = "noopener"; a.target = "_blank";
+    c.appendChild(a);
+    note.appendChild(c);
+  }
+  note.hidden = false;
+}
+
+async function listCams() {
+  const devs = await navigator.mediaDevices.enumerateDevices();
+  const sel = $("cam").value;
+  const cams = devs.filter(d => d.kind === "videoinput")
+    .map(d => `<option value="${d.deviceId}">${d.label || "camera"}</option>`).join("");
+  const samples = SAMPLES.map(s =>
+    `<option value="${SAMPLE_PREFIX}${s.slug}">Sample: ${s.label}</option>`).join("");
+  // A live camera has nothing to send a frame TO in static mode, and the Orin
+  // camera needs the board — offer only what actually works.
+  $("cam").innerHTML = STATIC
+    ? `<optgroup label="Sample images">${samples}</optgroup>`
+    : cams + `<optgroup label="Sample images — no camera needed">${samples}</optgroup>`;
+  if (sel) $("cam").value = sel;
+}
+async function openCam() {
+  if (usingSample()) {
+    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+    const s = currentSample();
+    const meta = sampleMeta(s.slug);
+    $("v").hidden = true;
+    const img = $("samplePreview");
+    img.src = `samples/${s.slug}.jpg`;
+    img.alt = meta ? meta.alt : s.label + " — sample image";
+    img.hidden = false;
+    showSampleNote(s);
+    // Each sample exists to exercise ONE mode, and it is the mode that decides
+    // the prompt and the image budget — picking the picture without the mode
+    // would demo the wrong thing.
+    setMode(s.mode);
+    const canReplay = boardUp === false && recordedRun(s.slug, s.mode);
+    const msg = "Sample loaded: " + (meta ? meta.blurb : s.label) + " "
+      + (canReplay
+          ? "The board is offline, so Describe will replay a run recorded on it."
+          : "Press Describe.");
+    $("out").textContent = msg;
+    announce(msg);
+    return;
+  }
+  $("samplePreview").hidden = true; showSampleNote(null);
+  $("v").hidden = false;
+  if (stream) stream.getTracks().forEach(t => t.stop());
+  stream = await navigator.mediaDevices.getUserMedia({
+    video: { deviceId: $("cam").value ? { exact: $("cam").value } : undefined,
+             facingMode: "environment", width: { ideal: 1280 } } });
+  $("v").srcObject = stream;
+  await listCams();
+}
+$("cam").onchange = () => openCam().catch(e => showError("Camera: " + e.message));
+
+async function boot() {
+  // recorded.json first: it decides whether an offline visitor gets a replay
+  // or an apology, and openCam() below reads it for the caption.
+  try {
+    const r = await fetch("samples/recorded.json");
+    if (r.ok) RECORDED = await r.json();
+  } catch {}
+  await listCams().catch(() => {});
+  const hasLocal = !STATIC && [...$("cam").options]
+    .some(o => !o.value.startsWith(SAMPLE_PREFIX));
+  // No camera on this device (desktop without a webcam, or permission denied)
+  // — open on a sample so the first tap on Describe does something.
+  if (!hasLocal) $("cam").value = SAMPLE_PREFIX + "scene";
+  await openCam();
+}
+
+function grabFrame() {
+  const v = $("v"), c = document.createElement("canvas");
+  const scale = Math.min(1, 1280 / Math.max(v.videoWidth, v.videoHeight));
+  c.width = v.videoWidth * scale; c.height = v.videoHeight * scale;
+  c.getContext("2d").drawImage(v, 0, 0, c.width, c.height);
+  return new Promise(res => c.toBlob(res, "image/jpeg", 0.88));
+}
+
+let spokenUpto = 0;
+function speakChunk(text, flush) {
+  if (!$("speak").checked) return;
+  const { clauses, upto } = nextClauses(text, spokenUpto, flush);
+  spokenUpto = upto;
+  for (const clause of clauses) {
+    const spoken = applyVariants(clause).trim();
+    if (spoken) speechSynthesis.speak(new SpeechSynthesisUtterance(spoken));
+  }
+}
+
+function variantList() {
+  return [$("clock").checked && "clock_face", $("steps").checked && "steps"]
+    .filter(Boolean).join(",");
+}
+
+async function getFrameBlob() {
+  if (usingSample()) {
+    const r = await fetch(`samples/${currentSample().slug}.jpg`);
+    if (!r.ok) throw new Error("sample image unavailable");
+    return await r.blob();
+  }
+  return await grabFrame();
+}
+
+// Variant post-processors: the 3B ignores style riders in the prompt
+// (verified 2026-07-05), so steps and clock-face are applied deterministically
+// to the text. Steps: metres -> ~0.75 m strides. Clock: coarse egocentric map.
+function applyVariants(t) {
+  if ($("steps").checked) {
+    t = t.replace(/(?:about |around |approximately )?(\d+(?:\.\d+)?)\s*(?:m\b|meters?\b|metres?\b)/gi,
+      (_, n) => { const s = Math.max(1, Math.round(parseFloat(n) / 0.75));
+                  return `about ${s} step${s === 1 ? "" : "s"}`; });
+  }
+  if ($("clock").checked) {
+    t = t.replace(/\b(?:on|to) your left\b/gi, "at 9 o'clock")
+         .replace(/\b(?:on|to) your right\b/gi, "at 3 o'clock")
+         .replace(/\b(?:straight|directly) ahead\b/gi, "at 12 o'clock")
+         .replace(/\bahead of you\b/gi, "at 12 o'clock")
+         .replace(/\bbehind you\b/gi, "at 6 o'clock");
+  }
+  return t;
+}
+
+// ── which stage answered ──
+// The board runs several models in a row (gate, detector, text reader, three
+// experts on one language model). One line under the description says what
+// each saw and which one spoke. It is not a live region: it would talk over
+// the description.
+const SOURCE_NAMES = { reflex: "hazard reflex", ocr: "OCR alone", gate: "gate, no model call",
+  "expert:outdoor": "outdoor expert", "expert:indoor": "indoor expert",
+  "expert:reader": "reader expert", "expert:document": "document reader" };
+function traceLine(tr, sources) {
+  if (!tr) return "";
+  const g = tr.gate || {}, parts = [];
+  parts.push(g.usable
+    ? `gate: frame ok, ${Math.round((g.indoor_p ?? 0.5) * 100)}% indoor, ${Math.round((g.text_p ?? 0) * 100)}% text`
+    : `gate: frame rejected (${g.issue || "unclear"})`);
+  if (tr.objects && tr.objects.length) parts.push("detector: " + tr.objects.join(", "));
+  if (sources && sources.length)
+    parts.push("answered by " + sources.map(x => SOURCE_NAMES[x] || x).join(", then "));
+  return parts.join(" · ");
+}
+
+async function runDescribe({ mode, blob, render, speak }) {
+  $("trace").textContent = "";
+  let trace = null;
+  const fd = new FormData();
+  fd.append("frame", blob, "frame.jpg");
+  fd.append("mode", mode);
+  fd.append("context", $("ctx").value);
+  fd.append("question", $("q").value);
+  fd.append("variants", variantList());
+  const resp = await fetch("/api/describe", { method: "POST", body: fd });
+  if (!resp.ok) {
+    const body = (await resp.text().catch(() => "")).slice(0, 300);
+    throw new Error(`describe failed (HTTP ${resp.status})${body ? ": " + body : ""}`);
+  }
+  const reader = resp.body.getReader(); const dec = new TextDecoder();
+  let text = "", buf = "", stats = "", errored = false, frame = "";
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += dec.decode(value, { stream: true });
+    // Only parse complete SSE events; keep any incomplete tail in the buffer
+    // until the next read (chunks can end mid-event).
+    const idx = buf.lastIndexOf("\n\n");
+    if (idx === -1) continue;
+    const complete = buf.slice(0, idx);
+    buf = buf.slice(idx + 2);
+    for (const line of complete.split("\n\n")) {
+      if (!line.startsWith("data: ")) continue;
+      let ev;
+      try { ev = JSON.parse(line.slice(6)); } catch { continue; }
+      if (ev.trace) { trace = ev.trace; $("trace").textContent = traceLine(trace); }
+      if (ev.delta && !errored) {
+        text += ev.delta;
+        render(applyVariants(text));
+        // speech/announce offsets track the RAW text (see nextClauses).
+        // Clause announcements go to the SR live region only when in-app TTS
+        // is off — with both on, screen-reader users heard everything twice
+        // (the documented double-speech hazard; the speak toggle's hint tells
+        // SR users to turn it off, and then the live region takes over).
+        if (speak) {
+          speakChunk(text, false);
+          if (!$("speak").checked) announceChunk(text, false);
+        }
+      }
+      if (ev.error) {
+        errored = true;
+        const partial = applyVariants(text);
+        render((partial ? partial + "\n" : "") + "ERROR: " + ev.error);
+        announce("Error: " + ev.error, true);
+      }
+      if (ev.done) {
+        const shown = applyVariants(text);
+        if (speak && !errored) {
+          speakChunk(text, true);
+          if (!$("speak").checked) announceChunk(text, true);
+        }
+        const parts = [];
+        if (ev.ttft_s != null) parts.push(`first word ${ev.ttft_s}s`);
+        if (ev.total_s != null) parts.push(`total ${ev.total_s}s`);
+        stats = errored ? "" : parts.join(" · ");
+        text = shown;
+        if (ev.frame) frame = ev.frame;
+        if (trace) $("trace").textContent = traceLine(trace, ev.sources);
+      }
+    }
+  }
+  return { text, stats, errored, frame };
+}
+
+// ── replaying a recorded run ──
+// Offline, a sample still describes itself: the deltas saved in recorded.json
+// are re-emitted on their real recorded offsets, so the wait before the first
+// word is the wait the board actually took. Everything downstream (variants,
+// clause speech, announcements) is the same code path as a live stream, which
+// is why a replay sounds identical to the real thing rather than approximating
+// it. It is labelled "recorded" throughout — it is never presented as live.
+let replayTimer = null, replaySkipped = false;
+function replayRun(run, render, speak) {
+  return new Promise(resolve => {
+    let i = 0, text = "", started = false;
+    const t0 = performance.now();
+    const emitAll = () => { while (i < run.deltas.length) { text += run.deltas[i][1]; i++; } };
+    const step = () => {
+      const now = (performance.now() - t0) / 1000;
+      if (replaySkipped) emitAll();
+      else while (i < run.deltas.length && run.deltas[i][0] <= now) {
+        text += run.deltas[i][1]; i++;
+      }
+      if (text && !started) { started = true; }
+      if (started) {
+        render(applyVariants(text));
+        if (speak) {
+          speakChunk(text, false);
+          if (!$("speak").checked) announceChunk(text, false);
+        }
+      }
+      if (i >= run.deltas.length) {
+        replayTimer = null;
+        if (speak) {
+          speakChunk(text, true);
+          if (!$("speak").checked) announceChunk(text, true);
+        }
+        resolve(text);
+        return;
+      }
+      replayTimer = setTimeout(step, 60);
+    };
+    step();
+  });
+}
+
+// Board off: return the element to replay into, or explain and return null.
+// Never silently do nothing — an unexplained dead shutter is the single worst
+// failure this page can have.
+function offlineSection(sample, mode) {
+  if (sample && recordedRun(sample.slug, mode))
+    return outSection(modeTag(mode) + " — recorded");
+  const why = "The Jetson Orin is offline, so nothing can be described live. ";
+  if (!sample) {
+    showError(why + "Pick one of the sample images at the top of the camera "
+      + "list — each replays a description recorded on the board.");
+  } else {
+    const own = MODE_LABELS[sample.mode] || sample.mode;
+    showError(why + `This sample has recorded runs in ${own} mode and in `
+      + "generic mode; switch to one of those to replay it.");
+  }
+  return null;
+}
+
+// Mirrors runDescribe's return shape so describe()/Compare do not branch.
+async function runRecorded({ slug, mode, render, speak, el }) {
+  const run = recordedRun(slug, mode);
+  if (!run) return null;
+  replaySkipped = false;
+  $("trace").textContent = traceLine(run.trace, run.sources);
+  $("replayRow").hidden = false;
+  if (el) el.textContent =
+    `Replaying a run recorded on the board — the first word took ${run.ttft_s}s.`;
+  let cleared = false;
+  const wrapped = t => {
+    if (!cleared) { cleared = true; }
+    render(t);
+  };
+  try {
+    const text = await replayRun(run, wrapped, speak);
+    return { text: applyVariants(text), errored: false, frame: "",
+             stats: `recorded · first word ${run.ttft_s}s · total ${run.total_s}s`,
+             recorded: true };
+  } finally {
+    $("replayRow").hidden = true;
+  }
+}
+$("skipReplay").onclick = () => { replaySkipped = true; };
+
+// Focus only after speech has drained: moving focus the instant the network
+// stream ends made the SR focus announcement preempt the still-queued final
+// clauses (speak off), or talk over speechSynthesis (speak on).
+function focusWhenQuiet(el) {
+  const t0 = performance.now();
+  (function wait() {
+    if (speechSynthesis.speaking && performance.now() - t0 < 15000)
+      return setTimeout(wait, 250);
+    setTimeout(() => el.focus({ preventScroll: false }),
+               $("speak").checked ? 0 : 800);
+  })();
+}
+function finishOutput(auto) {
+  setBusy(false);
+  syncRatingControls();
+  if (auto) return;  // timer runs must not yank the SR cursor mid-exploration
+  if (needsRating) {
+    // Land the cursor on the rating ROW, not on #out (focusing the output
+    // makes VoiceOver re-read the entire description) and not directly on the
+    // Helpful button (a reflexive second Enter recorded a false positive).
+    announce("Description complete. Was it helpful?");
+    focusWhenQuiet($("rateRow"));
+  } else {
+    focusWhenQuiet($("out"));
+  }
+}
+
+// Same output tagging as Compare: every description renders under a header
+// naming its source ("Veris — <mode>" or "Generic model").
+function outSection(title) {
+  const h = document.createElement("div");
+  h.innerHTML = `<h3 class="section-t" style="margin:10px 0 4px">${title}</h3><div>…</div>`;
+  $("out").appendChild(h);
+  return h.lastElementChild;
+}
+function modeTag(mode) {
+  return mode === "general" ? "Generic model" : "Veris — " + (MODE_LABELS[mode] || mode);
+}
+
+// Concurrency guard: the auto-describe timer, the Describe button/Enter key,
+// the mic flow and Compare all funnel through one in-flight run at a time —
+// overlapping runs would detach the output node, reset the speech offsets
+// under a live stream, and race for the single llama-server slot.
+let inFlight = false;
+// aria-disabled, NOT the disabled attribute: disabling a focused button drops
+// keyboard/SR focus to <body> — with auto-describe on, that would silently
+// reset a screen-reader user's reading position every tick. The inFlight
+// guards in each handler are what actually prevent re-entry.
+function setActionsDisabled(d) {
+  for (const el of [$("go"), $("compare"), $("mic")])
+    el.setAttribute("aria-disabled", d ? "true" : "false");
+}
+
+async function sendRating(rating, note) {
+  // Snapshot at click time: with auto-describe running, lastOutput can be
+  // overwritten by a newer capture while this request is in flight, which
+  // would attribute the rating to a description the tester never judged.
+  const payload = { output: lastOutput, rating, note: note || "",
+                    mode: lastMode, frame: lastFrame };
+  const isJudgment = rating != null;  // thumbs or skip; a note alone is not
+  // Clear the gate BEFORE the await (one judgment per capture — disabling
+  // happens via syncRatingControls); re-open it if the POST fails.
+  const wasNeeded = needsRating;
+  if (isJudgment) clearRatingGate();
+  syncRatingControls();
+  try {
+    const r = await fetch("/api/rate", { method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+  } catch (e) {
+    if (isJudgment && wasNeeded) { needsRating = true; syncRatingControls(); }
+    announce("Rating failed to send — try again.", true);
+    throw e;
+  }
+}
+function clearRatingGate() {
+  needsRating = false; ratingNudged = false;
+  $("rateRow").classList.remove("needs-rating");
+  $("rateMsg").hidden = true;
+}
+// Returns false when the caller should stop and let the tester rate first.
+// The auto-describe timer is exempt: gating it would stall hands-free mode.
+function ratingGate(auto) {
+  if (auto || !needsRating || !lastOutput) return true;
+  if (ratingNudged) {
+    sendRating("skipped").catch(() => {});
+    // visible confirmation — a silent skip on a double-tapped laggy phone
+    // looked identical to a rating that never happened
+    $("rateMsg").hidden = false;
+    $("rateMsg").textContent = "Previous description marked skipped.";
+    return true;
+  }
+  ratingNudged = true;
+  $("rateRow").classList.add("needs-rating");
+  // The instruction must be VISIBLE, not just announced — sighted testers saw
+  // an amber ring with no words. And focus goes to the row, not the Helpful
+  // button: a keyboard user who pressed Enter to describe and presses Enter
+  // again "to retry" was recording a false Helpful.
+  $("rateMsg").hidden = false;
+  $("rateMsg").textContent =
+    "Rate this description to continue — or press Describe again to skip.";
+  announce("Was that description helpful? Press thumbs up or thumbs down. " +
+           "Press Describe again to skip.", true);
+  $("rateRow").focus();
+  return false;
+}
+
+async function describe(opts = {}) {
+  if (inFlight) {
+    // The mic flow lands here when auto-describe holds the slot: the user was
+    // told "Heard: …" and then nothing happened — say why instead.
+    if (!opts.auto) announce("Still working on the previous description — try again in a moment.", true);
+    return;
+  }
+  if (!ratingGate(opts.auto)) return;
+  inFlight = true;
+  setActionsDisabled(true);
+  try {
+    $("out").textContent = ""; $("stats").textContent = "";
+    speechSynthesis.cancel(); spokenUpto = 0; announcedUpto = 0;
+    setBusy(true);
+    navigator.vibrate?.(30);  // shutter confirmation; silent no-op on iOS
+    const mode = getMode();
+    const sample = usingSample() ? currentSample() : null;
+    if (boardUp === false) {
+      // A timer tick has nothing new to say offline — replaying the same
+      // recording every 20s would just talk over the room.
+      if (opts.auto) { setBusy(false); return; }
+      const rel = offlineSection(sample, mode);
+      if (!rel) { setBusy(false); return; }
+      announce("The board is offline. Replaying a recorded description.");
+      const rr = await runRecorded({ slug: sample.slug, mode, el: rel,
+        render: t => rel.textContent = t, speak: true });
+      $("stats").textContent = rr.stats;
+      lastOutput = rr.text; lastMode = mode; lastFrame = "";
+      lastRecorded = true; needsRating = false;
+      setBusy(false); syncRatingControls(); focusWhenQuiet($("out"));
+      return;
+    }
+    announce("Describing…");
+    const blob = await getFrameBlob();
+    const el = outSection(modeTag(mode));
+    const r = await runDescribe({ mode, blob,
+      render: t => el.textContent = t, speak: true });
+    $("stats").textContent = r.stats;
+    if (!r.errored) {
+      lastOutput = r.text; lastMode = mode; lastFrame = r.frame; needsRating = true;
+      lastRecorded = false;
+      // One-shot question: the field is usually scrolled off-screen when
+      // Describe is pressed from the bar, so a stale question was silently
+      // re-steering every later capture (including auto-describe ticks).
+      if ($("q").value) { $("q").value = ""; announce("Question cleared."); }
+    }
+    finishOutput(opts.auto);
+  } finally {
+    inFlight = false;
+    setActionsDisabled(false);
+  }
+}
+$("go").onclick = () => {
+  if ($("go").getAttribute("aria-disabled") === "true") return;
+  describe().catch(e => showError("Error: " + e.message));
+};
+// keyboard-only: Enter in the question or context field triggers Describe
+for (const id of ["q", "ctx"]) $(id).addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); describe().catch(err => showError("Error: " + err.message)); }
+});
+
+$("compare").onclick = async () => {
+  if ($("compare").getAttribute("aria-disabled") === "true") return;
+  if (inFlight) return;
+  if (!ratingGate()) return;
+  inFlight = true;
+  setActionsDisabled(true);
+  $("stats").textContent = ""; speechSynthesis.cancel(); spokenUpto = 0; announcedUpto = 0;
+  setBusy(true);
+  announce("Comparing the generic model with the Veris mode. Generic model first…");
+  if ($("speak").checked)
+    speechSynthesis.speak(new SpeechSynthesisUtterance("Generic model:"));
+  try {
+    const blind = getMode() === "general" ? "describe" : getMode();
+    if (boardUp === false) {
+      const sample = usingSample() ? currentSample() : null;
+      if (!sample || !recordedRun(sample.slug, blind) || !recordedRun(sample.slug, "general")) {
+        offlineSection(sample, blind);   // explains and returns null
+        setBusy(false);
+        return;
+      }
+      $("out").innerHTML = "";
+      const gr = outSection("Generic model — recorded");
+      const br = outSection(modeTag(blind) + " — recorded");
+      await runRecorded({ slug: sample.slug, mode: "general", el: gr,
+        render: t => gr.textContent = t, speak: true });
+      spokenUpto = 0; announcedUpto = 0;
+      announce("Now the Veris description:");
+      const rr = await runRecorded({ slug: sample.slug, mode: blind, el: br,
+        render: t => br.textContent = t, speak: true });
+      $("stats").textContent = rr.stats;
+      lastOutput = rr.text; lastMode = blind; lastFrame = "";
+      lastRecorded = true; needsRating = false;
+      setBusy(false); syncRatingControls(); focusWhenQuiet($("out"));
+      return;
+    }
+    const blob = await getFrameBlob();   // ONE frame through both pipelines
+    $("out").innerHTML = "";
+    const g = outSection("Generic model"), b = outSection(modeTag(blind));
+    // BOTH halves speak — with speak:false the generic description was never
+    // voiced or announced, so a blind user got silence for exactly the half
+    // the comparison exists to expose.
+    await runDescribe({ mode: "general", blob, render: t => g.textContent = t, speak: true });
+    // reset the clause offsets: they track cumulative text, and carrying the
+    // generic run's length into the Veris stream would slice its clauses wrong
+    spokenUpto = 0; announcedUpto = 0;
+    announce("Now the Veris description:");
+    if ($("speak").checked)
+      speechSynthesis.speak(new SpeechSynthesisUtterance("Now the Veris description:"));
+    const r = await runDescribe({ mode: blind, blob, render: t => b.textContent = t, speak: true });
+    if (!r.errored) {
+      lastOutput = r.text; lastMode = blind; lastFrame = r.frame;
+      needsRating = true; lastRecorded = false;
+    }
+    $("stats").textContent = r.stats;
+    finishOutput(false);
+  } catch (e) { showError("Error: " + e.message); }
+  finally { inFlight = false; setActionsDisabled(false); }
+};
+
+// ── voice ask: prefer THIS device's mic (phone), fall back to the Orin's ──
+function encodeWav(samples, rate) {
+  // 16-bit PCM mono WAV
+  const buf = new ArrayBuffer(44 + samples.length * 2);
+  const v = new DataView(buf);
+  const str = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+  str(0, "RIFF"); v.setUint32(4, 36 + samples.length * 2, true); str(8, "WAVE");
+  str(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+  v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true); v.setUint16(32, 2, true);
+  v.setUint16(34, 16, true); str(36, "data"); v.setUint32(40, samples.length * 2, true);
+  for (let i = 0; i < samples.length; i++)
+    v.setInt16(44 + i * 2, Math.max(-1, Math.min(1, samples[i])) * 0x7fff, true);
+  return new Blob([buf], { type: "audio/wav" });
+}
+
+async function recordLocalWav(seconds) {
+  const mic = await navigator.mediaDevices.getUserMedia({ audio: true });
+  const ctx = new AudioContext();
+  const src = ctx.createMediaStreamSource(mic);
+  const proc = ctx.createScriptProcessor(4096, 1, 1);
+  const chunks = [];
+  src.connect(proc); proc.connect(ctx.destination);
+  proc.onaudioprocess = e => chunks.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+  await new Promise(r => setTimeout(r, seconds * 1000));
+  proc.disconnect(); src.disconnect(); mic.getTracks().forEach(t => t.stop());
+  const all = new Float32Array(chunks.reduce((n, c) => n + c.length, 0));
+  let o = 0; for (const c of chunks) { all.set(c, o); o += c.length; }
+  // downsample to 16k for whisper
+  const ratio = ctx.sampleRate / 16000, out = new Float32Array(Math.floor(all.length / ratio));
+  for (let i = 0; i < out.length; i++) out[i] = all[Math.floor(i * ratio)];
+  ctx.close();
+  return encodeWav(out, 16000);
+}
+
+$("mic").onclick = async () => {
+  if ($("mic").getAttribute("aria-disabled") === "true") return;
+  if (boardUp === false) {
+    showError("Ask needs the board: your question is transcribed by whisper on "
+      + "the Orin and answered by the model there, and it is offline. The "
+      + "sample images still replay their recorded descriptions.");
+    return;
+  }
+  $("mic").setAttribute("aria-disabled", "true"); $("mic").textContent = "listening…";
+  announce("Listening for four seconds. Ask your question now.");
+  try {
+    let j;
+    try {          // this device's mic (phone/laptop) — needs HTTPS + permission
+      const wav = await recordLocalWav(4);
+      const fd = new FormData(); fd.append("audio", wav, "q.wav");
+      j = await (await fetch("/api/transcribe", { method: "POST", body: fd })).json();
+    } catch (e) {  // no local mic / denied -> the Orin's C920 mic
+      j = await (await fetch("/api/voice_ask", { method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ seconds: 4, model: "tiny" }) })).json();
+    }
+    const heard = (j.transcript || "").trim();
+    if (heard && !/^\[.*\]$|^\(.*\)$/.test(heard)) {
+      $("q").value = heard;
+      announce("Heard: " + heard);
+      await describe();
+    }
+    else showError("Voice: nothing heard — try again.");
+  } finally {
+    $("mic").setAttribute("aria-disabled", "false");
+    $("mic").innerHTML = '<span aria-hidden="true">🎤</span> Ask';
+  }
+};
+
+// ── walk capture: harvest nav frames as training feedstock ──
+// No model call per frame (see /api/capture), so this can run at a walking
+// cadence without draining the phone or queueing on the single llama-server
+// slot. outdoor_nav/indoor_nav have no training data at all; this is the
+// intake for that.
+let walkTimer = null, walkN = 0, walkFail = 0;
+async function walkShot() {
+  try {
+    const blob = await getFrameBlob();
+    const fd = new FormData();
+    fd.append("frame", blob, "frame.jpg");
+    fd.append("mode", getMode());
+    fd.append("context", $("ctx").value);
+    const r = await fetch("/api/capture", { method: "POST", body: fd });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    walkN++; walkFail = 0;
+  } catch (e) {
+    // A walk is unattended and often on flaky mobile data: keep going, but
+    // don't harvest nothing in silence if the hub has actually gone away.
+    if (++walkFail === 3) announce("Walk capture is failing — check the connection.", true);
+  }
+  $("walkstat").textContent = walkN + (walkN === 1 ? " frame" : " frames")
+    + (walkFail ? " · " + walkFail + " failed" : "");
+  $("walkstat").classList.toggle("warn", walkFail > 0);
+}
+function stopWalk() {
+  clearInterval(walkTimer); walkTimer = null;
+  keepAwake(false);
+  $("walk").textContent = "Start walk capture";
+  $("walkstat").classList.add("dim");
+  $("walkstat").classList.remove("live", "warn");
+  $("walkstat").textContent = "stopped · " + walkN + " frames";
+  announce("Walk capture stopped after " + walkN + " frames.");
+}
+$("walk").onclick = () => {
+  if (walkTimer) return stopWalk();
+  // Walk capture exists to harvest REAL egocentric nav frames for the next
+  // fine-tune. Pointing it at a sample would write the same stock photo to
+  // the training feedstock every few seconds.
+  if (usingSample()) {
+    showError("Walk capture records frames from a live camera to use as "
+      + "training data — pick a real camera in the camera list first.");
+    return;
+  }
+  walkN = 0; walkFail = 0;
+  const secs = Math.min(60, Math.max(2, +$("walks").value || 4));
+  $("walkstat").classList.remove("dim"); $("walkstat").classList.add("live");
+  $("walkstat").textContent = "0 frames";
+  $("walk").textContent = "Stop walk capture";
+  keepAwake(true);
+  // NOT "put the phone away": a locked screen suspends getUserMedia and
+  // timers on iOS, killing the walk — the wake lock keeps the screen on.
+  announce("Walk capture started in " + (MODE_LABELS[getMode()] || getMode()) +
+           " mode, one frame every " + secs + " seconds. " +
+           "Keep the screen on and the camera pointed ahead.");
+  walkShot();
+  walkTimer = setInterval(walkShot, secs * 1000);
+};
+// The wake lock is auto-released on tab switch and NOT re-granted — without
+// this, a walk dies the first time the tester checks a notification.
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && walkTimer) $("walkstat").textContent = walkN + " frames · backgrounded";
+  if (!document.hidden && walkTimer) keepAwake(true);
+});
+
+let autoTimer = null;
+$("auto").onchange = () => {
+  clearInterval(autoTimer);
+  if ($("auto").checked) {
+    // a tick that fires while a run is in flight is skipped by describe()'s
+    // inFlight guard; failures (e.g. Orin down) are surfaced, not swallowed
+    autoTimer = setInterval(() => describe({ auto: true }).catch(e => showError("Error: " + e.message)),
+      (+$("autos").value || 20) * 1000);
+    announce("Auto-describe on, every " + (+$("autos").value || 20) + " seconds.");
+  } else announce("Auto-describe off.");
+};
+
+$("gps").onclick = () => navigator.geolocation.getCurrentPosition(async p => {
+  const body = { lat: p.coords.latitude, lon: p.coords.longitude,
+                 heading_deg: p.coords.heading, speed_mps: p.coords.speed };
+  const r = await fetch("/api/context", { method: "POST",
+    headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const j = await r.json();
+  $("ctx").value = j.context || "";
+  // One combined announcement (setMode announces the switch itself when
+  // auto-mode acts on the suggestion) — the pill is deliberately not a live
+  // region: it started [hidden], which drops the first announcement, and a
+  // second live region here would double-speak with this announce().
+  announce(j.context ? "Location set: " + j.context : "Location updated.");
+  if (j.situation) {
+    $("situation").classList.remove("dim"); $("situation").classList.add("live");
+    $("situation").textContent = j.situation + " → " + j.suggested_mode;
+  }
+  if ($("automode").checked && j.suggested_mode) setMode(j.suggested_mode);
+}, e => alert("GPS: " + e.message), { enableHighAccuracy: true });
+
+$("send").onclick = async () => {
+  try {
+    await sendRating(null, $("note").value);
+    $("note").value = ""; syncRatingControls();
+    announce("Feedback sent. Thank you.");
+  } catch {}  // sendRating already announced the failure
+};
+$("note").addEventListener("input", syncRatingControls);
+document.querySelectorAll("[data-r]").forEach(b => b.onclick = async () => {
+  try {
+    await sendRating(b.dataset.r, $("note").value);
+    $("note").value = ""; syncRatingControls();
+    announce(b.dataset.r === "up" ? "Rated helpful. Thank you." : "Rated not helpful. Thank you.");
+  } catch {}
+});
+
+// ── connection state, explained ──
+// "orin ✗" in a 12px pill is meaningless to someone who has never heard of
+// this project. The banner says which piece is down, why that is normal for a
+// board that lives on a desk, and what still works — and it only touches the
+// DOM when the state actually CHANGES, because it is a live region and a
+// rewrite every 5s would make a screen reader announce it forever.
+let lastBanner = "";
+function renderBanner() {
+  const key = STATIC ? (liveState === "up" ? "static-live"
+                        : liveState === "hub" ? "static-hub" : "static")
+            : hubUp === false ? "hub"
+            : boardUp === false ? "board" : "ok";
+  if (key === lastBanner) return;
+  lastBanner = key;
+  const el = $("banner");
+  if (key === "ok") { el.hidden = true; el.innerHTML = ""; return; }
+  el.classList.remove("ok", "live");
+  el.innerHTML = "";
+  const h = document.createElement("h2");
+  const add = text => { const q = document.createElement("p"); q.textContent = text; el.appendChild(q); };
+  if (key === "static-live" || key === "static-hub") {
+    // The recorded copy just heard back from the board. Offer the live page,
+    // never redirect to it: a silent jump is disorienting with a screen
+    // reader, this copy is the side-by-side reference, and if the board
+    // drops after the jump the visitor lands on a relay error page.
+    el.classList.add("live");
+    h.textContent = key === "static-live"
+      ? "The live board is up right now"
+      : "The live board is on, but its model is restarting";
+    el.appendChild(h);
+    add(key === "static-live"
+      ? "Everything on this page is a recording. The real thing is answering "
+        + "right now on the Jetson Orin Nano: a live camera feed, the on-device "
+        + "model, and the location context from your phone's GPS. You're welcome "
+        + "to try it there."
+      : "Everything on this page is a recording. The Jetson Orin Nano is "
+        + "reachable right now, and its live page opens and shows the camera; "
+        + "descriptions resume when the model finishes loading, usually within "
+        + "a minute.");
+    const a = document.createElement("a");
+    a.className = "golive"; a.rel = "noopener";
+    a.href = LIVE_URL.replace(/\/$/, "/") + location.search;  // keep any ?k= from an old link
+    a.textContent = "Open the live demo";
+    el.appendChild(a);
+    add("This page keeps working if the board goes offline again.");
+    el.hidden = false;
+    if (usingSample()) showSampleNote(currentSample());
+    return;
+  }
+  if (key === "static") {
+    h.textContent = "This is the recorded copy of the demo";
+    el.appendChild(h);
+    add("There is no hardware behind this page. Veris runs on a physical "
+      + "Jetson Orin Nano — a board on a desk — and this is a static copy that "
+      + "works whether or not the board is plugged in.");
+    add("Everything you can play here was recorded on that board over the real "
+      + "inference path: the descriptions are verbatim, and they replay at the "
+      + "speed they actually ran. Pick a sample image and press Describe, or "
+      + "press Compare to hear the fine-tuned model against the untuned one.");
+    if (LIVE_URL) {
+      const q = document.createElement("p");
+      q.appendChild(document.createTextNode("The live demo, when the board is on: "));
+      const a = document.createElement("a");
+      a.href = LIVE_URL; a.textContent = LIVE_URL.replace(/^https?:\/\//, "");
+      a.rel = "noopener";
+      q.appendChild(a);
+      el.appendChild(q);
+    }
+    el.hidden = false;
+    if (usingSample()) showSampleNote(currentSample());
+    return;
+  }
+  if (key === "hub") {
+    h.textContent = "Can’t reach the demo server";
+    el.appendChild(h);
+    add("The page loaded but the server behind it stopped answering. It may be "
+      + "restarting — this page retries every few seconds on its own.");
+  } else {
+    h.textContent = "The Jetson Orin is offline right now";
+    el.appendChild(h);
+    add("Veris runs on a physical Jetson Orin Nano devkit — a board on a desk, "
+      + "not a cloud service. It is powered down or off the network at the "
+      + "moment, so no live camera frame can be described.");
+    add("You can still try it. Pick one of the four sample images and press "
+      + "Describe: each one replays a description recorded on the board "
+      + "itself, streamed at the speed it really ran. Compare works too, so "
+      + "you can still see the fine-tuned model against the untuned one.");
+    const row = document.createElement("div");
+    row.className = "row";
+    const b = document.createElement("button");
+    b.className = "ghost";
+    b.textContent = "Load a sample image";
+    b.onclick = () => {
+      $("cam").value = SAMPLE_PREFIX + "scene";
+      openCam().catch(e => showError("Sample: " + e.message));
+      $("go").focus();
+    };
+    row.appendChild(b);
+    el.appendChild(row);
+  }
+  el.hidden = false;
+  // the "recorded" badge on the sample caption depends on this state
+  if (usingSample()) showSampleNote(currentSample());
+}
+
+
+// ── walkthrough ───────────────────────────────────────────────────────────
+// Two jobs in one flow: explain what the project IS (a stranger arrives from a
+// link with no context), then point at the controls in the order you would
+// actually use them. Steps that highlight something also NAME it in prose,
+// because aria-modal hides the highlighted control from screen readers.
+const TOUR = [
+  { title: "What is Veris?",
+    body: ["Veris is the vision half of a wearable that describes the world to "
+         + "blind and low-vision users. A head-mounted camera feeds a Jetson "
+         + "Orin Nano in a belt pack, and a vision-language model running on "
+         + "that board turns what it sees into a spoken sentence.",
+           "It is not one model. A small gate throws out blurred frames, a "
+         + "detector warns about what is in the way within a twentieth of a "
+         + "second, a text reader handles signs and documents, and three "
+         + "experts for outdoors, indoors and reading share one language "
+         + "model. All of it fits in the board’s 8 GB and runs with no network.",
+           "Each part is trained for this job specifically: say what is "
+         + "there, in second person, most important thing first — and say “I "
+         + "can’t tell” instead of inventing something.",
+           "No image ever leaves the device. The only thing that goes out is "
+         + "the phone’s GPS position, which a cloud service turns into a hint "
+         + "about the situation you are in."] },
+  { title: "What this page is",
+    body: ["This page is the harness the model is tested through — it is what "
+         + "testers use in the field, not a marketing mock-up. It talks to a "
+         + "real board over an encrypted tunnel.",
+           "That means it is genuinely offline sometimes. When the board is "
+         + "down, the sample images below replay descriptions recorded on it, "
+         + "clearly marked as recordings."],
+    staticBody: ["This page is a recorded copy of the harness the model is "
+         + "tested through — the real one talks to a Jetson Orin Nano over an "
+         + "encrypted tunnel, and is what testers use in the field.",
+           "Nothing here is computed live, because there is no board behind "
+         + "this copy. What you can play are real runs captured from the "
+         + "board: verbatim text, real timings, replayed at the speed they "
+         + "actually took."] },
+  { title: "Choose what it looks at",
+    target: '[aria-labelledby="t-source"]',
+    body: ["The camera list at the top of this panel picks the frame source: a "
+         + "camera on this device, or one of four sample photographs.",
+           "The samples exist so the demo works on a laptop with no webcam — "
+         + "and picking one also switches to the mode it was chosen to show "
+         + "off. Each sample’s caption describes the picture in words."] },
+  { title: "Four modes, one pipeline",
+    target: ".modrow", raise: true,
+    body: ["The buttons along the bottom choose the mode. Each mode is a "
+         + "different route through the models, not a different prompt on "
+         + "one model.",
+           "Outdoor nav and indoor nav each have their own expert, which is "
+         + "handed what the detector found and on which side. Text reading "
+         + "speaks a short sign straight from OCR in about half a second, and "
+         + "sends a page, a menu or a receipt to the language model as a "
+         + "tight crop. Scene lets the gate decide whether you are indoors "
+         + "or outdoors.",
+           "Under each description, one line shows what the gate and the "
+         + "detector saw and which stage answered.",
+           "Generic is the untuned stock model, kept here on purpose as the "
+         + "baseline to compare against."] },
+  { title: "Describe, Ask, Compare",
+    target: ".actions", raise: true,
+    body: ["Describe sends one frame and speaks the answer as it streams back, "
+         + "clause by clause, so you hear the first words before the sentence "
+         + "has finished generating.",
+           "Ask records a question through the microphone, transcribes it on "
+         + "the board, and answers it about what the camera can see.",
+           "Compare is the interesting one: it sends the same frame through the "
+         + "untuned model and the Veris mode, one after the other, so you can "
+         + "judge the difference yourself."],
+    staticBody: ["Describe plays back the run recorded for the sample you have "
+         + "picked, streaming it clause by clause and speaking it exactly as "
+         + "the live demo does.",
+           "Compare is the interesting one: the same frame went through the "
+         + "untuned stock model and through the Veris mode, and both runs were "
+         + "recorded. On the menu-board sample, compare what each one does "
+         + "with the words it cannot quite read.",
+           "The live demo adds Ask — a spoken question, transcribed on the "
+         + "board and answered about what the camera can see."] },
+  { title: "Rating is the training loop",
+    target: "#rateRow",
+    body: ["Every description can be rated, and the rating lands in a session "
+         + "log alongside the frame and the model’s output.",
+           "Those logs are mined back into the next fine-tune — the ratings are "
+         + "not a feedback form, they are the training data pipeline. "
+         + "Recorded replays are deliberately not ratable."],
+    staticBody: ["In the live demo every description can be rated, and the "
+         + "rating lands in a session log next to the frame and the output.",
+           "Those logs are mined back into the next fine-tune — the ratings "
+         + "are not a feedback form, they are the training data pipeline. "
+         + "There is nothing to rate here: a replay is not an inference "
+         + "anyone just made, and must not enter that pipeline as one."] },
+  { title: "Where this actually runs",
+    body: ["Everything you see described was computed on a Jetson Orin Nano "
+         + "devkit drawing about 15 watts — no datacentre, no API call, no "
+         + "image upload.",
+           "That is the whole argument: a blind user’s camera feed is about as "
+         + "private as data gets, and it should never have to leave the thing "
+         + "clipped to their belt.",
+           "Press Close to try it."] },
+];
+
+let tourIdx = -1, tourPrevFocus = null, tourTarget = null;
+
+function clearTourSpot() {
+  if (tourTarget) {
+    tourTarget.classList.remove("tour-spot");
+    const bar = tourTarget.closest(".bar");
+    if (bar) bar.classList.remove("tour-raise");
+    tourTarget = null;
+  }
+}
+
+function renderTour() {
+  const step = TOUR[tourIdx];
+  $("tourTitle").textContent = step.title;
+  const body = $("tourBody");
+  body.innerHTML = "";
+  for (const para of ((STATIC && step.staticBody) || step.body)) {
+    const el = document.createElement("p");
+    el.textContent = para;
+    body.appendChild(el);
+  }
+  $("tourDots").textContent = `Step ${tourIdx + 1} of ${TOUR.length}`;
+  $("tourPrev").hidden = tourIdx === 0;
+  $("tourNext").textContent = tourIdx === TOUR.length - 1 ? "Done" : "Next";
+
+  clearTourSpot();
+  if (step.target) {
+    const t = document.querySelector(step.target);
+    if (t) {
+      tourTarget = t;
+      const bar = t.closest(".bar");
+      if (bar) bar.classList.add("tour-raise");
+      t.classList.add("tour-spot");
+      const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+      t.scrollIntoView({ block: "center",
+                         behavior: smooth ? "smooth" : "auto" });
+      // keep the panel off the thing it is pointing at
+      const r = t.getBoundingClientRect();
+      $("tour").classList.toggle("top", r.top + r.height / 2 > innerHeight / 2);
+    }
+  } else {
+    $("tour").classList.remove("top");
+  }
+  $("tourTitle").focus();
+}
+
+function openTour(from) {
+  tourPrevFocus = document.activeElement;
+  tourIdx = from || 0;
+  $("tourBack").hidden = false;
+  $("tour").hidden = false;
+  renderTour();
+}
+function closeTour() {
+  clearTourSpot();
+  $("tour").hidden = true;
+  $("tourBack").hidden = true;
+  $("tour").classList.remove("top");
+  try { localStorage.setItem("veris_tour_seen", "1"); } catch {}
+  if (tourPrevFocus && tourPrevFocus.isConnected) tourPrevFocus.focus();
+  tourPrevFocus = null;
+}
+function stepTour(d) {
+  const next = tourIdx + d;
+  if (next < 0) return;
+  if (next >= TOUR.length) return closeTour();
+  tourIdx = next;
+  renderTour();
+}
+$("tourBtn").onclick = () => openTour(0);
+$("tourNext").onclick = () => stepTour(1);
+$("tourPrev").onclick = () => stepTour(-1);
+$("tourSkip").onclick = closeTour;
+$("tourBack").onclick = closeTour;
+// Focus trap + keyboard stepping. Without the trap, Tab walks straight out of
+// an aria-modal dialog into a page the screen reader has been told is hidden.
+$("tour").addEventListener("keydown", e => {
+  if (e.key === "Escape") { e.preventDefault(); return closeTour(); }
+  if (e.key === "ArrowRight") { e.preventDefault(); return stepTour(1); }
+  if (e.key === "ArrowLeft") { e.preventDefault(); return stepTour(-1); }
+  if (e.key !== "Tab") return;
+  const f = [...$("tour").querySelectorAll("button")].filter(b => !b.hidden);
+  if (!f.length) return;
+  const first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && (document.activeElement === first || document.activeElement === $("tourTitle"))) {
+    e.preventDefault(); last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault(); first.focus();
+  }
+});
+
+// The recorded copy asks the board's hub, cross-origin, whether it is up. The
+// hub grants CORS to this page's origin for that one endpoint. Once a minute
+// per open tab (the hub caches the answer, so many tabs cost the board one
+// check), with a short timeout so a board that is off never slows this page.
+// liveState: null (not asked yet) | "down" | "hub" (hub up, model down) | "up"
+let liveState = null, lastProbe = 0;
+async function probeLive() {
+  if (!LIVE_URL || Date.now() - lastProbe < 60000) return;
+  lastProbe = Date.now();
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 4000);
+  try {
+    const r = await fetch(LIVE_URL.replace(/\/$/, "") + "/api/live",
+                          { signal: ctl.signal, cache: "no-store" });
+    const j = r.ok ? await r.json() : {};
+    liveState = j.board ? "up" : "hub";   // any HTTP answer at all means the hub is there
+  } catch { liveState = "down"; }
+  finally { clearTimeout(timer); }
+}
+
+let lastHealth = "";
+async function poll() {
+  let h;
+  if (STATIC) {           // no hub to ask; only the live board's state can change
+    hubUp = true; boardUp = false;
+    await probeLive();
+    renderBanner();
+    h = liveState === "up" ? "recorded copy · live board up"
+      : liveState === "hub" ? "recorded copy · board on, model loading" : "recorded copy";
+    if (h !== lastHealth) { lastHealth = h; $("health").textContent = h; }
+    return;
+  }
+  try {
+    const s = await (await fetch("/api/status")).json();
+    hubUp = true;
+    boardUp = s.orin.status === "ok";
+    h = (boardUp ? "orin ✓" : "orin ✗") +
+      (s.context_engine.status === "ok" ? " · ctx ✓" : " · ctx ✗");
+  } catch { hubUp = false; h = "hub ✗"; }
+  renderBanner();
+  if (h !== lastHealth) { lastHealth = h; $("health").textContent = h; }
+  try {
+    const t = await (await fetch("/api/telemetry")).json();
+    if (t.power_vdd_in_mw) $("tele").textContent =
+      `${(t.power_vdd_in_mw/1000).toFixed(1)} W · ${t.ram_used_mb}/${t.ram_total_mb} MB · ${(t.temp_max_c ?? 0).toFixed(0)} °C · GPU ${t.gpu_pct ?? "?"}%`;
+  } catch {}
+}
+setInterval(poll, 5000); poll();
+// scroll-padding must match the REAL bar height (chips wrap to different row
+// counts per width — a fixed constant left the focused rating row half-hidden
+// under the bar's top edge on narrow phones)
+function syncBarPad() {
+  const b = document.querySelector(".bar");
+  if (b) document.documentElement.style.scrollPaddingBottom = (b.offsetHeight + 16) + "px";
+}
+window.addEventListener("resize", syncBarPad); syncBarPad();
+// In static mode, remove the controls that have nothing to talk to. Leaving a
+// dead Ask button or an un-sendable rating form on the page just invites a tap
+// that does nothing.
+if (STATIC) {
+  document.title = "Veris — recorded demo";
+  // The whole Ask card goes: a typed question steers a live inference, but it
+  // cannot change a recording, so a filled-in box that does nothing is a lie.
+  // auto-mode goes with it — there is no GPS suggestion to act on.
+  for (const sel of ["#walk", "#walkstat", "#walks", "#gps", "#situation",
+                     "#mic", "#rateRow", "#tele", "#auto", "#autos",
+                     '[aria-labelledby="t-ask"]', "#automode"]) {
+    const el = document.querySelector(sel);
+    if (el) {
+      const label = el.closest("label");
+      (label || el).hidden = true;
+    }
+  }
+  // the labels wrapping the auto-describe controls read as orphans once their
+  // inputs are gone
+  for (const l of document.querySelectorAll("label.check")) {
+    if (!l.querySelector("input") || l.querySelector("input").hidden) l.hidden = true;
+  }
+  $("out").textContent = "Pick a sample image and press Describe.";
+}
+syncRatingControls();
+boot().catch(e => showError("Camera: " + e.message));
+// First visit only: someone arriving from a link has no idea what this is.
+// Returning visitors get the header button instead of a popup every time.
+try {
+  if (!localStorage.getItem("veris_tour_seen")) setTimeout(() => openTour(0), 600);
+} catch {}
+</script>
+</body>
+</html>
