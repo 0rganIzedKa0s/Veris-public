@@ -1,0 +1,131 @@
+{
+ "command": "flock /tmp/veris-gpu.lock .venv/bin/python evals/reader_docs.py",
+ "dataset": "WildReceipt test, long side >= 1000 px, seed 0, first 100, downscaled to 1280 px",
+ "model": "Qwen/Qwen2.5-VL-3B-Instruct, bnb 4-bit, RTX 3070 (timings are not the board)",
+ "max_new_tokens": 300,
+ "scoring": "WildReceipt transcribes each line without spaces, so both sides are\nreduced to lower-case letters and digits. A ground-truth line of 3 or more\ncharacters counts as read when it appears in the output. Precision is the\nshare of output characters that belong to a line read, so a line read with\none wrong character counts fully against it: it is a lower bound.",
+ "a_base_full_frame_1280": {
+  "n_images": 100,
+  "gt_lines": 3711,
+  "line_recall": 0.723,
+  "char_recall": 0.6794,
+  "char_precision": 0.7124,
+  "image_tokens_mean": 1063.0,
+  "image_tokens_max": 1260,
+  "ttft_s_median_3070": 0.69,
+  "gen_s_mean_3070": 13.94
+ },
+ "r_deployed_crop_base_model": {
+  "n_images": 100,
+  "gt_lines": 3711,
+  "line_recall": 0.7375,
+  "char_recall": 0.719,
+  "char_precision": 0.7949,
+  "image_tokens_mean": 333.9,
+  "image_tokens_max": 352,
+  "ttft_s_median_3070": 0.347,
+  "gen_s_mean_3070": 13.61,
+  "took_document_path": 100
+ },
+ "c_crop_reader_adapter": {
+  "n_images": 100,
+  "gt_lines": 3711,
+  "line_recall": 0.5985,
+  "char_recall": 0.5861,
+  "char_precision": 0.8369,
+  "image_tokens_mean": 333.9,
+  "image_tokens_max": 352,
+  "ttft_s_median_3070": 0.388,
+  "gen_s_mean_3070": 22.06
+ },
+ "m_mosaic_capped_reader_adapter": {
+  "n_images": 100,
+  "gt_lines": 3711,
+  "line_recall": 0.4783,
+  "char_recall": 0.4797,
+  "char_precision": 0.8131,
+  "image_tokens_mean": 304.1,
+  "image_tokens_max": 352,
+  "ttft_s_median_3070": 0.376,
+  "gen_s_mean_3070": 19.55
+ },
+ "u_mosaic_not_capped": {
+  "n_images": 100,
+  "gt_lines": 3711,
+  "line_recall": 0.5042,
+  "char_recall": 0.5204,
+  "char_precision": 0.85,
+  "image_tokens_mean": 417.6,
+  "image_tokens_max": 702,
+  "ttft_s_median_3070": 0.427,
+  "gen_s_mean_3070": 20.38
+ },
+ "h_mosaic_not_capped_with_hints": {
+  "n_images": 100,
+  "gt_lines": 3711,
+  "line_recall": 0.3269,
+  "char_recall": 0.3091,
+  "char_precision": 0.7129,
+  "image_tokens_mean": 417.6,
+  "image_tokens_max": 702,
+  "ttft_s_median_3070": 0.546,
+  "gen_s_mean_3070": 27.7,
+  "hinted": 100
+ },
+ "examples": [
+  {
+   "gt": [
+    "ALMANAMAHYPERMARKET",
+    "TIMESSQUARECENTER-DUBAI",
+    "Phone:",
+    "04-3466046",
+    "Date:",
+    "10/01/14",
+    "14:03",
+    "slip:01D0069729",
+    "Staff:DANNYROSE",
+    "Trans:74420",
+    "Qty.",
+    "Description"
+   ],
+   "a": "The receipt shows the following items and their quantities:\n\n- 0.48 Courgettes Green ESP: 7.92 AED\n- 0.27 Broccoli Spain: 3.65 AED\n- 0.38 Carrot Loose Aust: 1.43 AED\n- 0.92 Lettuce Iceberg: 12.42 AED\n- 0.3 Lychee: 3.29 AED\n- 1 PK Mushroom Fine/Small: 5.50 AED\n- 0.21 Ginger China: 2.84 AED\n- 0.43 Onion Brown Spain: 2.37 AED\n- 0.89 Potato Saudi: 4.41 AED\n- 0.64 Kiwifruit Italy: 8.00 AED\n- 1 PC Norla",
+   "r": "AL MANAMA HYPERMARKET\nTIMES SQUARE CENTER - DUBAI\nPhone:04-3466046\n**********1234567890**********\nDate: 10/01/14 14:03 Slip: 01D0069729\nStaff: DANNY ROSE Trans: 74420\nQty. Description Amount\n0.48 COURGETTES GREEN ESP 7.92\n0.27 BROCCOLI SPAIN 3.65\n0.38 CARROT LOOSE AUST 1.43\n0.92 LETTUCE - ICEBERG - 12.42\n0.3 LYCHEE 3.29\n1 PK MUSHROOM-FINE/SMALL 5.50\n0.21 GINGER CHINA 2.84\n0.43 ONION BROWN SPAIN 2."
+  },
+  {
+   "gt": [
+    "YOURGUESTNUMBERIS",
+    "73",
+    "IN-N-OUTBURGERWESTCHESTER",
+    "117216182536",
+    "Cashier:MARVINJU",
+    "Check:73",
+    "1",
+    "1",
+    "1",
+    "CheesebrgrAnimal",
+    "Db1-Db1Animal",
+    "Fry"
+   ],
+   "a": "Your guest number is 73. IN-N-OUT BURGER WESTCHESTER 117 2 1618 2536 Cashier: MARVIN JU Check : 73 1 Cheesebrgr Animal 2.70 1 Db1-Dbl Animal 3.90 1 Fry 1.85 COUNTER-Take Out 8.45 TAX 9.50% .80 Amount Due $9.25 Tender AMEX Change $9.25 $0.00 CHARGE DETAIL SALE Card Type: Amex Account: **********3009 C Auth Code: 2536",
+   "r": "YOUR GUEST NUMBER IS\n73\nIN-N-OUT BURGER WESTCHESTER\n117 2 1618 2536\nCashier: MARVIN JU\nCheck : 73\n1 Cheesebrgr Animal\n1 Dbl-Dbl Animal\n1 Fry\nCOUNTER-Take Out\nTAX 9.50%\nAmount Due\nTender AMEX\nChange\nCHARGE DETAIL\nSALE\nCard Type: Amex\nAccount: **********3009 C\nAuth Code: 2536"
+  },
+  {
+   "gt": [
+    "PJ'SPETEXPRESS",
+    "3737MajorMackenzieDr",
+    "VAUGHANON",
+    "L4HOA2",
+    "9053036621",
+    "Oper.:Staff200",
+    "Date:",
+    "02/08/2016",
+    "15:59",
+    "Store:107Inv#:002-00157478Trs#:157498",
+    "EUKANUBASMBREEDADULT16LB",
+    "ITEMCODE:PG50014"
+   ],
+   "a": "The receipt reads:\n\nPJ'S PET EXPRESS\n3737 Major Mackenzie Dr\nVAUGHAN ON\nL4H OA2\n905 303 6621\n\nOper.: Staff 200 Date:02/08/2016 15:59\nStore:107 Inv#:002-00157478 Trs#:157498\n\nEUKANUBA SM BREED ADULT 16LB\nITEM CODE:PG50014 $49.99 HST\nItem Discount -$45.00\nexpiring\n\nNet Sales $4.99\nHST $0.65\nTOTAL SALES $5.64\n\nSUB TOTAL $5.64\nCash $10.00\nChange $4.36\n\nItem count 1\nManual item discount $45.00\nTOTAL SA",
+   "r": "PJ'S PET EXPRESS\n3737 Major Mackenzie Dr\nVAUGHAN ON\nL4H 0A2\n905 303 6621\nOper.:Staff 200 Date:02/08/2016 15:59\nStore:107 Inv#:002-00157478 Trs#:157498\nEUKANUBA SM BREED ADULT 16LB\nITEM CODE:P550014 $49.99 HST\nItem Discount -$45.00\n. expiring\nNet Sales $4.99\nHST $0.65\nTOTAL SALES $5.64\nSUB TOTAL $5.64\nCash $10.00\nChange $4.36\nItem count 1\nManual item discount $45.00\nTOTAL SAVING $45.00\nGST # 887262"
+  }
+ ]
+}

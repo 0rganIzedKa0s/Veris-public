@@ -1,0 +1,643 @@
+{
+ "command": "flock /tmp/veris-gpu.lock .venv/bin/python evals/nav_detect.py",
+ "device": "cpu",
+ "split": "held-out: Open Images V7 validation + test images (never trained on); training used Open Images V7 train only",
+ "n_images": 1500,
+ "n_boxes": 5356,
+ "protocol": "pycocotools bbox AP per class on images where the class is human-verified; macro mean over classes; IsGroupOf -> iscrowd; maxDets 100",
+ "finetuned": {
+  "ckpt": "train/nav/runs/dfine_s_oi18",
+  "clean": {
+   "mAP50": 66.4,
+   "mAP50_95": 54.5,
+   "n_classes": 18,
+   "per_class": {
+    "person": {
+     "mAP50": 50.4,
+     "mAP50_95": 37.0,
+     "n_images": 864,
+     "n_boxes": 1361
+    },
+    "car": {
+     "mAP50": 58.8,
+     "mAP50_95": 44.2,
+     "n_images": 590,
+     "n_boxes": 731
+    },
+    "bus": {
+     "mAP50": 90.3,
+     "mAP50_95": 81.1,
+     "n_images": 161,
+     "n_boxes": 212
+    },
+    "truck": {
+     "mAP50": 92.5,
+     "mAP50_95": 84.1,
+     "n_images": 162,
+     "n_boxes": 173
+    },
+    "bicycle": {
+     "mAP50": 75.3,
+     "mAP50_95": 58.6,
+     "n_images": 186,
+     "n_boxes": 228
+    },
+    "motorcycle": {
+     "mAP50": 83.6,
+     "mAP50_95": 68.9,
+     "n_images": 168,
+     "n_boxes": 236
+    },
+    "traffic light": {
+     "mAP50": 68.1,
+     "mAP50_95": 45.2,
+     "n_images": 113,
+     "n_boxes": 226
+    },
+    "traffic sign": {
+     "mAP50": 51.7,
+     "mAP50_95": 42.0,
+     "n_images": 138,
+     "n_boxes": 211
+    },
+    "stop sign": {
+     "mAP50": 97.5,
+     "mAP50_95": 96.0,
+     "n_images": 77,
+     "n_boxes": 46
+    },
+    "street light": {
+     "mAP50": 35.2,
+     "mAP50_95": 23.5,
+     "n_images": 172,
+     "n_boxes": 447
+    },
+    "fire hydrant": {
+     "mAP50": 99.8,
+     "mAP50_95": 95.7,
+     "n_images": 79,
+     "n_boxes": 75
+    },
+    "waste container": {
+     "mAP50": 91.6,
+     "mAP50_95": 82.2,
+     "n_images": 99,
+     "n_boxes": 137
+    },
+    "bench": {
+     "mAP50": 47.0,
+     "mAP50_95": 28.7,
+     "n_images": 22,
+     "n_boxes": 24
+    },
+    "chair": {
+     "mAP50": 63.2,
+     "mAP50_95": 48.0,
+     "n_images": 154,
+     "n_boxes": 303
+    },
+    "table": {
+     "mAP50": 48.5,
+     "mAP50_95": 33.9,
+     "n_images": 145,
+     "n_boxes": 252
+    },
+    "door": {
+     "mAP50": 36.5,
+     "mAP50_95": 24.9,
+     "n_images": 176,
+     "n_boxes": 211
+    },
+    "stairs": {
+     "mAP50": 39.1,
+     "mAP50_95": 24.9,
+     "n_images": 156,
+     "n_boxes": 164
+    },
+    "dog": {
+     "mAP50": 67.0,
+     "mAP50_95": 62.2,
+     "n_images": 7,
+     "n_boxes": 5
+    }
+   }
+  },
+  "outdoor_walk": {
+   "mAP50": 61.3,
+   "mAP50_95": 47.0,
+   "n_classes": 18,
+   "per_class": {
+    "person": {
+     "mAP50": 43.0,
+     "mAP50_95": 30.0,
+     "n_images": 864,
+     "n_boxes": 1361
+    },
+    "car": {
+     "mAP50": 45.5,
+     "mAP50_95": 30.4,
+     "n_images": 590,
+     "n_boxes": 731
+    },
+    "bus": {
+     "mAP50": 84.1,
+     "mAP50_95": 70.2,
+     "n_images": 161,
+     "n_boxes": 212
+    },
+    "truck": {
+     "mAP50": 90.2,
+     "mAP50_95": 77.8,
+     "n_images": 162,
+     "n_boxes": 173
+    },
+    "bicycle": {
+     "mAP50": 69.3,
+     "mAP50_95": 47.7,
+     "n_images": 186,
+     "n_boxes": 228
+    },
+    "motorcycle": {
+     "mAP50": 77.0,
+     "mAP50_95": 59.2,
+     "n_images": 168,
+     "n_boxes": 236
+    },
+    "traffic light": {
+     "mAP50": 63.4,
+     "mAP50_95": 38.8,
+     "n_images": 113,
+     "n_boxes": 226
+    },
+    "traffic sign": {
+     "mAP50": 46.8,
+     "mAP50_95": 37.7,
+     "n_images": 138,
+     "n_boxes": 211
+    },
+    "stop sign": {
+     "mAP50": 97.4,
+     "mAP50_95": 94.4,
+     "n_images": 77,
+     "n_boxes": 46
+    },
+    "street light": {
+     "mAP50": 26.9,
+     "mAP50_95": 15.6,
+     "n_images": 172,
+     "n_boxes": 447
+    },
+    "fire hydrant": {
+     "mAP50": 99.9,
+     "mAP50_95": 89.0,
+     "n_images": 79,
+     "n_boxes": 75
+    },
+    "waste container": {
+     "mAP50": 89.1,
+     "mAP50_95": 74.4,
+     "n_images": 99,
+     "n_boxes": 137
+    },
+    "bench": {
+     "mAP50": 42.7,
+     "mAP50_95": 21.4,
+     "n_images": 22,
+     "n_boxes": 24
+    },
+    "chair": {
+     "mAP50": 53.5,
+     "mAP50_95": 36.5,
+     "n_images": 154,
+     "n_boxes": 303
+    },
+    "table": {
+     "mAP50": 43.4,
+     "mAP50_95": 25.3,
+     "n_images": 145,
+     "n_boxes": 252
+    },
+    "door": {
+     "mAP50": 33.2,
+     "mAP50_95": 21.1,
+     "n_images": 176,
+     "n_boxes": 211
+    },
+    "stairs": {
+     "mAP50": 33.8,
+     "mAP50_95": 18.7,
+     "n_images": 156,
+     "n_boxes": 164
+    },
+    "dog": {
+     "mAP50": 64.4,
+     "mAP50_95": 57.1,
+     "n_images": 7,
+     "n_boxes": 5
+    }
+   }
+  },
+  "indoor_walk": {
+   "mAP50": 50.5,
+   "mAP50_95": 38.8,
+   "n_classes": 18,
+   "per_class": {
+    "person": {
+     "mAP50": 31.6,
+     "mAP50_95": 21.1,
+     "n_images": 864,
+     "n_boxes": 1361
+    },
+    "car": {
+     "mAP50": 29.3,
+     "mAP50_95": 20.3,
+     "n_images": 590,
+     "n_boxes": 731
+    },
+    "bus": {
+     "mAP50": 76.3,
+     "mAP50_95": 63.6,
+     "n_images": 161,
+     "n_boxes": 212
+    },
+    "truck": {
+     "mAP50": 82.6,
+     "mAP50_95": 69.3,
+     "n_images": 162,
+     "n_boxes": 173
+    },
+    "bicycle": {
+     "mAP50": 58.4,
+     "mAP50_95": 39.0,
+     "n_images": 186,
+     "n_boxes": 228
+    },
+    "motorcycle": {
+     "mAP50": 68.8,
+     "mAP50_95": 52.1,
+     "n_images": 168,
+     "n_boxes": 236
+    },
+    "traffic light": {
+     "mAP50": 49.9,
+     "mAP50_95": 31.1,
+     "n_images": 113,
+     "n_boxes": 226
+    },
+    "traffic sign": {
+     "mAP50": 36.5,
+     "mAP50_95": 30.2,
+     "n_images": 138,
+     "n_boxes": 211
+    },
+    "stop sign": {
+     "mAP50": 96.8,
+     "mAP50_95": 93.0,
+     "n_images": 77,
+     "n_boxes": 46
+    },
+    "street light": {
+     "mAP50": 13.5,
+     "mAP50_95": 7.5,
+     "n_images": 172,
+     "n_boxes": 447
+    },
+    "fire hydrant": {
+     "mAP50": 98.8,
+     "mAP50_95": 85.4,
+     "n_images": 79,
+     "n_boxes": 75
+    },
+    "waste container": {
+     "mAP50": 83.9,
+     "mAP50_95": 68.7,
+     "n_images": 99,
+     "n_boxes": 137
+    },
+    "bench": {
+     "mAP50": 28.8,
+     "mAP50_95": 15.2,
+     "n_images": 22,
+     "n_boxes": 24
+    },
+    "chair": {
+     "mAP50": 31.7,
+     "mAP50_95": 22.3,
+     "n_images": 154,
+     "n_boxes": 303
+    },
+    "table": {
+     "mAP50": 27.8,
+     "mAP50_95": 16.3,
+     "n_images": 145,
+     "n_boxes": 252
+    },
+    "door": {
+     "mAP50": 27.2,
+     "mAP50_95": 17.2,
+     "n_images": 176,
+     "n_boxes": 211
+    },
+    "stairs": {
+     "mAP50": 22.2,
+     "mAP50_95": 12.3,
+     "n_images": 156,
+     "n_boxes": 164
+    },
+    "dog": {
+     "mAP50": 44.6,
+     "mAP50_95": 34.5,
+     "n_images": 7,
+     "n_boxes": 5
+    }
+   }
+  }
+ },
+ "coco_pretrained_shared_classes": {
+  "ckpt": "ustc-community/dfine-small-obj2coco",
+  "classes": [
+   "person",
+   "bicycle",
+   "car",
+   "motorcycle",
+   "bus",
+   "truck",
+   "traffic light",
+   "fire hydrant",
+   "stop sign",
+   "bench",
+   "dog",
+   "chair",
+   "table"
+  ],
+  "clean": {
+   "mAP50": 78.9,
+   "mAP50_95": 63.9,
+   "n_classes": 13,
+   "per_class": {
+    "person": {
+     "mAP50": 74.2,
+     "mAP50_95": 49.3,
+     "n_images": 864,
+     "n_boxes": 1361
+    },
+    "bicycle": {
+     "mAP50": 74.1,
+     "mAP50_95": 57.1,
+     "n_images": 186,
+     "n_boxes": 228
+    },
+    "car": {
+     "mAP50": 76.2,
+     "mAP50_95": 52.7,
+     "n_images": 590,
+     "n_boxes": 731
+    },
+    "motorcycle": {
+     "mAP50": 87.6,
+     "mAP50_95": 71.4,
+     "n_images": 168,
+     "n_boxes": 236
+    },
+    "bus": {
+     "mAP50": 88.3,
+     "mAP50_95": 78.4,
+     "n_images": 161,
+     "n_boxes": 212
+    },
+    "truck": {
+     "mAP50": 92.6,
+     "mAP50_95": 84.7,
+     "n_images": 162,
+     "n_boxes": 173
+    },
+    "traffic light": {
+     "mAP50": 73.1,
+     "mAP50_95": 47.2,
+     "n_images": 113,
+     "n_boxes": 226
+    },
+    "fire hydrant": {
+     "mAP50": 99.8,
+     "mAP50_95": 96.3,
+     "n_images": 79,
+     "n_boxes": 75
+    },
+    "stop sign": {
+     "mAP50": 97.1,
+     "mAP50_95": 94.5,
+     "n_images": 77,
+     "n_boxes": 46
+    },
+    "bench": {
+     "mAP50": 71.2,
+     "mAP50_95": 50.5,
+     "n_images": 22,
+     "n_boxes": 24
+    },
+    "dog": {
+     "mAP50": 73.6,
+     "mAP50_95": 67.0,
+     "n_images": 7,
+     "n_boxes": 5
+    },
+    "chair": {
+     "mAP50": 71.2,
+     "mAP50_95": 52.8,
+     "n_images": 154,
+     "n_boxes": 303
+    },
+    "table": {
+     "mAP50": 47.1,
+     "mAP50_95": 28.7,
+     "n_images": 145,
+     "n_boxes": 252
+    }
+   }
+  },
+  "outdoor_walk": {
+   "mAP50": 71.5,
+   "mAP50_95": 50.8,
+   "n_classes": 13,
+   "per_class": {
+    "person": {
+     "mAP50": 61.6,
+     "mAP50_95": 36.4,
+     "n_images": 864,
+     "n_boxes": 1361
+    },
+    "bicycle": {
+     "mAP50": 63.6,
+     "mAP50_95": 40.9,
+     "n_images": 186,
+     "n_boxes": 228
+    },
+    "car": {
+     "mAP50": 61.0,
+     "mAP50_95": 32.9,
+     "n_images": 590,
+     "n_boxes": 731
+    },
+    "motorcycle": {
+     "mAP50": 79.8,
+     "mAP50_95": 55.9,
+     "n_images": 168,
+     "n_boxes": 236
+    },
+    "bus": {
+     "mAP50": 81.5,
+     "mAP50_95": 62.9,
+     "n_images": 161,
+     "n_boxes": 212
+    },
+    "truck": {
+     "mAP50": 88.8,
+     "mAP50_95": 69.3,
+     "n_images": 162,
+     "n_boxes": 173
+    },
+    "traffic light": {
+     "mAP50": 65.5,
+     "mAP50_95": 37.5,
+     "n_images": 113,
+     "n_boxes": 226
+    },
+    "fire hydrant": {
+     "mAP50": 99.8,
+     "mAP50_95": 83.8,
+     "n_images": 79,
+     "n_boxes": 75
+    },
+    "stop sign": {
+     "mAP50": 97.6,
+     "mAP50_95": 91.5,
+     "n_images": 77,
+     "n_boxes": 46
+    },
+    "bench": {
+     "mAP50": 66.5,
+     "mAP50_95": 36.0,
+     "n_images": 22,
+     "n_boxes": 24
+    },
+    "dog": {
+     "mAP50": 68.6,
+     "mAP50_95": 61.5,
+     "n_images": 7,
+     "n_boxes": 5
+    },
+    "chair": {
+     "mAP50": 58.4,
+     "mAP50_95": 35.0,
+     "n_images": 154,
+     "n_boxes": 303
+    },
+    "table": {
+     "mAP50": 36.4,
+     "mAP50_95": 16.5,
+     "n_images": 145,
+     "n_boxes": 252
+    }
+   }
+  },
+  "indoor_walk": {
+   "mAP50": 57.4,
+   "mAP50_95": 40.2,
+   "n_classes": 13,
+   "per_class": {
+    "person": {
+     "mAP50": 48.9,
+     "mAP50_95": 26.4,
+     "n_images": 864,
+     "n_boxes": 1361
+    },
+    "bicycle": {
+     "mAP50": 52.7,
+     "mAP50_95": 30.1,
+     "n_images": 186,
+     "n_boxes": 228
+    },
+    "car": {
+     "mAP50": 43.6,
+     "mAP50_95": 23.6,
+     "n_images": 590,
+     "n_boxes": 731
+    },
+    "motorcycle": {
+     "mAP50": 68.9,
+     "mAP50_95": 44.1,
+     "n_images": 168,
+     "n_boxes": 236
+    },
+    "bus": {
+     "mAP50": 75.2,
+     "mAP50_95": 58.3,
+     "n_images": 161,
+     "n_boxes": 212
+    },
+    "truck": {
+     "mAP50": 82.7,
+     "mAP50_95": 62.2,
+     "n_images": 162,
+     "n_boxes": 173
+    },
+    "traffic light": {
+     "mAP50": 47.6,
+     "mAP50_95": 27.0,
+     "n_images": 113,
+     "n_boxes": 226
+    },
+    "fire hydrant": {
+     "mAP50": 95.9,
+     "mAP50_95": 79.1,
+     "n_images": 79,
+     "n_boxes": 75
+    },
+    "stop sign": {
+     "mAP50": 96.8,
+     "mAP50_95": 88.2,
+     "n_images": 77,
+     "n_boxes": 46
+    },
+    "bench": {
+     "mAP50": 24.4,
+     "mAP50_95": 10.6,
+     "n_images": 22,
+     "n_boxes": 24
+    },
+    "dog": {
+     "mAP50": 52.5,
+     "mAP50_95": 44.1,
+     "n_images": 7,
+     "n_boxes": 5
+    },
+    "chair": {
+     "mAP50": 36.0,
+     "mAP50_95": 19.9,
+     "n_images": 154,
+     "n_boxes": 303
+    },
+    "table": {
+     "mAP50": 21.2,
+     "mAP50_95": 9.6,
+     "n_images": 145,
+     "n_boxes": 252
+    }
+   }
+  }
+ },
+ "finetuned_on_shared_classes": {
+  "clean": {
+   "mAP50": 72.5,
+   "mAP50_95": 60.3
+  },
+  "outdoor_walk": {
+   "mAP50": 67.2,
+   "mAP50_95": 52.1
+  },
+  "indoor_walk": {
+   "mAP50": 55.8,
+   "mAP50_95": 43.3
+  }
+ }
+}

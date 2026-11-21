@@ -1,0 +1,19 @@
+[Unit]
+Description=Veris context engine (:8090)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=@VERIS_USER@
+Group=@VERIS_USER@
+WorkingDirectory=/home/@VERIS_USER@/veris-app
+EnvironmentFile=-/home/@VERIS_USER@/veris-app/.env
+Environment=HOME=/home/@VERIS_USER@
+Environment=PATH=/home/@VERIS_USER@/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 -m uvicorn context_engine.service:app --host 0.0.0.0 --port 8090
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target

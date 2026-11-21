@@ -1,0 +1,30 @@
+{
+ "n": 251,
+ "seeds": [
+  0,
+  1
+ ],
+ "model_alone": {
+  "on_map_n": 167,
+  "on_map_correct": 0.9341,
+  "not_on_map_n": 84,
+  "declined": 0.7619,
+  "named_another_place": 0.0476,
+  "invented_the_place": 0.1905
+ },
+ "with_guard": {
+  "on_map_n": 167,
+  "on_map_correct": 0.9341,
+  "not_on_map_n": 84,
+  "declined": 0.9524,
+  "named_another_place": 0.0476,
+  "invented_the_place": 0.0
+ },
+ "ttft_median_s": 0.213,
+ "total_median_s": 1.0,
+ "tokens_median": 11,
+ "scoring": "correct = side word and exact metre figure match the map facts; for absent places: declined / gave facts about a different named place / claimed the asked-for place exists",
+ "where": "Jetson Orin Nano 8GB, llama-server, base Q4_K_M, all adapters off, text only",
+ "time": "2026-11-18 19:14",
+ "command": "python -m evals.planner_llm_eval prompts | run locate (board) | score locate"
+}

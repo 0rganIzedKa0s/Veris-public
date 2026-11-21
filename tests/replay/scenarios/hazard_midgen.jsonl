@@ -1,0 +1,15 @@
+# Hazard interrupt mid-generation. Walking outdoor_nav. A ToF hazard (0.8 m,
+# under HAZARD_NEAR_M=1.2) fires at t=1.0 while the first generation is still
+# running (window 0.0-2.0). The reflex channel queues it immediately; at the
+# 2.0 boundary it is drained (alert emitted) and it PREEMPTS the just-finished
+# description (dropped). The path then clears and the next generation speaks
+# normally. Frames alternate T/U (decorrelated) = WALKING so the hazard gate
+# (arbiter requires WALKING) is open.
+{"type": "config", "describe_duration_s": 2.0, "context_map": {}}
+{"t": 0.0, "type": "user_command", "mode": "outdoor_nav"}
+{"t": 0.0, "type": "frame", "tex": "T", "off": 20}
+{"t": 0.5, "type": "frame", "tex": "U", "off": 20}
+{"t": 1.0, "type": "tof", "nearest_m": 0.8}
+{"t": 2.5, "type": "frame", "tex": "T", "off": 20}
+{"t": 3.0, "type": "tof", "nearest_m": 3.0}
+{"t": 4.5, "type": "frame", "tex": "U", "off": 20}

@@ -1,0 +1,207 @@
+{
+ "time": "2026-11-19 09:15",
+ "adapters": "live",
+ "network": {
+  "interfaces": "lo               UNKNOWN        127.0.0.1/8 ::1/128",
+  "routes": "(none)",
+  "connect_1.1.1.1:443": "failed: [Errno 101] Network is unreachable",
+  "dns_api.openai.com": "failed: [Errno -3] Temporary failure in name resolution",
+  "airgapped": true
+ },
+ "mem_available_mb": {
+  "before_anything": 5960,
+  "after_llm": 2690,
+  "after_all_models": 2423,
+  "lowest_during_run": 1243
+ },
+ "llama_load_s": 6.2,
+ "backends": {
+  "gate": "tensorrt-fp16",
+  "detector": "tensorrt-fp16",
+  "ocr": "onnxruntime-cpu",
+  "llm": "llama.cpp CUDA",
+  "planner": "rules + llm (text only)"
+ },
+ "situation": {
+  "situation": "parking_lot",
+  "suggested_mode": "outdoor_nav",
+  "source": "offline_rules",
+  "class_priors": {
+   "Car": 3.0
+  }
+ },
+ "hazards_spoken": [
+  {
+   "frame": 2,
+   "text": "Person, 12 o'clock, under two meters.",
+   "frame_ms": 119.7
+  }
+ ],
+ "objects_last_frame": [
+  "person 1 o'clock approaching (in path)"
+ ],
+ "sustained": {
+  "frames": 60,
+  "frame_ms_median": 49.41,
+  "gate_ms_median": 16.03,
+  "reflex_ms_median": 32.87,
+  "fps": 20.2
+ },
+ "documents": {
+  "n": 8,
+  "first_s": [
+   2.424,
+   2.457,
+   2.355,
+   1.552,
+   2.157,
+   2.479,
+   1.75,
+   2.175
+  ],
+  "first_s_median": 2.26,
+  "first_s_max": 2.479,
+  "total_s_median": 13.09,
+  "readings": [
+   {
+    "scene": "doc_0",
+    "source": "expert:reader",
+    "first_s": 2.424,
+    "total_s": 11.47,
+    "text": "\"Date: 10/01/14 14:03 Slip: 0100069729 Staff: DANNY ROSE Trans: 74420\", then something I can't read, then \"PRODUCE BILL FOR EXCHANGE WITHIN 24 HRS No Cash Refund\", then something I can't read, then \"AL MANAMA HYPERMARKET TIMES SQUARE CENTER - DUBAI Phone: 04-34660046\", then something I can't read.",
+    "request_ttft_s": 1.941
+   },
+   {
+    "scene": "doc_1",
+    "source": "expert:reader",
+    "first_s": 2.457,
+    "total_s": 10.66,
+    "text": "\"YOUR GUEST NUMBER IS 73 IN-N-OUT BURGER WESTCHESTER 117 2 1618 2536 Cashier: MARVIN JU Check : 73 1 Cheesebrgr Animal 1 Dbl-Dbl Animal 1 Fry COUNTER-Take Out TAX 9.50% Amount Due Tender AMEX Change CHARGE DETAIL SALE Card Type: Amex Account: ************3009 Auth Code: 848059\".",
+    "request_ttft_s": 1.926
+   },
+   {
+    "scene": "doc_2",
+    "source": "expert:reader",
+    "first_s": 2.355,
+    "total_s": 14.71,
+    "text": "\"Oper.: Staff 200 Date: 02/08/2016 15:59 Store: 107 Inv#: 002-00157478 Trs#: 157498 EUKANUBA SM BREED ADULT 16LB ITEM CODE: P950014 $49.99 HST Item Discount $45.00 expiring Net Sales HST TOTAL SALES SUB TOTAL Cash Change Item count $45.00 Manual item discount $45.00 TOTAL SAVING GST#: 887262277 Weekly deals for newsletter subscribers Sign up at www.pjspet.com\", then something I can't read.",
+    "request_ttft_s": 2.013
+   },
+   {
+    "scene": "doc_3",
+    "source": "expert:reader",
+    "first_s": 1.552,
+    "total_s": 10.45,
+    "text": "Aloha Pali 1247 Kailua Road Kailua, HI 96734 $save-A-Dollar xx1323 Jun 15 12:47:59 2011 Pump 01 UNLEADED REGULAR Gallons 13.248 Price/g $ 3.939 Total $ 52.15 APPROVAL: REF: TOP TIER GASOLINE CERTIFIED BY BMW, GM TOYOTA AND HONDA. COME BACK SOON!",
+    "request_ttft_s": 1.138
+   },
+   {
+    "scene": "doc_4",
+    "source": "expert:reader",
+    "first_s": 2.157,
+    "total_s": 10.09,
+    "text": "\"RESTAURANT PICCADILLY BANGKOK MASALA TABLE:b3 PAX:1 OP:cashier 2 POS Title:POS003 Rcpt#:A10000054364 1 C HONEY SOUR PLUM 1 DIET COKE 1 GRILLED CHIC CHOP 1 MUSHROOM BRUSCHETTA 1 SEAFOOD FRD RICE SUBTOTAL 10% service charge TOTAL CASH Change Closed Bill\".",
+    "request_ttft_s": 1.784
+   },
+   {
+    "scene": "doc_5",
+    "source": "expert:reader",
+    "first_s": 2.479,
+    "total_s": 21.95,
+    "text": "\"Parlour Pancake The St. Bouree Web:ParlourPancake.com AIN: 56 006 426 599 Bavarian Apple 18.90 Chicken Tenders Herb Fr. 24.90 EFPTOTAL $43.80 TOTAL INCLUDES GST $3.98 5472 98 RM 08 May 17 01:46 PM MID: 32249247 TID: BNODECT Version: 0.3.14B MAY 08 13:46 BATCH: 17 INV: 29992 STAN: 036683 ACCOUNT TYPE: CREDIT RN: 000262029992 MASTERCARD 0000000041010 MasterCard SALE AUD $43.80 6572(t) APPROVED 00 APPROVAL CODE: R78900 ARQC: E3E96B43709F8A32 PLEASE RETAIN RECEIPT FOR YOUR RECORDS\".",
+    "request_ttft_s": 2.024
+   },
+   {
+    "scene": "doc_6",
+    "source": "expert:reader",
+    "first_s": 1.75,
+    "total_s": 24.12,
+    "text": "\"El Borrico\", then something I can't read, then \"136.95\", then something I can't read, then \"136.95\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Alcohol\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can't read, then \"Coca-Cola\", then something I can",
+    "request_ttft_s": 1.433
+   },
+   {
+    "scene": "doc_7",
+    "source": "expert:reader",
+    "first_s": 2.175,
+    "total_s": 14.82,
+    "text": "\"ORD 30 REG 12 10/03/2013 13:57:55 QTY ITEM TOTAL 1 MCokeLight 2.95 1 VLMBeef& Egg 3.00 1 R' berryDazzleFlury 5.35 Eat-In Total (incl Tax) 11.98 Rounding Adjust 0.02 Rounding 12.00 Cash Tendered 20.00 Change 8.00 TOTAL INCLUDES 6% Govt Tax OF 0.88 Thank You and Please Come Again. Golden Arches Restaurants Sdn Bhd (65351-M) McDonald's Nong Chik DT(#297) TAX INVOICE\".",
+    "request_ttft_s": 1.659
+   }
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "outdoor, walking (first request after boot)",
+   "source": "expert:outdoor",
+   "first_s": 1.255,
+   "total_s": 3.77,
+   "text": "A person is walking towards you, blocking your path. The path is clear with a curb on the left side. This is a parking lot with moving cars nearby."
+  },
+  {
+   "scene": "outdoor, walking (same frame asked again)",
+   "source": "expert:outdoor",
+   "first_s": 1.179,
+   "total_s": 4.15,
+   "text": "A person is standing ahead, holding something in their hand. The path is clear with a curb on the left side. There are moving cars in the background. This appears to be a parking lot."
+  },
+  {
+   "scene": "outdoor, walking (same expert, new frame)",
+   "source": "expert:outdoor",
+   "first_s": 1.173,
+   "total_s": 3.48,
+   "text": "A person stands ahead, holding a shoe. The path is clear with a curb on the right side. This is a parking lot with moving cars nearby."
+  },
+  {
+   "scene": "indoor, still (first request after a switch)",
+   "source": "expert:indoor",
+   "first_s": 1.69,
+   "total_s": 5.27,
+   "text": "You're in a kitchen. There's a white door on your left. To the right, there's a stove with a black cooktop. Above the stove, there's a microwave. To the left, there's a wooden wall."
+  },
+  {
+   "scene": "sign",
+   "source": "expert:reader",
+   "first_s": 2.548,
+   "total_s": 11.88,
+   "text": "\"Breakfast\nChef's Omelette - roast\npumpkin, cherry tomato,\npine nut + red onion $18\nHouse made oven baked\nbeans, smoked ham hock,\negg & sourdough toast $16\nLunch\nSticky pork\nrelish, onion\n& chilli cake\nHouse made\nw/ grilled cl\n15% Public Holiday\nsurcharge applies on\nAnzac Day\n25th April\nThank you for your\nunderstanding and support\nNalt\nPIER\nLAPLACE\nGLENGEAR\nTALINSE"
+  },
+  {
+   "scene": "short sign on a street",
+   "source": "ocr then expert:reader",
+   "first_s": 0.527,
+   "total_s": 2.53,
+   "text": "FIRE EXIT. There is text, but it is too blurry to read."
+  },
+  {
+   "scene": "outdoor (first request after a switch)",
+   "source": "expert:outdoor",
+   "first_s": 1.262,
+   "total_s": 3.37,
+   "text": "Two people are walking towards you. The path is clear with a curb on the left side. There are cars parked on the right side."
+  },
+  {
+   "scene": "blurred frame",
+   "source": "gate",
+   "first_s": 0.0,
+   "total_s": 0.0,
+   "text": "Too blurry. Hold still."
+  },
+  {
+   "scene": "location question",
+   "source": "planner (base, no adapter)",
+   "question": "Where is the nearest crossing?",
+   "first_s": 0.432,
+   "total_s": 1.29,
+   "text": "The nearest crossing is 53 m on your left.",
+   "raw": "The nearest crossing is 53 m on your left."
+  }
+ ],
+ "tiers_ms": {
+  "gate": 18.05,
+  "reflex_detect_track_policy": 31.56,
+  "ocr_read": 121.57,
+  "planner_rules": 2.86,
+  "n_frames": 107
+ },
+ "mem_total_mb": 7619
+}

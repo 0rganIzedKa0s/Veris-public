@@ -1,0 +1,22 @@
+[Unit]
+Description=Veris demo hub (:8000)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=@VERIS_USER@
+Group=@VERIS_USER@
+WorkingDirectory=/home/@VERIS_USER@/veris-app
+EnvironmentFile=-/home/@VERIS_USER@/veris-app/.env
+Environment=HOME=/home/@VERIS_USER@
+Environment=ORIN_URL=http://localhost:8080
+Environment=CTX_ENGINE_URL=http://localhost:8090
+Environment=TELEMETRY_LOCAL=1
+Environment=PATH=/home/@VERIS_USER@/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 -m uvicorn demo.app:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target

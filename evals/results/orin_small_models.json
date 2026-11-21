@@ -1,0 +1,40 @@
+{
+ "_meta": {
+  "time": "2026-11-19 02:22",
+  "command": "bench/orin/small_models.py nav:data/board_models/nav.onnx:pixel_values:1x3x640x640",
+  "mem_available_mb_at_start": 6007,
+  "note": "llama-server (3B base + adapters) loaded during the run unless stated; trt = TensorRT 10.3 FP16 via polygraphy, median of 200 after warm-up, host copies included"
+ },
+ "gate": {
+  "onnx_mb": 6.11,
+  "inputs": {
+   "image": [
+    1,
+    3,
+    224,
+    224
+   ]
+  },
+  "cpu_1thread_ms": 15.6,
+  "cpu_4thread_ms": 6.36,
+  "engine_mb": 3.98,
+  "trt_fp16_ms": 4.92,
+  "mem_taken_mb": 44
+ },
+ "nav": {
+  "onnx_mb": 41.38,
+  "inputs": {
+   "pixel_values": [
+    1,
+    3,
+    640,
+    640
+   ]
+  },
+  "cpu_error": "[ONNXRuntimeError] : 9 : NOT_IMPLEMENTED : Could not find an implementation for Cos(7) node with name '/m/model/encoder/aifi.0/position_embedding/Cos'",
+  "engine_build_s": 1049.4,
+  "engine_mb": 25.53,
+  "trt_fp16_ms": 22.94,
+  "mem_taken_mb": 84
+ }
+}

@@ -1,0 +1,207 @@
+{
+ "time": "2026-11-19 12:18",
+ "adapters": "live",
+ "network": {
+  "interfaces": "lo               UNKNOWN        127.0.0.1/8 ::1/128",
+  "routes": "(none)",
+  "connect_1.1.1.1:443": "failed: [Errno 101] Network is unreachable",
+  "dns_api.openai.com": "failed: [Errno -3] Temporary failure in name resolution",
+  "airgapped": true
+ },
+ "mem_available_mb": {
+  "before_anything": 5942,
+  "after_llm": 2671,
+  "after_all_models": 2409,
+  "lowest_during_run": 1158
+ },
+ "llama_load_s": 6.1,
+ "backends": {
+  "gate": "tensorrt-fp16",
+  "detector": "tensorrt-fp16",
+  "ocr": "onnxruntime-cpu",
+  "llm": "llama.cpp CUDA",
+  "planner": "rules + llm (text only)"
+ },
+ "situation": {
+  "situation": "parking_lot",
+  "suggested_mode": "outdoor_nav",
+  "source": "offline_rules",
+  "class_priors": {
+   "Car": 3.0
+  }
+ },
+ "hazards_spoken": [
+  {
+   "frame": 2,
+   "text": "Person, 12 o'clock, under two meters.",
+   "frame_ms": 106.3
+  }
+ ],
+ "objects_last_frame": [
+  "person 1 o'clock approaching (in path)"
+ ],
+ "sustained": {
+  "frames": 60,
+  "frame_ms_median": 47.57,
+  "gate_ms_median": 16.06,
+  "reflex_ms_median": 31.36,
+  "fps": 21.0
+ },
+ "documents": {
+  "n": 8,
+  "first_s": [
+   2.411,
+   2.449,
+   2.241,
+   2.386,
+   2.267,
+   2.505,
+   2.396,
+   2.444
+  ],
+  "first_s_median": 2.4,
+  "first_s_max": 2.505,
+  "total_s_median": 19.55,
+  "readings": [
+   {
+    "scene": "doc_0",
+    "source": "expert:document",
+    "first_s": 2.411,
+    "total_s": 23.53,
+    "text": "AL MANAMA HYPERMARKET\nTimes Square Center - Dubai\nPhone: 04-3466046\nDate: 10/01/14 14:03\nSlip: 01D0069729\nStaff: DANNY ROSE\nTrans: 74420\nQty. Description Amount\n0.48 COURGETTES GREEN ESP 7.92\n0.27 BROCCOLI SPAIN 3.65\n0.38 CARROT LOOSE AUST 1.43\n0.92 LETTUCE - ICEBERG - 12.42\n0.3 LYCHEE 3.29\n1 PK MUSHROOM-FINE/SMALL 5.50\n0.21 GINGER CHINA 2.84\n0.43 ONION BROWN SPAIN 2.37\n0.89 POTATO SAUDI 4.41\n0.64 KIWIFRUIT ITALY 8.00\n1 PC NORLANDER BREAD 6.50\n1 PC YOPLAIT F/F YOGHURTS 1.00\n1 PK BANANA PHILIPPINES D 3.75\n1 BT AL RAWABI LOW FAT MI 10.",
+    "request_ttft_s": 2.112
+   },
+   {
+    "scene": "doc_1",
+    "source": "expert:document",
+    "first_s": 2.449,
+    "total_s": 13.81,
+    "text": "YOUR GUEST NUMBER IS\n73\nIN-N-OUT BURGER WESTCHESTER\n117 2 1618 2536\nCashier: MARVIN JU\nCheck : 73\n1 Cheesebrgr Animal 2.70\n1 Dbl-Dbl Animal 3.90\n1 Fry 1.85\nCOUNTER-Take Out\nTAX 9.50%\nAmount Due 8.45 .80\n$9.25\nTender AMEX\nChange $9.25 $0.00\nCHARGE DETAIL\nSALE\nCard Type: Amex\nAccount: ************3009 C\nAuth Code: 2536",
+    "request_ttft_s": 1.988
+   },
+   {
+    "scene": "doc_2",
+    "source": "expert:document",
+    "first_s": 2.241,
+    "total_s": 20.46,
+    "text": "PJ'S PET EXPRESS\n3737 Major Mackenzie Dr\nVAUGHAN ON\nL4H 0A2\n905 303 6621\nOper.:Staff 200 Date:02/08/2016 15:59\nStore:107 Inv#:002-00157478 Trs#:157498\nEUKANUBA SM BREED ADULT 16LB\nITEM CODE:PG50014 $49.99 HST\nItem Discount -$45.00\n. expiring\nNet Sales $4.99\nHST $0.65\nTOTAL SALES $5.64\nSUB TOTAL $5.64\nCash $10.00\nChange $4.36\nItem count 1\nManual item discount $45.00\nTOTAL SAVING $45.00\nGST # 887262Z77\nWeekly deals for newsletter subscribers\nSign up at www.pjspet.com\nAll in-store for Canada's Best Pet\n10 Oct 1 FREE",
+    "request_ttft_s": 1.963
+   },
+   {
+    "scene": "doc_3",
+    "source": "expert:document",
+    "first_s": 2.386,
+    "total_s": 11.77,
+    "text": "Aloha Pali\n1247 Kailua Road\nKailua, HI 96734\n$ave-A-Dollar\nxx1323\nJun 15 12:47:59 2011\nPump 01\nUNLEADED REGULAR\nGallons 13.240\nPrice/g $ 3.939\nTotal $ 52.15\nAPPROVAL:\nREF:\nTOP TIER GASOLINE\nCERTIFIED BY BMW, GM\nTOYOTA AND HONDA.\nCOME BACK SOON!",
+    "request_ttft_s": 1.954
+   },
+   {
+    "scene": "doc_4",
+    "source": "expert:document",
+    "first_s": 2.267,
+    "total_s": 18.63,
+    "text": "RESTAURANT\nPICCADILLY\nBANGKOK MASALA\nTABLE: 63\nPax: 1 OP: cashier 2 JOHN\nPOS Title: POS003\nRcpt#: A10000054364 10/04/2010 13:16\n1 C HONEY SOUR PLUM RM 2.00\n1 DIET COKE RM 2.30\n1 GRILLED CHIC CHOP RM 8.80\n1 MUSHROOM BRUSCHETTA RM 4.50\n1 SEAFOOD FRD RICE RM 5.90\nSUBTOTAL RM 23.50\n10% service charge RM 2.35\nTOTAL RM 25.85\nCASH RM 30.00\nChange RM 4.15\nClosed Bill\n10/04/2010 14:13\nTel : 03 - 7955 3655",
+    "request_ttft_s": 1.963
+   },
+   {
+    "scene": "doc_5",
+    "source": "expert:document",
+    "first_s": 2.505,
+    "total_s": 23.62,
+    "text": "The Pancake Parlour\nBourke St\nWeb: PancakeParlour.com\nABN: 56 006 426 599\n* Bavarian Apple\n* Chicken Tenders and Herb Fr\nNAB EFTPOS\nPANCAKEPARLOUR BSM\nMELBOURNE\nAU\nMID: 32248247\nTID: 8900000\nVersion: 0.3.14B\nCUSTOMER COPY\nMAY 08, 17 13:46\nBATCH: 000262\nINV: 29992\nSTAN: 030683\nACCOUNT TYPE CREDIT\nRRN: 000262029992\nMASTERCARD\nA0000000041010\nMasterCard\nSALE AUD $43.80\nAPPROVED 00\nAPPROVAL CODE R78900\nARQC: E3E96B437D9F8A32\nPLEASE RETAIN RECEIPT FOR YOUR RECORDS\nSUBTOTAL 43.80\nTOTAL $43.80\nEFT\nTOTAL INCLUDES GST $3.98\n* Indicates item includes",
+    "request_ttft_s": 2.099
+   },
+   {
+    "scene": "doc_6",
+    "source": "expert:document",
+    "first_s": 2.396,
+    "total_s": 23.52,
+    "text": "El Borracho\nHarborne Court\n65-67 Harborne Road\nEdgbaston, B15 3BU\nTel: 0121 454 5368\n\n1x Coca con Tomate \u00a3 0.00\n1x Coca del Mossen \u00a3 0.00\n1x Alcachofas a la \u00a3 6.95\n1x Berenjenas con Miel \u00a3 7.00\n1x Croquetas de Pulpo \u00a3 5.50\n1x Espinacas a la \u00a3 7.50\n1x Fideua Mixta \u00a3 17.00\n1x Chocolate con \u00a3 5.50\n1x Coulant de Chocolate \u00a3 6.50\n2x Tarta de Santiago \u00a3 11.00\n2x 175ml Castillo \u00a3 11.00\n1x River Wild Wh \u00a3 22.00\n1x 330ml Coke \u00a3 2.95\n1x 330ml Sprite \u00a3 2.95\n2x Estrella Galicia 0.0 \u00a3 7.00\n1x Half Pint Estrella \u00a3 2.75\n1x Maeloc Fresa \u00a3 4.25\n3x Pint Estrella Galicia \u00a3",
+    "request_ttft_s": 2.105
+   },
+   {
+    "scene": "doc_7",
+    "source": "expert:document",
+    "first_s": 2.444,
+    "total_s": 15.81,
+    "text": "Golden Arches Restaurants Sdn Bhd\n(65351-M)\nMcDonald's Nong Chik DT(#297)\nTAX INVOICE\n#ORD 30 -REG 12- 10/03/2013 13:57:55\nQTY ITEM            TOTAL\n1 McCokeLight       2.95\n1 VLMBeef&Egg      3.00\n1 R'berryDazzleFlury 5.35\nEat-In Total (incl Tax) 11.98\nRounding Adjust     0.02\nRounding            12.00\nCash Tendered       20.00\nChange              8.00\nTOTAL INCLUDES 6% Govt Tax OF 0.68\nThank You and Please Come Again.",
+    "request_ttft_s": 1.986
+   }
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "outdoor, walking (first request after boot)",
+   "source": "expert:outdoor",
+   "first_s": 1.256,
+   "total_s": 3.78,
+   "text": "A person is walking towards you, blocking your path. The path is clear with a curb on the left side. This is a parking lot with moving cars nearby."
+  },
+  {
+   "scene": "outdoor, walking (same frame asked again)",
+   "source": "expert:outdoor",
+   "first_s": 1.18,
+   "total_s": 4.15,
+   "text": "A person is standing ahead, holding something in their hand. The path is clear with a curb on the left side. There are moving cars in the background. This appears to be a parking lot."
+  },
+  {
+   "scene": "outdoor, walking (same expert, new frame)",
+   "source": "expert:outdoor",
+   "first_s": 1.176,
+   "total_s": 3.48,
+   "text": "A person stands ahead, holding a shoe. The path is clear with a curb on the right side. This is a parking lot with moving cars nearby."
+  },
+  {
+   "scene": "indoor, still (first request after a switch)",
+   "source": "expert:indoor",
+   "first_s": 1.703,
+   "total_s": 5.28,
+   "text": "You're in a kitchen. There's a white door on your left. To the right, there's a stove with a black cooktop. Above the stove, there's a microwave. To the left, there's a wooden wall."
+  },
+  {
+   "scene": "sign",
+   "source": "expert:document",
+   "first_s": 2.528,
+   "total_s": 10.44,
+   "text": "Malt\nBreakfast\nChef's Onelette - roast\npumpkin, cherry tomato,\npine nut, red onion\n$18\nHousemade oven baked\nbeans, smoked ham hock,\negg & sourdough toast\n$16\nLunch\nSticky pork\nrelish, onion\n& chilli car\nHousemade\nw/ grilled cl\nMalt\nPIER\n15% Public Holiday\nsurcharge applies on\nAnzac Day\n25th April\nThank you for your\nunderstanding and support"
+  },
+  {
+   "scene": "short sign on a street",
+   "source": "ocr then expert:reader",
+   "first_s": 0.553,
+   "total_s": 2.62,
+   "text": "FIRE EXIT. There is text, but it is too blurry to read."
+  },
+  {
+   "scene": "outdoor (first request after a switch)",
+   "source": "expert:outdoor",
+   "first_s": 1.268,
+   "total_s": 3.39,
+   "text": "Two people are walking towards you. The path is clear with a curb on the left side. There are cars parked on the right side."
+  },
+  {
+   "scene": "blurred frame",
+   "source": "gate",
+   "first_s": 0.0,
+   "total_s": 0.0,
+   "text": "Too blurry. Hold still."
+  },
+  {
+   "scene": "location question",
+   "source": "planner (base, no adapter)",
+   "question": "Where is the nearest crossing?",
+   "first_s": 0.43,
+   "total_s": 1.29,
+   "text": "The nearest crossing is 53 m on your left.",
+   "raw": "The nearest crossing is 53 m on your left."
+  }
+ ],
+ "tiers_ms": {
+  "gate": 17.95,
+  "reflex_detect_track_policy": 32.9,
+  "ocr_read": 129.27,
+  "planner_rules": 3.21,
+  "n_frames": 107
+ },
+ "mem_total_mb": 7619
+}

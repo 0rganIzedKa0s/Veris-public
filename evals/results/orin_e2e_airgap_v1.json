@@ -1,0 +1,111 @@
+{
+ "time": "2026-11-19 05:03",
+ "adapters": "live",
+ "network": {
+  "interfaces": "lo               UNKNOWN        127.0.0.1/8 ::1/128",
+  "routes": "(none)",
+  "connect_1.1.1.1:443": "failed: [Errno 101] Network is unreachable",
+  "dns_api.openai.com": "failed: [Errno -3] Temporary failure in name resolution",
+  "airgapped": true
+ },
+ "mem_available_mb": {
+  "before_anything": 5974,
+  "after_llm": 2693,
+  "after_all_models": 2429,
+  "lowest_during_run": 1555
+ },
+ "llama_load_s": 6.7,
+ "backends": {
+  "gate": "tensorrt-fp16",
+  "detector": "tensorrt-fp16",
+  "ocr": "onnxruntime-cpu",
+  "llm": "llama.cpp CUDA",
+  "planner": "rules + llm (text only)"
+ },
+ "situation": {
+  "situation": "parking_lot",
+  "suggested_mode": "outdoor_nav",
+  "source": "offline_rules",
+  "class_priors": {
+   "Car": 3.0
+  }
+ },
+ "hazards_spoken": [
+  {
+   "frame": 2,
+   "text": "Person, 12 o'clock, under two meters.",
+   "frame_ms": 128.2
+  }
+ ],
+ "objects_last_frame": [
+  "person 1 o'clock approaching (in path)"
+ ],
+ "sustained": {
+  "frames": 60,
+  "frame_ms_median": 54.59,
+  "gate_ms_median": 18.87,
+  "reflex_ms_median": 35.68,
+  "fps": 18.3
+ },
+ "scenes": [
+  {
+   "scene": "outdoor, walking (first request after a switch)",
+   "source": "expert:outdoor",
+   "first_s": 1.612,
+   "total_s": 4.34,
+   "text": "A person is walking towards you, blocking your path. The path is clear with a curb on the left side. This is a parking lot with moving cars and a curb edge."
+  },
+  {
+   "scene": "outdoor, walking (same frame asked again)",
+   "source": "expert:outdoor",
+   "first_s": 1.229,
+   "total_s": 4.2,
+   "text": "A person is standing ahead, holding something in their hand. The path is clear with a curb on the left side. There are moving cars in the background. This appears to be a parking lot."
+  },
+  {
+   "scene": "outdoor, walking (same expert, new frame)",
+   "source": "expert:outdoor",
+   "first_s": 1.175,
+   "total_s": 3.41,
+   "text": "Two cars are moving on the road ahead. The curb is clear on your side. The path is smooth and clear. This is a parking lot."
+  },
+  {
+   "scene": "indoor, still (expert pre-warmed)",
+   "source": "expert:indoor",
+   "first_s": 1.734,
+   "total_s": 3.89,
+   "text": "This is a kitchen. There's a door directly ahead, blocking your path. To the left, there's a countertop with a stove."
+  },
+  {
+   "scene": "sign",
+   "source": "expert:reader",
+   "first_s": 5.093,
+   "total_s": 13.48,
+   "text": "\"Breakfast\nChef's Omelette - roast\npumpkin, cherry tomato,\npinenut + red-onion $18\nHousemade oven baked\nbean, smoked ham, rock,\negg & sourdough toast $16\nLunch\nSticky pork\nrelish, wonton\n& chilli cake\nHousemade\nby grilled chef\n15% Public Holiday\nsurcharge applies on\nAnzac Day\n25th April\nThank you for your\nunderstanding and support\nMalt\nPIER\"."
+  },
+  {
+   "scene": "blurred frame",
+   "source": "gate",
+   "first_s": 0.0,
+   "total_s": 0.0,
+   "text": "Too blurry. Hold still."
+  },
+  {
+   "scene": "location question",
+   "source": "planner (base, no adapter)",
+   "question": "Where is the nearest crossing?",
+   "first_s": 0.442,
+   "total_s": 1.29,
+   "text": "The nearest crossing is 53 m on your left.",
+   "raw": "The nearest crossing is 53 m on your left."
+  }
+ ],
+ "tiers_ms": {
+  "gate": 18.92,
+  "reflex_detect_track_policy": 35.89,
+  "ocr_read": 1164.33,
+  "planner_rules": 2.88,
+  "n_frames": 86
+ },
+ "mem_total_mb": 7619
+}

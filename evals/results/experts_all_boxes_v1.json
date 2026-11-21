@@ -1,0 +1,204 @@
+{
+ "command": ".venv/bin/python -m evals.experts_eval --rescore",
+ "note": "same outputs as experts*.json, checked against all COCO val2017 boxes",
+ "base@768": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.04,
+   "chair_i": 0.0325,
+   "side_acc": 1.0,
+   "side_checked": 11,
+   "invented_mentions": 5,
+   "wrong_vehicle_type": 0
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.43,
+   "chair_i": 0.1239,
+   "side_acc": 0.9231,
+   "side_checked": 26,
+   "invented_mentions": 55,
+   "wrong_vehicle_type": 0
+  }
+ },
+ "expert+det@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.12,
+   "chair_i": 0.0563,
+   "side_acc": 0.8939,
+   "side_checked": 66,
+   "invented_mentions": 13,
+   "wrong_vehicle_type": 6
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.43,
+   "chair_i": 0.1532,
+   "side_acc": 0.9615,
+   "side_checked": 52,
+   "invented_mentions": 51,
+   "wrong_vehicle_type": 0
+  }
+ },
+ "expert+det_v1@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.09,
+   "chair_i": 0.0546,
+   "side_acc": 0.8958,
+   "side_checked": 48,
+   "invented_mentions": 10,
+   "wrong_vehicle_type": 1
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.32,
+   "chair_i": 0.1213,
+   "side_acc": 0.9107,
+   "side_checked": 56,
+   "invented_mentions": 37,
+   "wrong_vehicle_type": 0
+  }
+ },
+ "expert+detside@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.21,
+   "chair_i": 0.0759,
+   "side_acc": 1.0,
+   "side_checked": 68,
+   "invented_mentions": 23,
+   "wrong_vehicle_type": 13
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.42,
+   "chair_i": 0.1646,
+   "side_acc": 0.9434,
+   "side_checked": 53,
+   "invented_mentions": 52,
+   "wrong_vehicle_type": 0
+  }
+ },
+ "expert+fake@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.14,
+   "chair_i": 0.053,
+   "side_acc": 0.9011,
+   "side_checked": 91,
+   "invented_mentions": 14,
+   "wrong_vehicle_type": 0
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.27,
+   "chair_i": 0.0588,
+   "side_acc": 0.9412,
+   "side_checked": 102,
+   "invented_mentions": 28,
+   "wrong_vehicle_type": 0
+  }
+ },
+ "expert+gt@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.02,
+   "chair_i": 0.0079,
+   "side_acc": 0.8953,
+   "side_checked": 86,
+   "invented_mentions": 2,
+   "wrong_vehicle_type": 0
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.16,
+   "chair_i": 0.0355,
+   "side_acc": 0.9286,
+   "side_checked": 98,
+   "invented_mentions": 16,
+   "wrong_vehicle_type": 0
+  }
+ },
+ "expert+gt@560": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.04,
+   "chair_i": 0.0149,
+   "side_acc": 0.8857,
+   "side_checked": 70,
+   "invented_mentions": 4,
+   "wrong_vehicle_type": 0
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.16,
+   "chair_i": 0.0351,
+   "side_acc": 0.9479,
+   "side_checked": 96,
+   "invented_mentions": 16,
+   "wrong_vehicle_type": 0
+  }
+ },
+ "expert+gtside@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.01,
+   "chair_i": 0.0032,
+   "side_acc": 0.9626,
+   "side_checked": 107,
+   "invented_mentions": 1,
+   "wrong_vehicle_type": 0
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.1,
+   "chair_i": 0.0235,
+   "side_acc": 1.0,
+   "side_checked": 85,
+   "invented_mentions": 10,
+   "wrong_vehicle_type": 0
+  }
+ },
+ "expert+none@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.1,
+   "chair_i": 0.0692,
+   "side_acc": 0.963,
+   "side_checked": 27,
+   "invented_mentions": 11,
+   "wrong_vehicle_type": 1
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.43,
+   "chair_i": 0.1507,
+   "side_acc": 0.9767,
+   "side_checked": 43,
+   "invented_mentions": 55,
+   "wrong_vehicle_type": 0
+  }
+ },
+ "v1@768": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.06,
+   "chair_i": 0.0311,
+   "side_acc": 1.0,
+   "side_checked": 3,
+   "invented_mentions": 6,
+   "wrong_vehicle_type": 1
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.4,
+   "chair_i": 0.1069,
+   "side_acc": 0.9,
+   "side_checked": 10,
+   "invented_mentions": 45,
+   "wrong_vehicle_type": 0
+  }
+ }
+}

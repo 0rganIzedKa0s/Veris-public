@@ -1,0 +1,44 @@
+# secrets
+.env
+.device-credentials
+# large binaries / models
+*.gguf
+dataset/sft/merged-3b-v1/
+dataset/sft/out-*/
+dataset/frames/
+dataset/frames_eval/
+dataset/sft/images/
+# collected data (privacy: contains photos)
+demo/sessions/
+dataset/frames_v2/
+dataset/teacher_raw.jsonl
+dataset/teacher_raw_v2.jsonl
+dataset/teacher_judged.jsonl
+dataset/abstention_rescued.jsonl
+dataset/eval_*.jsonl
+# generated: the static demo build (published to the gh-pages branch)
+site/
+
+# measurements & logs
+bench/results.jsonl
+bench/tegra-*.jsonl
+bench/latency_sweep.jsonl
+dataset/evals/raw-*.jsonl
+dataset/evals/.flip_cache/
+# python
+__pycache__/
+.venv/
+*.pyc
+.pytest_cache/
+bench/vllm_results.jsonl
+# local capture index (rebuildable from demo/sessions)
+demo/veris.sqlite*
+
+# multi-model build: downloads, generated sets, checkpoints
+data/
+train/**/runs/
+train/**/out*/
+*.onnx
+*.engine
+*.pt
+*.pth

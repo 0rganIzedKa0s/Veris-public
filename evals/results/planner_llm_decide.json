@@ -1,0 +1,25 @@
+{
+ "n": 84,
+ "seeds": [
+  0,
+  1
+ ],
+ "parse_rate": 0.5357,
+ "situation_acc": {
+  "rules": 0.7262,
+  "rules_plus_llm": 0.6071
+ },
+ "mode_acc": {
+  "rules": 1.0,
+  "rules_plus_llm": 1.0
+ },
+ "llm_changed_mode": 0,
+ "of_which_fixed": 0,
+ "of_which_broke": 0,
+ "ttft_median_s": 0.511,
+ "total_median_s": 10.81,
+ "tokens_median": 145.0,
+ "where": "Jetson Orin Nano 8GB, llama-server, base Q4_K_M, all adapters off, text only",
+ "time": "2026-11-18 19:09",
+ "command": "python -m evals.planner_llm_eval prompts | run decide (board) | score decide"
+}

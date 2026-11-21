@@ -1,0 +1,46 @@
+{
+ "command": ".venv/bin/python evals/nav_reflex.py",
+ "split": "synthetic tracks projected through a 1.6 m, 10 deg-down, 80 deg HFOV camera; 30 fps; 1% box-edge noise",
+ "scenarios_utterances": {
+  "approaching_person": [
+   [
+    1.63,
+    "Person, 12 o'clock, eight meters, approaching."
+   ]
+  ],
+  "pole_passed_on_side": [],
+  "pole_ahead": [
+   [
+    2.3,
+    "Pole, 12 o'clock, four meters."
+   ],
+   [
+    4.3,
+    "Pole, 12 o'clock, under three meters, approaching."
+   ]
+  ],
+  "person_leaves_corridor": [
+   [
+    0.07,
+    "Person, 12 o'clock, three meters."
+   ]
+  ],
+  "traffic_light_with_prior": [
+   [
+    0.07,
+    "Traffic light, 11 o'clock."
+   ]
+  ],
+  "policy_ms_per_frame": {
+   "median": 0.169,
+   "p99": 0.559,
+   "max": 6.409,
+   "n_frames": 690
+  }
+ },
+ "crowded_policy_ms": {
+  "objects_per_frame": 40,
+  "median": 9.311,
+  "p99": 16.239
+ }
+}

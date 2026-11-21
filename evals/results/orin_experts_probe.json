@@ -1,0 +1,122 @@
+{
+ "_meta": {
+  "url": "http://127.0.0.1:8080",
+  "adapters": {
+   "outdoor": 0,
+   "indoor": 1,
+   "reader": 2
+  },
+  "note": "outdoor trained, others stand-in, probe",
+  "time": "2026-11-19 00:35",
+  "command": "bench/orin/expert_bench.py run --n 2 --out orin_experts_probe --note outdoor trained, others stand-in, probe"
+ },
+ "outdoor@448": {
+  "n": 2,
+  "ttft_median_s": 1.219,
+  "ttft_min_s": 1.202,
+  "ttft_max_s": 1.236,
+  "tok_s": 13.7,
+  "total_median_s": 3.89,
+  "sample": "A black cat is standing in front of you. To your left, there's a laptop and a computer monitor. To your right, there's a telephone. The path is clear, with no obstacles"
+ },
+ "outdoor@560": {
+  "n": 2,
+  "ttft_median_s": 1.857,
+  "ttft_min_s": 1.79,
+  "ttft_max_s": 1.924,
+  "tok_s": 13.5,
+  "total_median_s": 4.71,
+  "sample": "Two people are ahead, blocking your path. The path is clear behind them. This is a street with a curb and a bench. There's a sign with Chinese characters on the right side."
+ },
+ "outdoor@768": {
+  "n": 2,
+  "ttft_median_s": 2.577,
+  "ttft_min_s": 2.561,
+  "ttft_max_s": 2.593,
+  "tok_s": 13.6,
+  "total_median_s": 5.33,
+  "sample": "Two people are standing ahead, blocking your path. A bench is nearby, and a statue is sitting on it. There's a bag on the ground next to the bench. The path is clear,"
+ },
+ "indoor@448": {
+  "n": 2,
+  "ttft_median_s": 1.335,
+  "ttft_min_s": 1.254,
+  "ttft_max_s": 1.417,
+  "tok_s": 13.7,
+  "total_median_s": 4.25,
+  "sample": "The room is a bus station. There are several buses parked in the station. The nearest furniture is a bench on the right side of the image. The obstacles include a road and a fence. The"
+ },
+ "indoor@560": {
+  "n": 2,
+  "ttft_median_s": 1.823,
+  "ttft_min_s": 1.738,
+  "ttft_max_s": 1.908,
+  "tok_s": 13.5,
+  "total_median_s": 4.07,
+  "sample": "The room is a street. Obstacles include a pole and a bench. Furniture nearest is a bench."
+ },
+ "indoor@768": {
+  "n": 2,
+  "ttft_median_s": 2.898,
+  "ttft_min_s": 2.562,
+  "ttft_max_s": 3.235,
+  "tok_s": 13.4,
+  "total_median_s": 5.69,
+  "sample": "The room is a home office. There is a desk with a laptop, a keyboard, and a mouse. To the left of the desk, there is a trash can. A chair is positioned in"
+ },
+ "reader@448": {
+  "n": 2,
+  "ttft_median_s": 1.636,
+  "ttft_min_s": 1.545,
+  "ttft_max_s": 1.726,
+  "tok_s": 13.2,
+  "total_median_s": 2.58,
+  "sample": "street sidewalk\nif visible: a crossing [GPS]"
+ },
+ "reader@560": {
+  "n": 2,
+  "ttft_median_s": 1.758,
+  "ttft_min_s": 1.728,
+  "ttft_max_s": 1.789,
+  "tok_s": 13.0,
+  "total_median_s": 2.22,
+  "sample": "The text cannot be read."
+ },
+ "reader@768": {
+  "n": 2,
+  "ttft_median_s": 2.428,
+  "ttft_min_s": 2.307,
+  "ttft_max_s": 2.549,
+  "tok_s": 13.0,
+  "total_median_s": 2.89,
+  "sample": "The text cannot be read."
+ },
+ "switch": {
+  "first_after_switch": {
+   "n": 4,
+   "ttft_median_s": 1.398,
+   "ttft_min_s": 1.37,
+   "ttft_max_s": 1.406,
+   "tok_s": 13.7,
+   "total_median_s": 4.32
+  },
+  "second_same_expert": {
+   "n": 4,
+   "ttft_median_s": 1.215,
+   "ttft_min_s": 1.093,
+   "ttft_max_s": 1.233,
+   "tok_s": 13.7,
+   "total_median_s": 4.13
+  },
+  "cost_s": 0.183
+ },
+ "planner_text_only": {
+  "n": 2,
+  "ttft_median_s": 0.182,
+  "ttft_min_s": 0.081,
+  "ttft_max_s": 0.284,
+  "tok_s": 14.1,
+  "total_median_s": 1.1,
+  "sample": "The bus stop is 30 meters ahead on the right."
+ }
+}

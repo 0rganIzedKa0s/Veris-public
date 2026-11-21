@@ -1,0 +1,807 @@
+{
+ "operating_points_dev": {
+  "seeds": [
+   100,
+   101,
+   102,
+   103,
+   104
+  ],
+  "points": [
+   {
+    "tau_s": 4,
+    "gps_w": 0.1,
+    "band": [
+     0.35,
+     0.65
+    ],
+    "err": 0.05,
+    "correct": 0.966,
+    "flaps": 28,
+    "doorway_median_s": 10,
+    "doorway_max_s": 23
+   },
+   {
+    "tau_s": 4,
+    "gps_w": 0.1,
+    "band": [
+     0.35,
+     0.65
+    ],
+    "err": 0.15,
+    "correct": 0.923,
+    "flaps": 89,
+    "doorway_median_s": 10,
+    "doorway_max_s": 25
+   },
+   {
+    "tau_s": 4,
+    "gps_w": 0.1,
+    "band": [
+     0.35,
+     0.65
+    ],
+    "err": 0.3,
+    "correct": 0.834,
+    "flaps": 189,
+    "doorway_median_s": 19,
+    "doorway_max_s": 57
+   },
+   {
+    "tau_s": 4,
+    "gps_w": 0.1,
+    "band": [
+     0.3,
+     0.7
+    ],
+    "err": 0.05,
+    "correct": 0.966,
+    "flaps": 22,
+    "doorway_median_s": 11,
+    "doorway_max_s": 24
+   },
+   {
+    "tau_s": 4,
+    "gps_w": 0.1,
+    "band": [
+     0.3,
+     0.7
+    ],
+    "err": 0.15,
+    "correct": 0.934,
+    "flaps": 64,
+    "doorway_median_s": 12,
+    "doorway_max_s": 27
+   },
+   {
+    "tau_s": 4,
+    "gps_w": 0.1,
+    "band": [
+     0.3,
+     0.7
+    ],
+    "err": 0.3,
+    "correct": 0.858,
+    "flaps": 133,
+    "doorway_median_s": 20,
+    "doorway_max_s": 58
+   },
+   {
+    "tau_s": 6,
+    "gps_w": 0.1,
+    "band": [
+     0.3,
+     0.7
+    ],
+    "err": 0.05,
+    "correct": 0.965,
+    "flaps": 9,
+    "doorway_median_s": 15,
+    "doorway_max_s": 26
+   },
+   {
+    "tau_s": 6,
+    "gps_w": 0.1,
+    "band": [
+     0.3,
+     0.7
+    ],
+    "err": 0.15,
+    "correct": 0.944,
+    "flaps": 21,
+    "doorway_median_s": 16,
+    "doorway_max_s": 34
+   },
+   {
+    "tau_s": 6,
+    "gps_w": 0.1,
+    "band": [
+     0.3,
+     0.7
+    ],
+    "err": 0.3,
+    "correct": 0.897,
+    "flaps": 45,
+    "doorway_median_s": 25,
+    "doorway_max_s": 59
+   },
+   {
+    "tau_s": 6,
+    "gps_w": 0.3,
+    "band": [
+     0.35,
+     0.65
+    ],
+    "err": 0.05,
+    "correct": 0.967,
+    "flaps": 5,
+    "doorway_median_s": 20,
+    "doorway_max_s": 26
+   },
+   {
+    "tau_s": 6,
+    "gps_w": 0.3,
+    "band": [
+     0.35,
+     0.65
+    ],
+    "err": 0.15,
+    "correct": 0.956,
+    "flaps": 11,
+    "doorway_median_s": 20,
+    "doorway_max_s": 41
+   },
+   {
+    "tau_s": 6,
+    "gps_w": 0.3,
+    "band": [
+     0.35,
+     0.65
+    ],
+    "err": 0.3,
+    "correct": 0.94,
+    "flaps": 23,
+    "doorway_median_s": 25,
+    "doorway_max_s": 56
+   },
+   {
+    "tau_s": 8,
+    "gps_w": 0.3,
+    "band": [
+     0.3,
+     0.7
+    ],
+    "err": 0.05,
+    "correct": 0.957,
+    "flaps": 0,
+    "doorway_median_s": 29,
+    "doorway_max_s": 49
+   },
+   {
+    "tau_s": 8,
+    "gps_w": 0.3,
+    "band": [
+     0.3,
+     0.7
+    ],
+    "err": 0.15,
+    "correct": 0.954,
+    "flaps": 0,
+    "doorway_median_s": 29,
+    "doorway_max_s": 44
+   },
+   {
+    "tau_s": 8,
+    "gps_w": 0.3,
+    "band": [
+     0.3,
+     0.7
+    ],
+    "err": 0.3,
+    "correct": 0.949,
+    "flaps": 0,
+    "doorway_median_s": 39,
+    "doorway_max_s": 58
+   }
+  ]
+ },
+ "command": "python -m evals.switching_eval",
+ "split": "test",
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "N_scenarios": 7,
+ "N_ticks_per_condition": 16844,
+ "setup": {
+  "tick_hz": 1,
+  "gate_vote_hz": 5,
+  "error_burst_mean_s": 3.0,
+  "flap_window_s": 20.0,
+  "motion": "ground truth walking/stationary",
+  "arbiter_start": "user_command(ground-truth mode at t=0)",
+  "ground_truth_mode": "outdoors outdoor_nav; indoors moving indoor_nav; indoors still describe",
+  "airgap": "socket.socket patched to raise"
+ },
+ "conditions": {
+  "planner_only": {
+   "time_in_correct_mode_mean_over_runs": 0.954,
+   "time_in_correct_mode_per_scenario": {
+    "sidewalk_crossings": 1.0,
+    "cafe_sit": 0.914,
+    "bus_stop": 1.0,
+    "campus_corridor": 0.903,
+    "parking_lot": 1.0,
+    "urban_canyon": 1.0,
+    "canyon_cafe": 0.861
+   },
+   "switch_latency_s": {
+    "describe->indoor_nav": {
+     "n": 5,
+     "missed": 0,
+     "median_s": 4,
+     "mean_s": 4,
+     "max_s": 4
+    },
+    "indoor_nav->describe": {
+     "n": 10,
+     "missed": 0,
+     "median_s": 4.5,
+     "mean_s": 9.3,
+     "max_s": 35
+    },
+    "indoor_nav->outdoor_nav": {
+     "n": 10,
+     "missed": 0,
+     "median_s": 17.5,
+     "mean_s": 16.9,
+     "max_s": 21
+    },
+    "outdoor_nav->indoor_nav": {
+     "n": 15,
+     "missed": 5,
+     "median_s": 23.0,
+     "mean_s": 24.4,
+     "max_s": 33
+    }
+   },
+   "flaps_reversed_within_20s": 2,
+   "flaps_per_hour": 0.43,
+   "doorway": {
+    "n": 15,
+    "median_arbiter_s": 30,
+    "max_arbiter_s": 41,
+    "missed": 0,
+    "beat_gnss_lag": 0,
+    "median_gnss_lag_s": 23,
+    "runs": [
+     {
+      "scenario": "cafe_sit",
+      "seed": 0,
+      "gnss_lag_s": 32,
+      "arbiter_s": 38
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 1,
+      "gnss_lag_s": 15,
+      "arbiter_s": 21
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 2,
+      "gnss_lag_s": 13,
+      "arbiter_s": 18
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 3,
+      "gnss_lag_s": 31,
+      "arbiter_s": 36
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 4,
+      "gnss_lag_s": 19,
+      "arbiter_s": 23
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 0,
+      "gnss_lag_s": 19,
+      "arbiter_s": 25
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 1,
+      "gnss_lag_s": 15,
+      "arbiter_s": 22
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 2,
+      "gnss_lag_s": 25,
+      "arbiter_s": 32
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 3,
+      "gnss_lag_s": 26,
+      "arbiter_s": 33
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 4,
+      "gnss_lag_s": 23,
+      "arbiter_s": 30
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 0,
+      "gnss_lag_s": 34,
+      "arbiter_s": 41
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 1,
+      "gnss_lag_s": 31,
+      "arbiter_s": 38
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 2,
+      "gnss_lag_s": 32,
+      "arbiter_s": 38
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 3,
+      "gnss_lag_s": 12,
+      "arbiter_s": 17
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 4,
+      "gnss_lag_s": 15,
+      "arbiter_s": 23
+     }
+    ]
+   }
+  },
+  "planner+gate_err0.05": {
+   "time_in_correct_mode_mean_over_runs": 0.973,
+   "time_in_correct_mode_per_scenario": {
+    "sidewalk_crossings": 0.998,
+    "cafe_sit": 0.948,
+    "bus_stop": 1.0,
+    "campus_corridor": 0.933,
+    "parking_lot": 1.0,
+    "urban_canyon": 1.0,
+    "canyon_cafe": 0.93
+   },
+   "switch_latency_s": {
+    "describe->indoor_nav": {
+     "n": 5,
+     "missed": 0,
+     "median_s": 4,
+     "mean_s": 4,
+     "max_s": 4
+    },
+    "indoor_nav->describe": {
+     "n": 10,
+     "missed": 0,
+     "median_s": 4.0,
+     "mean_s": 4,
+     "max_s": 4
+    },
+    "indoor_nav->outdoor_nav": {
+     "n": 10,
+     "missed": 0,
+     "median_s": 15.0,
+     "mean_s": 15.9,
+     "max_s": 23
+    },
+    "outdoor_nav->indoor_nav": {
+     "n": 15,
+     "missed": 0,
+     "median_s": 15,
+     "mean_s": 16.2,
+     "max_s": 25
+    }
+   },
+   "flaps_reversed_within_20s": 1,
+   "flaps_per_hour": 0.21,
+   "doorway": {
+    "n": 15,
+    "median_arbiter_s": 15,
+    "max_arbiter_s": 25,
+    "missed": 0,
+    "beat_gnss_lag": 9,
+    "median_gnss_lag_s": 23,
+    "runs": [
+     {
+      "scenario": "cafe_sit",
+      "seed": 0,
+      "gnss_lag_s": 32,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 1,
+      "gnss_lag_s": 15,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 2,
+      "gnss_lag_s": 13,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 3,
+      "gnss_lag_s": 31,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 4,
+      "gnss_lag_s": 19,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 0,
+      "gnss_lag_s": 19,
+      "arbiter_s": 20
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 1,
+      "gnss_lag_s": 15,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 2,
+      "gnss_lag_s": 25,
+      "arbiter_s": 16
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 3,
+      "gnss_lag_s": 26,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 4,
+      "gnss_lag_s": 23,
+      "arbiter_s": 16
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 0,
+      "gnss_lag_s": 34,
+      "arbiter_s": 25
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 1,
+      "gnss_lag_s": 31,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 2,
+      "gnss_lag_s": 32,
+      "arbiter_s": 16
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 3,
+      "gnss_lag_s": 12,
+      "arbiter_s": 14
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 4,
+      "gnss_lag_s": 15,
+      "arbiter_s": 16
+     }
+    ]
+   }
+  },
+  "planner+gate_err0.15": {
+   "time_in_correct_mode_mean_over_runs": 0.96,
+   "time_in_correct_mode_per_scenario": {
+    "sidewalk_crossings": 0.99,
+    "cafe_sit": 0.939,
+    "bus_stop": 0.991,
+    "campus_corridor": 0.922,
+    "parking_lot": 0.992,
+    "urban_canyon": 0.986,
+    "canyon_cafe": 0.899
+   },
+   "switch_latency_s": {
+    "describe->indoor_nav": {
+     "n": 5,
+     "missed": 0,
+     "median_s": 4,
+     "mean_s": 4,
+     "max_s": 4
+    },
+    "indoor_nav->describe": {
+     "n": 10,
+     "missed": 0,
+     "median_s": 4.0,
+     "mean_s": 4.6,
+     "max_s": 7
+    },
+    "indoor_nav->outdoor_nav": {
+     "n": 10,
+     "missed": 0,
+     "median_s": 14.5,
+     "mean_s": 15.2,
+     "max_s": 21
+    },
+    "outdoor_nav->indoor_nav": {
+     "n": 15,
+     "missed": 0,
+     "median_s": 17,
+     "mean_s": 19.7,
+     "max_s": 31
+    }
+   },
+   "flaps_reversed_within_20s": 15,
+   "flaps_per_hour": 3.21,
+   "doorway": {
+    "n": 15,
+    "median_arbiter_s": 17,
+    "max_arbiter_s": 31,
+    "missed": 0,
+    "beat_gnss_lag": 10,
+    "median_gnss_lag_s": 23,
+    "runs": [
+     {
+      "scenario": "cafe_sit",
+      "seed": 0,
+      "gnss_lag_s": 32,
+      "arbiter_s": 16
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 1,
+      "gnss_lag_s": 15,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 2,
+      "gnss_lag_s": 13,
+      "arbiter_s": 23
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 3,
+      "gnss_lag_s": 31,
+      "arbiter_s": 12
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 4,
+      "gnss_lag_s": 19,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 0,
+      "gnss_lag_s": 19,
+      "arbiter_s": 28
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 1,
+      "gnss_lag_s": 15,
+      "arbiter_s": 24
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 2,
+      "gnss_lag_s": 25,
+      "arbiter_s": 16
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 3,
+      "gnss_lag_s": 26,
+      "arbiter_s": 13
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 4,
+      "gnss_lag_s": 23,
+      "arbiter_s": 21
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 0,
+      "gnss_lag_s": 34,
+      "arbiter_s": 25
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 1,
+      "gnss_lag_s": 31,
+      "arbiter_s": 17
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 2,
+      "gnss_lag_s": 32,
+      "arbiter_s": 31
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 3,
+      "gnss_lag_s": 12,
+      "arbiter_s": 25
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 4,
+      "gnss_lag_s": 15,
+      "arbiter_s": 14
+     }
+    ]
+   }
+  },
+  "planner+gate_err0.30": {
+   "time_in_correct_mode_mean_over_runs": 0.852,
+   "time_in_correct_mode_per_scenario": {
+    "sidewalk_crossings": 0.904,
+    "cafe_sit": 0.844,
+    "bus_stop": 0.886,
+    "campus_corridor": 0.822,
+    "parking_lot": 0.861,
+    "urban_canyon": 0.868,
+    "canyon_cafe": 0.781
+   },
+   "switch_latency_s": {
+    "describe->indoor_nav": {
+     "n": 5,
+     "missed": 0,
+     "median_s": 4,
+     "mean_s": 7.4,
+     "max_s": 21
+    },
+    "indoor_nav->describe": {
+     "n": 10,
+     "missed": 0,
+     "median_s": 9.0,
+     "mean_s": 13.1,
+     "max_s": 47
+    },
+    "indoor_nav->outdoor_nav": {
+     "n": 10,
+     "missed": 0,
+     "median_s": 23.0,
+     "mean_s": 22.2,
+     "max_s": 46
+    },
+    "outdoor_nav->indoor_nav": {
+     "n": 15,
+     "missed": 1,
+     "median_s": 13.5,
+     "mean_s": 14.2,
+     "max_s": 42
+    }
+   },
+   "flaps_reversed_within_20s": 68,
+   "flaps_per_hour": 14.53,
+   "doorway": {
+    "n": 15,
+    "median_arbiter_s": 14,
+    "max_arbiter_s": 46,
+    "missed": 0,
+    "beat_gnss_lag": 10,
+    "median_gnss_lag_s": 23,
+    "runs": [
+     {
+      "scenario": "cafe_sit",
+      "seed": 0,
+      "gnss_lag_s": 32,
+      "arbiter_s": 15
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 1,
+      "gnss_lag_s": 15,
+      "arbiter_s": 13
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 2,
+      "gnss_lag_s": 13,
+      "arbiter_s": 0
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 3,
+      "gnss_lag_s": 31,
+      "arbiter_s": 46
+     },
+     {
+      "scenario": "cafe_sit",
+      "seed": 4,
+      "gnss_lag_s": 19,
+      "arbiter_s": 8
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 0,
+      "gnss_lag_s": 19,
+      "arbiter_s": 23
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 1,
+      "gnss_lag_s": 15,
+      "arbiter_s": 0
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 2,
+      "gnss_lag_s": 25,
+      "arbiter_s": 22
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 3,
+      "gnss_lag_s": 26,
+      "arbiter_s": 42
+     },
+     {
+      "scenario": "campus_corridor",
+      "seed": 4,
+      "gnss_lag_s": 23,
+      "arbiter_s": 13
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 0,
+      "gnss_lag_s": 34,
+      "arbiter_s": 35
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 1,
+      "gnss_lag_s": 31,
+      "arbiter_s": 14
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 2,
+      "gnss_lag_s": 32,
+      "arbiter_s": 0
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 3,
+      "gnss_lag_s": 12,
+      "arbiter_s": 14
+     },
+     {
+      "scenario": "canyon_cafe",
+      "seed": 4,
+      "gnss_lag_s": 15,
+      "arbiter_s": 0
+     }
+    ]
+   }
+  }
+ }
+}

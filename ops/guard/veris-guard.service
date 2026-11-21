@@ -1,0 +1,17 @@
+[Unit]
+Description=Veris front door (redirects to the board, or to the recorded copy)
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Service]
+User=@GUARD_USER@
+Environment=VERIS_BOARD_HEALTH=http://veris-board:8000/api/status
+Environment=VERIS_LIVE_URL=https://veris-board.@TAILNET@.ts.net/
+Environment=VERIS_RECORDED_URL=https://0rganizedka0s.github.io/Veris-public/
+ExecStart=/usr/bin/python3 /opt/veris-guard/veris_guard.py 8000
+Restart=always
+RestartSec=5
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,1555 @@
+{
+ "command": ".venv/bin/python evals/nav_ranging.py",
+ "data": "KITTI object training labels+calib (7481 frames) and tracking training labels (21 sequences, 10 Hz); labels only, no images",
+ "split": "KITTI training labels (nothing here is trained; pure geometry)",
+ "filter": "truncated == 0 and occluded == 0",
+ "camera": {
+  "height_m": 1.65,
+  "pitch_deg_assumed": 0.0,
+  "intrinsics": "per-frame P2"
+ },
+ "range_vs_nearest_footprint_point": {
+  "Pedestrian": {
+   "n": 2404,
+   "beyond_horizon": 0,
+   "median_ape_pct": 13.3,
+   "p90_ape_pct": 40.5,
+   "median_signed_pct": 12.7,
+   "by_bucket": {
+    "0-5": {
+     "n": 0,
+     "beyond_horizon": 0,
+     "median_ape_pct": null
+    },
+    "5-10": {
+     "n": 747,
+     "beyond_horizon": 0,
+     "median_ape_pct": 12.5
+    },
+    "10-20": {
+     "n": 919,
+     "beyond_horizon": 0,
+     "median_ape_pct": 14.2
+    },
+    "20+": {
+     "n": 738,
+     "beyond_horizon": 0,
+     "median_ape_pct": 14.7
+    }
+   }
+  },
+  "Cyclist": {
+   "n": 920,
+   "beyond_horizon": 0,
+   "median_ape_pct": 14.6,
+   "p90_ape_pct": 44.8,
+   "median_signed_pct": 1.4,
+   "by_bucket": {
+    "0-5": {
+     "n": 0,
+     "beyond_horizon": 0,
+     "median_ape_pct": null
+    },
+    "5-10": {
+     "n": 72,
+     "beyond_horizon": 0,
+     "median_ape_pct": 6.9
+    },
+    "10-20": {
+     "n": 268,
+     "beyond_horizon": 0,
+     "median_ape_pct": 11.2
+    },
+    "20+": {
+     "n": 580,
+     "beyond_horizon": 0,
+     "median_ape_pct": 17.8
+    }
+   }
+  },
+  "Car": {
+   "n": 11017,
+   "beyond_horizon": 30,
+   "median_ape_pct": 10.8,
+   "p90_ape_pct": 34.2,
+   "median_signed_pct": -3.3,
+   "by_bucket": {
+    "0-5": {
+     "n": 0,
+     "beyond_horizon": 0,
+     "median_ape_pct": null
+    },
+    "5-10": {
+     "n": 921,
+     "beyond_horizon": 0,
+     "median_ape_pct": 5.2
+    },
+    "10-20": {
+     "n": 2575,
+     "beyond_horizon": 0,
+     "median_ape_pct": 7.0
+    },
+    "20+": {
+     "n": 7521,
+     "beyond_horizon": 30,
+     "median_ape_pct": 14.3
+    }
+   }
+  }
+ },
+ "range_vs_box_centre": {
+  "Pedestrian": {
+   "n": 2404,
+   "beyond_horizon": 0,
+   "median_ape_pct": 9.1,
+   "p90_ape_pct": 36.9,
+   "median_signed_pct": 7.6,
+   "by_bucket": {
+    "0-5": {
+     "n": 0,
+     "beyond_horizon": 0,
+     "median_ape_pct": null
+    },
+    "5-10": {
+     "n": 665,
+     "beyond_horizon": 0,
+     "median_ape_pct": 6.7
+    },
+    "10-20": {
+     "n": 965,
+     "beyond_horizon": 0,
+     "median_ape_pct": 10.1
+    },
+    "20+": {
+     "n": 774,
+     "beyond_horizon": 0,
+     "median_ape_pct": 13.5
+    }
+   }
+  },
+  "Cyclist": {
+   "n": 920,
+   "beyond_horizon": 0,
+   "median_ape_pct": 15.0,
+   "p90_ape_pct": 40.4,
+   "median_signed_pct": -4.2,
+   "by_bucket": {
+    "0-5": {
+     "n": 0,
+     "beyond_horizon": 0,
+     "median_ape_pct": null
+    },
+    "5-10": {
+     "n": 51,
+     "beyond_horizon": 0,
+     "median_ape_pct": 6.8
+    },
+    "10-20": {
+     "n": 262,
+     "beyond_horizon": 0,
+     "median_ape_pct": 10.7
+    },
+    "20+": {
+     "n": 607,
+     "beyond_horizon": 0,
+     "median_ape_pct": 18.0
+    }
+   }
+  },
+  "Car": {
+   "n": 11017,
+   "beyond_horizon": 30,
+   "median_ape_pct": 16.4,
+   "p90_ape_pct": 34.5,
+   "median_signed_pct": -13.1,
+   "by_bucket": {
+    "0-5": {
+     "n": 0,
+     "beyond_horizon": 0,
+     "median_ape_pct": null
+    },
+    "5-10": {
+     "n": 447,
+     "beyond_horizon": 0,
+     "median_ape_pct": 18.3
+    },
+    "10-20": {
+     "n": 2547,
+     "beyond_horizon": 0,
+     "median_ape_pct": 14.4
+    },
+    "20+": {
+     "n": 8023,
+     "beyond_horizon": 30,
+     "median_ape_pct": 17.0
+    }
+   }
+  }
+ },
+ "bearing_from_box_centre_column": {
+  "Pedestrian": {
+   "n": 2404,
+   "median_abs_err_deg": 0.17,
+   "p90_abs_err_deg": 0.54
+  },
+  "Cyclist": {
+   "n": 920,
+   "median_abs_err_deg": 0.04,
+   "p90_abs_err_deg": 0.21
+  },
+  "Car": {
+   "n": 11017,
+   "median_abs_err_deg": 0.11,
+   "p90_abs_err_deg": 0.83
+  }
+ },
+ "sensitivity": {
+  "pitch-2deg": {
+   "Pedestrian": {
+    "n": 2404,
+    "beyond_horizon": 113,
+    "median_ape_pct": 60.1,
+    "p90_ape_pct": 263.8,
+    "median_signed_pct": 60.1,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 747,
+      "beyond_horizon": 0,
+      "median_ape_pct": 39.0
+     },
+     "10-20": {
+      "n": 919,
+      "beyond_horizon": 0,
+      "median_ape_pct": 67.9
+     },
+     "20+": {
+      "n": 738,
+      "beyond_horizon": 113,
+      "median_ape_pct": 172.1
+     }
+    }
+   },
+   "Cyclist": {
+    "n": 920,
+    "beyond_horizon": 126,
+    "median_ape_pct": 89.5,
+    "p90_ape_pct": 406.9,
+    "median_signed_pct": 89.5,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 72,
+      "beyond_horizon": 0,
+      "median_ape_pct": 26.5
+     },
+     "10-20": {
+      "n": 268,
+      "beyond_horizon": 0,
+      "median_ape_pct": 58.5
+     },
+     "20+": {
+      "n": 580,
+      "beyond_horizon": 126,
+      "median_ape_pct": 164.2
+     }
+    }
+   },
+   "Car": {
+    "n": 11017,
+    "beyond_horizon": 1628,
+    "median_ape_pct": 82.1,
+    "p90_ape_pct": 554.0,
+    "median_signed_pct": 82.1,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 921,
+      "beyond_horizon": 0,
+      "median_ape_pct": 23.1
+     },
+     "10-20": {
+      "n": 2575,
+      "beyond_horizon": 0,
+      "median_ape_pct": 42.2
+     },
+     "20+": {
+      "n": 7521,
+      "beyond_horizon": 1628,
+      "median_ape_pct": 148.4
+     }
+    }
+   }
+  },
+  "pitch-1deg": {
+   "Pedestrian": {
+    "n": 2404,
+    "beyond_horizon": 6,
+    "median_ape_pct": 31.5,
+    "p90_ape_pct": 111.7,
+    "median_signed_pct": 31.5,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 747,
+      "beyond_horizon": 0,
+      "median_ape_pct": 24.4
+     },
+     "10-20": {
+      "n": 919,
+      "beyond_horizon": 0,
+      "median_ape_pct": 34.6
+     },
+     "20+": {
+      "n": 738,
+      "beyond_horizon": 6,
+      "median_ape_pct": 63.8
+     }
+    }
+   },
+   "Cyclist": {
+    "n": 920,
+    "beyond_horizon": 22,
+    "median_ape_pct": 33.8,
+    "p90_ape_pct": 134.2,
+    "median_signed_pct": 33.7,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 72,
+      "beyond_horizon": 0,
+      "median_ape_pct": 15.4
+     },
+     "10-20": {
+      "n": 268,
+      "beyond_horizon": 0,
+      "median_ape_pct": 27.4
+     },
+     "20+": {
+      "n": 580,
+      "beyond_horizon": 22,
+      "median_ape_pct": 46.6
+     }
+    }
+   },
+   "Car": {
+    "n": 11017,
+    "beyond_horizon": 241,
+    "median_ape_pct": 28.2,
+    "p90_ape_pct": 140.8,
+    "median_signed_pct": 28.0,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 921,
+      "beyond_horizon": 0,
+      "median_ape_pct": 12.1
+     },
+     "10-20": {
+      "n": 2575,
+      "beyond_horizon": 0,
+      "median_ape_pct": 17.1
+     },
+     "20+": {
+      "n": 7521,
+      "beyond_horizon": 241,
+      "median_ape_pct": 42.4
+     }
+    }
+   }
+  },
+  "pitch+1deg": {
+   "Pedestrian": {
+    "n": 2404,
+    "beyond_horizon": 0,
+    "median_ape_pct": 8.3,
+    "p90_ape_pct": 27.3,
+    "median_signed_pct": -1.1,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 747,
+      "beyond_horizon": 0,
+      "median_ape_pct": 3.7
+     },
+     "10-20": {
+      "n": 919,
+      "beyond_horizon": 0,
+      "median_ape_pct": 8.8
+     },
+     "20+": {
+      "n": 738,
+      "beyond_horizon": 0,
+      "median_ape_pct": 19.7
+     }
+    }
+   },
+   "Cyclist": {
+    "n": 920,
+    "beyond_horizon": 0,
+    "median_ape_pct": 18.4,
+    "p90_ape_pct": 40.9,
+    "median_signed_pct": -16.6,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 72,
+      "beyond_horizon": 0,
+      "median_ape_pct": 5.5
+     },
+     "10-20": {
+      "n": 268,
+      "beyond_horizon": 0,
+      "median_ape_pct": 10.0
+     },
+     "20+": {
+      "n": 580,
+      "beyond_horizon": 0,
+      "median_ape_pct": 29.1
+     }
+    }
+   },
+   "Car": {
+    "n": 11017,
+    "beyond_horizon": 7,
+    "median_ape_pct": 23.7,
+    "p90_ape_pct": 44.7,
+    "median_signed_pct": -23.3,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 921,
+      "beyond_horizon": 0,
+      "median_ape_pct": 6.2
+     },
+     "10-20": {
+      "n": 2575,
+      "beyond_horizon": 0,
+      "median_ape_pct": 14.3
+     },
+     "20+": {
+      "n": 7521,
+      "beyond_horizon": 7,
+      "median_ape_pct": 30.9
+     }
+    }
+   }
+  },
+  "pitch+2deg": {
+   "Pedestrian": {
+    "n": 2404,
+    "beyond_horizon": 0,
+    "median_ape_pct": 13.4,
+    "p90_ape_pct": 37.4,
+    "median_signed_pct": -12.9,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 747,
+      "beyond_horizon": 0,
+      "median_ape_pct": 5.7
+     },
+     "10-20": {
+      "n": 919,
+      "beyond_horizon": 0,
+      "median_ape_pct": 14.4
+     },
+     "20+": {
+      "n": 738,
+      "beyond_horizon": 0,
+      "median_ape_pct": 31.6
+     }
+    }
+   },
+   "Cyclist": {
+    "n": 920,
+    "beyond_horizon": 0,
+    "median_ape_pct": 30.6,
+    "p90_ape_pct": 53.8,
+    "median_signed_pct": -30.6,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 72,
+      "beyond_horizon": 0,
+      "median_ape_pct": 11.3
+     },
+     "10-20": {
+      "n": 268,
+      "beyond_horizon": 0,
+      "median_ape_pct": 18.7
+     },
+     "20+": {
+      "n": 580,
+      "beyond_horizon": 0,
+      "median_ape_pct": 39.6
+     }
+    }
+   },
+   "Car": {
+    "n": 11017,
+    "beyond_horizon": 2,
+    "median_ape_pct": 36.8,
+    "p90_ape_pct": 57.0,
+    "median_signed_pct": -36.8,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 921,
+      "beyond_horizon": 0,
+      "median_ape_pct": 12.8
+     },
+     "10-20": {
+      "n": 2575,
+      "beyond_horizon": 0,
+      "median_ape_pct": 23.9
+     },
+     "20+": {
+      "n": 7521,
+      "beyond_horizon": 2,
+      "median_ape_pct": 45.0
+     }
+    }
+   }
+  },
+  "height-0.1m": {
+   "Pedestrian": {
+    "n": 2404,
+    "beyond_horizon": 0,
+    "median_ape_pct": 8.4,
+    "p90_ape_pct": 32.4,
+    "median_signed_pct": 5.8,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 747,
+      "beyond_horizon": 0,
+      "median_ape_pct": 6.0
+     },
+     "10-20": {
+      "n": 919,
+      "beyond_horizon": 0,
+      "median_ape_pct": 9.4
+     },
+     "20+": {
+      "n": 738,
+      "beyond_horizon": 0,
+      "median_ape_pct": 12.9
+     }
+    }
+   },
+   "Cyclist": {
+    "n": 920,
+    "beyond_horizon": 0,
+    "median_ape_pct": 15.8,
+    "p90_ape_pct": 38.1,
+    "median_signed_pct": -4.7,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 72,
+      "beyond_horizon": 0,
+      "median_ape_pct": 7.4
+     },
+     "10-20": {
+      "n": 268,
+      "beyond_horizon": 0,
+      "median_ape_pct": 10.9
+     },
+     "20+": {
+      "n": 580,
+      "beyond_horizon": 0,
+      "median_ape_pct": 20.4
+     }
+    }
+   },
+   "Car": {
+    "n": 11017,
+    "beyond_horizon": 30,
+    "median_ape_pct": 13.4,
+    "p90_ape_pct": 35.0,
+    "median_signed_pct": -9.2,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 921,
+      "beyond_horizon": 0,
+      "median_ape_pct": 5.0
+     },
+     "10-20": {
+      "n": 2575,
+      "beyond_horizon": 0,
+      "median_ape_pct": 9.0
+     },
+     "20+": {
+      "n": 7521,
+      "beyond_horizon": 30,
+      "median_ape_pct": 17.6
+     }
+    }
+   }
+  },
+  "height+0.1m": {
+   "Pedestrian": {
+    "n": 2404,
+    "beyond_horizon": 0,
+    "median_ape_pct": 19.7,
+    "p90_ape_pct": 48.8,
+    "median_signed_pct": 19.5,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 747,
+      "beyond_horizon": 0,
+      "median_ape_pct": 19.3
+     },
+     "10-20": {
+      "n": 919,
+      "beyond_horizon": 0,
+      "median_ape_pct": 20.8
+     },
+     "20+": {
+      "n": 738,
+      "beyond_horizon": 0,
+      "median_ape_pct": 18.7
+     }
+    }
+   },
+   "Cyclist": {
+    "n": 920,
+    "beyond_horizon": 0,
+    "median_ape_pct": 15.0,
+    "p90_ape_pct": 52.6,
+    "median_signed_pct": 7.5,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 72,
+      "beyond_horizon": 0,
+      "median_ape_pct": 11.6
+     },
+     "10-20": {
+      "n": 268,
+      "beyond_horizon": 0,
+      "median_ape_pct": 15.7
+     },
+     "20+": {
+      "n": 580,
+      "beyond_horizon": 0,
+      "median_ape_pct": 15.6
+     }
+    }
+   },
+   "Car": {
+    "n": 11017,
+    "beyond_horizon": 30,
+    "median_ape_pct": 10.5,
+    "p90_ape_pct": 36.6,
+    "median_signed_pct": 2.5,
+    "by_bucket": {
+     "0-5": {
+      "n": 0,
+      "beyond_horizon": 0,
+      "median_ape_pct": null
+     },
+     "5-10": {
+      "n": 921,
+      "beyond_horizon": 0,
+      "median_ape_pct": 8.7
+     },
+     "10-20": {
+      "n": 2575,
+      "beyond_horizon": 0,
+      "median_ape_pct": 7.5
+     },
+     "20+": {
+      "n": 7521,
+      "beyond_horizon": 30,
+      "median_ape_pct": 12.6
+     }
+    }
+   }
+  }
+ },
+ "wearable_analytic_pitch15_h1.6": {
+  "1m": {
+   "row_px": 1071.1,
+   "pitch-2": 1.08,
+   "pitch-1": 1.04,
+   "pitch+1": 0.96,
+   "pitch+2": 0.92,
+   "height-0.1": 0.94,
+   "height+0.1": 1.06
+  },
+  "2m": {
+   "row_px": 694.2,
+   "pitch-2": 2.15,
+   "pitch-1": 2.07,
+   "pitch+1": 1.93,
+   "pitch+2": 1.86,
+   "height-0.1": 1.88,
+   "height+0.1": 2.12
+  },
+  "3m": {
+   "row_px": 537.1,
+   "pitch-2": 3.27,
+   "pitch-1": 3.13,
+   "pitch+1": 2.88,
+   "pitch+2": 2.76,
+   "height-0.1": 2.81,
+   "height+0.1": 3.19
+  },
+  "5m": {
+   "row_px": 396.6,
+   "pitch-2": 5.68,
+   "pitch-1": 5.32,
+   "pitch+1": 4.71,
+   "pitch+2": 4.46,
+   "height-0.1": 4.69,
+   "height+0.1": 5.31
+  },
+  "8m": {
+   "row_px": 310.8,
+   "pitch-2": 9.76,
+   "pitch-1": 8.8,
+   "pitch+1": 7.33,
+   "pitch+2": 6.76,
+   "height-0.1": 7.5,
+   "height+0.1": 8.5
+  },
+  "12m": {
+   "row_px": 260.9,
+   "pitch-2": 16.33,
+   "pitch-1": 13.84,
+   "pitch+1": 10.59,
+   "pitch+2": 9.47,
+   "height-0.1": 11.25,
+   "height+0.1": 12.75
+  },
+  "20m": {
+   "row_px": 219.7,
+   "pitch-2": 35.59,
+   "pitch-1": 25.62,
+   "pitch+1": 16.39,
+   "pitch+2": 13.88,
+   "height-0.1": 18.75,
+   "height+0.1": 21.25
+  }
+ },
+ "ttc": {
+  "window_3_frames": {
+   "Pedestrian": {
+    "n_windows": 6693,
+    "n_approaching_gt_le_10s": 3211,
+    "coverage_pct": 42.6,
+    "median_ape_pct": 3.6,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 959,
+      "median_ape_pct": 3.4
+     },
+     "3-6s": {
+      "n": 1304,
+      "median_ape_pct": 3.5
+     },
+     "6-10s": {
+      "n": 948,
+      "median_ape_pct": 4.0
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 38.6,
+     "n_gt_below": 959,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 4430
+    }
+   },
+   "Cyclist": {
+    "n_windows": 1105,
+    "n_approaching_gt_le_10s": 759,
+    "coverage_pct": 46.2,
+    "median_ape_pct": 5.1,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 348,
+      "median_ape_pct": 7.5
+     },
+     "3-6s": {
+      "n": 300,
+      "median_ape_pct": 3.8
+     },
+     "6-10s": {
+      "n": 111,
+      "median_ape_pct": 5.1
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 41.1,
+     "n_gt_below": 348,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 457
+    }
+   },
+   "Car": {
+    "n_windows": 10783,
+    "n_approaching_gt_le_10s": 5477,
+    "coverage_pct": 43.4,
+    "median_ape_pct": 9.8,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 2922,
+      "median_ape_pct": 13.5
+     },
+     "3-6s": {
+      "n": 1638,
+      "median_ape_pct": 6.4
+     },
+     "6-10s": {
+      "n": 917,
+      "median_ape_pct": 8.1
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 42.4,
+     "n_gt_below": 2922,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 6223
+    }
+   },
+   "all": {
+    "n_windows": 18581,
+    "n_approaching_gt_le_10s": 9447,
+    "coverage_pct": 43.3,
+    "median_ape_pct": 6.3,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 4229,
+      "median_ape_pct": 9.9
+     },
+     "3-6s": {
+      "n": 3242,
+      "median_ape_pct": 5.0
+     },
+     "6-10s": {
+      "n": 1976,
+      "median_ape_pct": 5.0
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 41.4,
+     "n_gt_below": 4229,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 11110
+    }
+   }
+  },
+  "window_5_frames": {
+   "Pedestrian": {
+    "n_windows": 6245,
+    "n_approaching_gt_le_10s": 2978,
+    "coverage_pct": 91.4,
+    "median_ape_pct": 4.0,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 891,
+      "median_ape_pct": 4.0
+     },
+     "3-6s": {
+      "n": 1192,
+      "median_ape_pct": 3.8
+     },
+     "6-10s": {
+      "n": 895,
+      "median_ape_pct": 4.4
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 91.7,
+     "n_gt_below": 891,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 4162
+    }
+   },
+   "Cyclist": {
+    "n_windows": 1026,
+    "n_approaching_gt_le_10s": 693,
+    "coverage_pct": 98.4,
+    "median_ape_pct": 5.6,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 316,
+      "median_ape_pct": 7.6
+     },
+     "3-6s": {
+      "n": 273,
+      "median_ape_pct": 4.0
+     },
+     "6-10s": {
+      "n": 104,
+      "median_ape_pct": 5.3
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 93.0,
+     "n_gt_below": 316,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 437
+    }
+   },
+   "Car": {
+    "n_windows": 9973,
+    "n_approaching_gt_le_10s": 4865,
+    "coverage_pct": 98.9,
+    "median_ape_pct": 10.1,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 2555,
+      "median_ape_pct": 13.6
+     },
+     "3-6s": {
+      "n": 1467,
+      "median_ape_pct": 6.4
+     },
+     "6-10s": {
+      "n": 843,
+      "median_ape_pct": 8.4
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 98.2,
+     "n_gt_below": 2555,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 5951
+    }
+   },
+   "all": {
+    "n_windows": 17244,
+    "n_approaching_gt_le_10s": 8536,
+    "coverage_pct": 96.3,
+    "median_ape_pct": 6.6,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 3762,
+      "median_ape_pct": 10.0
+     },
+     "3-6s": {
+      "n": 2932,
+      "median_ape_pct": 5.2
+     },
+     "6-10s": {
+      "n": 1842,
+      "median_ape_pct": 5.6
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 96.2,
+     "n_gt_below": 3762,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 10550
+    }
+   }
+  },
+  "window_8_frames": {
+   "Pedestrian": {
+    "n_windows": 5686,
+    "n_approaching_gt_le_10s": 2669,
+    "coverage_pct": 91.9,
+    "median_ape_pct": 4.3,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 788,
+      "median_ape_pct": 4.4
+     },
+     "3-6s": {
+      "n": 1050,
+      "median_ape_pct": 3.9
+     },
+     "6-10s": {
+      "n": 831,
+      "median_ape_pct": 4.7
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 93.4,
+     "n_gt_below": 788,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 3848
+    }
+   },
+   "Cyclist": {
+    "n_windows": 916,
+    "n_approaching_gt_le_10s": 601,
+    "coverage_pct": 100.0,
+    "median_ape_pct": 6.2,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 273,
+      "median_ape_pct": 8.3
+     },
+     "3-6s": {
+      "n": 234,
+      "median_ape_pct": 4.3
+     },
+     "6-10s": {
+      "n": 94,
+      "median_ape_pct": 5.3
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 98.2,
+     "n_gt_below": 273,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 409
+    }
+   },
+   "Car": {
+    "n_windows": 8962,
+    "n_approaching_gt_le_10s": 4123,
+    "coverage_pct": 99.4,
+    "median_ape_pct": 10.3,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 2113,
+      "median_ape_pct": 14.3
+     },
+     "3-6s": {
+      "n": 1241,
+      "median_ape_pct": 6.6
+     },
+     "6-10s": {
+      "n": 769,
+      "median_ape_pct": 8.7
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 99.3,
+     "n_gt_below": 2113,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 5608
+    }
+   },
+   "all": {
+    "n_windows": 15564,
+    "n_approaching_gt_le_10s": 7393,
+    "coverage_pct": 96.7,
+    "median_ape_pct": 7.0,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 3174,
+      "median_ape_pct": 10.4
+     },
+     "3-6s": {
+      "n": 2525,
+      "median_ape_pct": 5.4
+     },
+     "6-10s": {
+      "n": 1694,
+      "median_ape_pct": 5.9
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 97.8,
+     "n_gt_below": 3174,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 9865
+    }
+   }
+  }
+ },
+ "ttc_with_box_jitter": {
+  "window_5_frames_jitter_0.03": {
+   "Pedestrian": {
+    "n_windows": 6245,
+    "n_approaching_gt_le_10s": 2978,
+    "coverage_pct": 85.6,
+    "median_ape_pct": 26.8,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 891,
+      "median_ape_pct": 18.9
+     },
+     "3-6s": {
+      "n": 1192,
+      "median_ape_pct": 30.3
+     },
+     "6-10s": {
+      "n": 895,
+      "median_ape_pct": 38.1
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 79.2,
+     "n_gt_below": 891,
+     "false_alarm_pct": 1.35,
+     "n_gt_above_2x_or_receding": 4162
+    }
+   },
+   "Cyclist": {
+    "n_windows": 1026,
+    "n_approaching_gt_le_10s": 693,
+    "coverage_pct": 93.9,
+    "median_ape_pct": 22.6,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 316,
+      "median_ape_pct": 14.9
+     },
+     "3-6s": {
+      "n": 273,
+      "median_ape_pct": 29.7
+     },
+     "6-10s": {
+      "n": 104,
+      "median_ape_pct": 36.6
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 89.6,
+     "n_gt_below": 316,
+     "false_alarm_pct": 1.6,
+     "n_gt_above_2x_or_receding": 437
+    }
+   },
+   "Car": {
+    "n_windows": 9973,
+    "n_approaching_gt_le_10s": 4865,
+    "coverage_pct": 95.1,
+    "median_ape_pct": 23.3,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 2555,
+      "median_ape_pct": 19.9
+     },
+     "3-6s": {
+      "n": 1467,
+      "median_ape_pct": 27.6
+     },
+     "6-10s": {
+      "n": 843,
+      "median_ape_pct": 37.9
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 92.2,
+     "n_gt_below": 2555,
+     "false_alarm_pct": 1.01,
+     "n_gt_above_2x_or_receding": 5951
+    }
+   },
+   "all": {
+    "n_windows": 17244,
+    "n_approaching_gt_le_10s": 8536,
+    "coverage_pct": 91.7,
+    "median_ape_pct": 24.4,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 3762,
+      "median_ape_pct": 19.3
+     },
+     "3-6s": {
+      "n": 2932,
+      "median_ape_pct": 28.7
+     },
+     "6-10s": {
+      "n": 1842,
+      "median_ape_pct": 37.9
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 88.9,
+     "n_gt_below": 3762,
+     "false_alarm_pct": 1.17,
+     "n_gt_above_2x_or_receding": 10550
+    }
+   }
+  },
+  "window_5_frames_jitter_0.06": {
+   "Pedestrian": {
+    "n_windows": 6245,
+    "n_approaching_gt_le_10s": 2978,
+    "coverage_pct": 77.0,
+    "median_ape_pct": 41.5,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 891,
+      "median_ape_pct": 33.3
+     },
+     "3-6s": {
+      "n": 1192,
+      "median_ape_pct": 44.8
+     },
+     "6-10s": {
+      "n": 895,
+      "median_ape_pct": 53.6
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 72.2,
+     "n_gt_below": 891,
+     "false_alarm_pct": 10.33,
+     "n_gt_above_2x_or_receding": 4162
+    }
+   },
+   "Cyclist": {
+    "n_windows": 1026,
+    "n_approaching_gt_le_10s": 693,
+    "coverage_pct": 86.1,
+    "median_ape_pct": 35.6,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 316,
+      "median_ape_pct": 25.9
+     },
+     "3-6s": {
+      "n": 273,
+      "median_ape_pct": 44.6
+     },
+     "6-10s": {
+      "n": 104,
+      "median_ape_pct": 50.2
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 83.5,
+     "n_gt_below": 316,
+     "false_alarm_pct": 10.76,
+     "n_gt_above_2x_or_receding": 437
+    }
+   },
+   "Car": {
+    "n_windows": 9973,
+    "n_approaching_gt_le_10s": 4865,
+    "coverage_pct": 88.0,
+    "median_ape_pct": 34.2,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 2555,
+      "median_ape_pct": 28.3
+     },
+     "3-6s": {
+      "n": 1467,
+      "median_ape_pct": 42.1
+     },
+     "6-10s": {
+      "n": 843,
+      "median_ape_pct": 53.0
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 85.0,
+     "n_gt_below": 2555,
+     "false_alarm_pct": 7.58,
+     "n_gt_above_2x_or_receding": 5951
+    }
+   },
+   "all": {
+    "n_windows": 17244,
+    "n_approaching_gt_le_10s": 8536,
+    "coverage_pct": 84.0,
+    "median_ape_pct": 36.4,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 3762,
+      "median_ape_pct": 29.0
+     },
+     "3-6s": {
+      "n": 2932,
+      "median_ape_pct": 43.9
+     },
+     "6-10s": {
+      "n": 1842,
+      "median_ape_pct": 53.1
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 81.8,
+     "n_gt_below": 3762,
+     "false_alarm_pct": 8.8,
+     "n_gt_above_2x_or_receding": 10550
+    }
+   }
+  },
+  "window_8_frames_jitter_0.03": {
+   "Pedestrian": {
+    "n_windows": 5686,
+    "n_approaching_gt_le_10s": 2669,
+    "coverage_pct": 90.4,
+    "median_ape_pct": 16.7,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 788,
+      "median_ape_pct": 11.7
+     },
+     "3-6s": {
+      "n": 1050,
+      "median_ape_pct": 18.4
+     },
+     "6-10s": {
+      "n": 831,
+      "median_ape_pct": 24.6
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 86.3,
+     "n_gt_below": 788,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 3848
+    }
+   },
+   "Cyclist": {
+    "n_windows": 916,
+    "n_approaching_gt_le_10s": 601,
+    "coverage_pct": 99.8,
+    "median_ape_pct": 15.3,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 273,
+      "median_ape_pct": 12.5
+     },
+     "3-6s": {
+      "n": 234,
+      "median_ape_pct": 16.5
+     },
+     "6-10s": {
+      "n": 94,
+      "median_ape_pct": 28.2
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 95.6,
+     "n_gt_below": 273,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 409
+    }
+   },
+   "Car": {
+    "n_windows": 8962,
+    "n_approaching_gt_le_10s": 4123,
+    "coverage_pct": 98.3,
+    "median_ape_pct": 18.0,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 2113,
+      "median_ape_pct": 16.6
+     },
+     "3-6s": {
+      "n": 1241,
+      "median_ape_pct": 17.4
+     },
+     "6-10s": {
+      "n": 769,
+      "median_ape_pct": 25.7
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 97.0,
+     "n_gt_below": 2113,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 5608
+    }
+   },
+   "all": {
+    "n_windows": 15564,
+    "n_approaching_gt_le_10s": 7393,
+    "coverage_pct": 95.6,
+    "median_ape_pct": 17.3,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 3174,
+      "median_ape_pct": 14.9
+     },
+     "3-6s": {
+      "n": 2525,
+      "median_ape_pct": 17.5
+     },
+     "6-10s": {
+      "n": 1694,
+      "median_ape_pct": 25.4
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 94.2,
+     "n_gt_below": 3174,
+     "false_alarm_pct": 0.0,
+     "n_gt_above_2x_or_receding": 9865
+    }
+   }
+  },
+  "window_8_frames_jitter_0.06": {
+   "Pedestrian": {
+    "n_windows": 5686,
+    "n_approaching_gt_le_10s": 2669,
+    "coverage_pct": 84.9,
+    "median_ape_pct": 29.0,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 788,
+      "median_ape_pct": 20.2
+     },
+     "3-6s": {
+      "n": 1050,
+      "median_ape_pct": 32.0
+     },
+     "6-10s": {
+      "n": 831,
+      "median_ape_pct": 36.7
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 80.5,
+     "n_gt_below": 788,
+     "false_alarm_pct": 1.22,
+     "n_gt_above_2x_or_receding": 3848
+    }
+   },
+   "Cyclist": {
+    "n_windows": 916,
+    "n_approaching_gt_le_10s": 601,
+    "coverage_pct": 96.8,
+    "median_ape_pct": 24.1,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 273,
+      "median_ape_pct": 18.3
+     },
+     "3-6s": {
+      "n": 234,
+      "median_ape_pct": 29.5
+     },
+     "6-10s": {
+      "n": 94,
+      "median_ape_pct": 42.4
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 93.4,
+     "n_gt_below": 273,
+     "false_alarm_pct": 1.96,
+     "n_gt_above_2x_or_receding": 409
+    }
+   },
+   "Car": {
+    "n_windows": 8962,
+    "n_approaching_gt_le_10s": 4123,
+    "coverage_pct": 94.6,
+    "median_ape_pct": 25.2,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 2113,
+      "median_ape_pct": 21.2
+     },
+     "3-6s": {
+      "n": 1241,
+      "median_ape_pct": 29.9
+     },
+     "6-10s": {
+      "n": 769,
+      "median_ape_pct": 39.1
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 92.3,
+     "n_gt_below": 2113,
+     "false_alarm_pct": 1.12,
+     "n_gt_above_2x_or_receding": 5608
+    }
+   },
+   "all": {
+    "n_windows": 15564,
+    "n_approaching_gt_le_10s": 7393,
+    "coverage_pct": 91.3,
+    "median_ape_pct": 26.1,
+    "by_gt_tau": {
+     "0-3s": {
+      "n": 3174,
+      "median_ape_pct": 20.9
+     },
+     "3-6s": {
+      "n": 2525,
+      "median_ape_pct": 30.8
+     },
+     "6-10s": {
+      "n": 1694,
+      "median_ape_pct": 38.1
+     }
+    },
+    "alarm_at_3s": {
+     "recall_pct": 89.4,
+     "n_gt_below": 3174,
+     "false_alarm_pct": 1.2,
+     "n_gt_above_2x_or_receding": 9865
+    }
+   }
+  }
+ },
+ "range_note": "No 0-5 m samples: KITTI's camera is level with a 28 deg vertical FOV, so the ground is out of frame closer than about 6 m. Near range is covered only by the analytic wearable table.",
+ "ttc_note": "Boxes are labels, not detections; the jitter rows add Gaussian noise to box height as a stand-in for detector noise. KITTI ego is a car at up to ~15 m/s: closing speeds and taus differ from walking. GT tau from 3D z includes ego motion, as looming does."
+}

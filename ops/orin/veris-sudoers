@@ -1,0 +1,3 @@
+# Let the veris user manage the veris services without a password, so
+# restart_llm.sh / start_services.sh / the 7B scripts work non-interactively.
+@VERIS_USER@ ALL=(root) NOPASSWD: /usr/bin/systemctl start veris-*, /usr/bin/systemctl stop veris-*, /usr/bin/systemctl restart veris-*, /usr/bin/systemctl status veris-*

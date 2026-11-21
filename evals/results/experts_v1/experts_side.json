@@ -1,0 +1,57 @@
+{
+ "expert+gtside@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.04,
+   "chair_i": 0.0128,
+   "coverage": 0.8707,
+   "side_acc": 0.9623,
+   "side_checked": 106,
+   "banned_rate": 0.01,
+   "mean_words": 27.4,
+   "ttft_3070_median_s": 0.296
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.1,
+   "chair_i": 0.0259,
+   "coverage": 0.8693,
+   "side_acc": 1.0,
+   "side_checked": 85,
+   "banned_rate": 0.03,
+   "mean_words": 32.2,
+   "ttft_3070_median_s": 0.323
+  }
+ },
+ "_meta": {
+  "dataset": "COCO val2017 (held out; training used train2017 only)",
+  "command": "python -m evals.experts_eval --configs expert+gtside@448 expert+detside@448",
+  "scoring": "train/experts/verify.py (CHAIR objects + side agreement)",
+  "ttft_note": "RTX 3070, transformers 4-bit; indicative only, not the board",
+  "time": "2026-11-19 05:20"
+ },
+ "expert+detside@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.28,
+   "chair_i": 0.1155,
+   "coverage": 0.7436,
+   "side_acc": 0.9846,
+   "side_checked": 65,
+   "banned_rate": 0.01,
+   "mean_words": 28.4,
+   "ttft_3070_median_s": 0.312
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.42,
+   "chair_i": 0.2184,
+   "coverage": 0.5429,
+   "side_acc": 0.9434,
+   "side_checked": 53,
+   "banned_rate": 0.0,
+   "mean_words": 27.4,
+   "ttft_3070_median_s": 0.305
+  }
+ }
+}

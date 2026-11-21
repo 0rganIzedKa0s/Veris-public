@@ -1,0 +1,68 @@
+{
+ "_meta": {
+  "url": "http://127.0.0.1:8080",
+  "adapters": {
+   "outdoor": 0,
+   "indoor": 1,
+   "reader": 2
+  },
+  "note": "stand-in attn adapter, timing only",
+  "time": "2026-11-18 18:38",
+  "command": "bench/orin/expert_bench.py run --n 4 --sides 448 --out orin_overhead_attn --note stand-in attn adapter, timing only"
+ },
+ "outdoor@448": {
+  "n": 4,
+  "ttft_median_s": 1.225,
+  "ttft_min_s": 1.206,
+  "ttft_max_s": 1.267,
+  "tok_s": 13.8,
+  "total_median_s": 4.12,
+  "sample": "The path is a street sidewalk with a bench on it. There is a person sitting on the bench. There is a car parked on the street. There is a pole on the sidewalk. There is"
+ },
+ "indoor@448": {
+  "n": 4,
+  "ttft_median_s": 1.244,
+  "ttft_min_s": 1.228,
+  "ttft_max_s": 1.413,
+  "tok_s": 13.8,
+  "total_median_s": 4.14,
+  "sample": "The room is a bus station. There are several buses parked in the station. The nearest furniture is a bench on the right side of the image. The obstacles include a road and a fence. The"
+ },
+ "reader@448": {
+  "n": 4,
+  "ttft_median_s": 1.309,
+  "ttft_min_s": 1.23,
+  "ttft_max_s": 1.501,
+  "tok_s": 12.6,
+  "total_median_s": 1.83,
+  "sample": "The text cannot be read."
+ },
+ "switch": {
+  "first_after_switch": {
+   "n": 8,
+   "ttft_median_s": 1.417,
+   "ttft_min_s": 1.378,
+   "ttft_max_s": 1.73,
+   "tok_s": 13.7,
+   "total_median_s": 4.33
+  },
+  "second_same_expert": {
+   "n": 8,
+   "ttft_median_s": 1.21,
+   "ttft_min_s": 1.1,
+   "ttft_max_s": 1.552,
+   "tok_s": 13.7,
+   "total_median_s": 4.11
+  },
+  "cost_s": 0.207
+ },
+ "planner_text_only": {
+  "n": 4,
+  "ttft_median_s": 0.081,
+  "ttft_min_s": 0.081,
+  "ttft_max_s": 0.279,
+  "tok_s": 14.3,
+  "total_median_s": 2.39,
+  "sample": "You are standing on Main St, facing north, with a bus stop 30 meters ahead on the right and a cafe entrance 8 meters to the left."
+ }
+}

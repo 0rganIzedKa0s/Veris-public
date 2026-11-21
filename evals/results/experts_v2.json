@@ -1,0 +1,131 @@
+{
+ "expert+gtside@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.03,
+   "chair_i": 0.011,
+   "coverage": 0.8291,
+   "side_acc": 0.9341,
+   "side_checked": 91,
+   "banned_rate": 0.0,
+   "mean_words": 28.8,
+   "ttft_3070_median_s": 0.3
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.18,
+   "chair_i": 0.0575,
+   "coverage": 0.8408,
+   "side_acc": 0.9659,
+   "side_checked": 88,
+   "banned_rate": 0.05,
+   "mean_words": 33.0,
+   "ttft_3070_median_s": 0.309
+  }
+ },
+ "_meta": {
+  "dataset": "COCO val2017 (held out; training used train2017 only)",
+  "command": "python -m evals.experts_eval --configs expert+gtside@448 expert+detside@448 expert+none@448 expert+fakeside@448 expert+detside@560",
+  "scoring": "train/experts/verify.py (CHAIR objects + side agreement)",
+  "ttft_note": "RTX 3070, transformers 4-bit; indicative only, not the board",
+  "time": "2026-11-19 07:05"
+ },
+ "expert+detside@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.21,
+   "chair_i": 0.1055,
+   "coverage": 0.7018,
+   "side_acc": 0.8889,
+   "side_checked": 63,
+   "banned_rate": 0.0,
+   "mean_words": 29.2,
+   "ttft_3070_median_s": 0.307
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.37,
+   "chair_i": 0.153,
+   "coverage": 0.6522,
+   "side_acc": 0.9265,
+   "side_checked": 68,
+   "banned_rate": 0.05,
+   "mean_words": 30.1,
+   "ttft_3070_median_s": 0.305
+  }
+ },
+ "expert+none@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.16,
+   "chair_i": 0.0944,
+   "coverage": 0.5623,
+   "side_acc": 0.9286,
+   "side_checked": 28,
+   "banned_rate": 0.03,
+   "mean_words": 27.3,
+   "ttft_3070_median_s": 0.298
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.35,
+   "chair_i": 0.1648,
+   "coverage": 0.6473,
+   "side_acc": 0.9655,
+   "side_checked": 58,
+   "banned_rate": 0.04,
+   "mean_words": 31.2,
+   "ttft_3070_median_s": 0.309
+  }
+ },
+ "expert+fakeside@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.18,
+   "chair_i": 0.0621,
+   "coverage": 0.8341,
+   "side_acc": 0.9432,
+   "side_checked": 88,
+   "banned_rate": 0.01,
+   "mean_words": 28.5,
+   "ttft_3070_median_s": 0.298,
+   "fake_echo": 0.15
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.29,
+   "chair_i": 0.0781,
+   "coverage": 0.8608,
+   "side_acc": 0.9659,
+   "side_checked": 88,
+   "banned_rate": 0.03,
+   "mean_words": 34.6,
+   "ttft_3070_median_s": 0.309,
+   "fake_echo": 0.13
+  }
+ },
+ "expert+detside@560": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.21,
+   "chair_i": 0.1055,
+   "coverage": 0.726,
+   "side_acc": 0.8727,
+   "side_checked": 55,
+   "banned_rate": 0.01,
+   "mean_words": 30.1,
+   "ttft_3070_median_s": 0.315
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.32,
+   "chair_i": 0.149,
+   "coverage": 0.6529,
+   "side_acc": 0.9143,
+   "side_checked": 70,
+   "banned_rate": 0.05,
+   "mean_words": 30.1,
+   "ttft_3070_median_s": 0.311
+  }
+ }
+}

@@ -1,0 +1,6 @@
+[Unit]
+Description=Veris health watchdog (one shot, driven by veris-watchdog.timer)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/lib/veris/veris-watchdog.sh

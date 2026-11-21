@@ -1,0 +1,21 @@
+{
+ "command": ".venv/bin/python evals/nav_onnx.py",
+ "onnx": "data/nav/dfine_s_oi18_640.onnx",
+ "onnx_mb": 41.38,
+ "opset": 17,
+ "input": "1x3x640x640 RGB 0..1",
+ "split": "Open Images held-out (heldout.json), first N images",
+ "n": 8,
+ "parity": {
+  "threshold": 0.3,
+  "n_torch_dets": 20,
+  "det_counts_equal": true,
+  "min_matched_iou": 1.0,
+  "max_score_diff": 0.0
+ },
+ "desktop_cpu_ms": {
+  "ort_median": 739.3,
+  "reflex_step_median": 537.1,
+  "note": "desktop x86 CPU, not the Orin"
+ }
+}

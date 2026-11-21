@@ -1,0 +1,6 @@
+Loading weights:   0%|          | 0/764 [00:00<?, ?it/s]Loading weights:  27%|██▋       | 206/764 [00:00<00:00, 2028.79it/s]Loading weights:  54%|█████▎    | 409/764 [00:00<00:00, 1734.34it/s]Loading weights:  83%|████████▎ | 635/764 [00:00<00:00, 1949.79it/s]Loading weights: 100%|██████████| 764/764 [00:00<00:00, 1929.06it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/764 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 166/764 [00:00<00:00, 1655.18it/s]Loading weights:  43%|████▎     | 332/764 [00:00<00:00, 1531.47it/s]Loading weights:  64%|██████▎   | 486/764 [00:00<00:00, 1499.88it/s]Loading weights:  83%|████████▎ | 637/764 [00:00<00:00, 1503.22it/s]Loading weights: 100%|██████████| 764/764 [00:00<00:00, 1525.57it/s]
+clean ft 69.9 56.1 | shared ft 76.4 coco 78.9
+outdoor_walk ft 66.0 50.4 | shared ft 73.0 coco 71.5
+indoor_walk ft 56.6 42.4 | shared ft 63.4 coco 57.5

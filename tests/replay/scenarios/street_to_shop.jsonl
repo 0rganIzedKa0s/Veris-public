@@ -1,0 +1,18 @@
+# Street walk -> shop entry. Walking the whole time; the cloud context flips
+# from street to shop at t=12. The mode must ride out MIN_RESIDENCE_S(10)+
+# DWELL_S(4) before switching outdoor_nav -> indoor_nav, and only between
+# generations. No interrupts. Frames alternate T/U (decorrelated) = WALKING.
+{"type": "config", "describe_duration_s": 2.0, "context_map": {"street": ["outdoor_nav", "street_sidewalk"], "shop": ["indoor_nav", "clothing_store"]}}
+{"t": 0.0, "type": "user_command", "mode": "outdoor_nav"}
+{"t": 0.0, "type": "frame", "tex": "T", "off": 20}
+{"t": 0.5, "type": "frame", "tex": "U", "off": 20}
+{"t": 1.0, "type": "context", "fix": "street"}
+{"t": 3.0, "type": "frame", "tex": "T", "off": 20}
+{"t": 6.0, "type": "frame", "tex": "U", "off": 20}
+{"t": 9.0, "type": "frame", "tex": "T", "off": 20}
+{"t": 12.0, "type": "context", "fix": "shop"}
+{"t": 12.5, "type": "frame", "tex": "U", "off": 20}
+{"t": 14.5, "type": "frame", "tex": "T", "off": 20}
+{"t": 16.5, "type": "frame", "tex": "U", "off": 20}
+{"t": 18.5, "type": "frame", "tex": "T", "off": 20}
+{"t": 20.5, "type": "frame", "tex": "U", "off": 20}

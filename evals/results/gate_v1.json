@@ -1,0 +1,229 @@
+{
+ "command": "flock /tmp/veris-gpu.lock .venv/bin/python train/gate/train.py && .venv/bin/python evals/gate_eval.py",
+ "model": "data/gate/gate.onnx",
+ "splits": {
+  "threshold": "VizWiz train images, md5(name)%10==0 (`val`), N=665",
+  "quality_text": "VizWiz official val images (`test`), N=2000; 1,700 random + the 300 already in dataset/frames",
+  "indoor": "Places365 val, per category files 81-100 by name (`test`), N=7300; Places365 test labels are private",
+  "train": "VizWiz train (90% of 7,200 fetched, 2,500 enriched for rare flaws) + Places365 val files 1-70 per category; files 71-80 = val"
+ },
+ "labels": {
+  "flaw": ">=2 of 5 VizWiz votes",
+  "unusable": "unrecognizable >= 3 of 5",
+  "text": "VizWiz-Captions text_detected",
+  "indoor": "IO_places365.txt"
+ },
+ "threshold": {
+  "unusable_t": 0.4189,
+  "rule": "FRR <= 5% on val usable frames",
+  "val_frr": 0.0499,
+  "val_catch": 0.7258,
+  "val_n_usable": 541,
+  "val_n_unusable": 124
+ },
+ "quality_test": {
+  "blur": {
+   "n": 2000,
+   "pos": 890,
+   "acc": 0.786,
+   "f1": 0.7467,
+   "auroc": 0.865
+  },
+  "dark": {
+   "n": 2000,
+   "pos": 124,
+   "acc": 0.928,
+   "f1": 0.4783,
+   "auroc": 0.8755
+  },
+  "bright": {
+   "n": 2000,
+   "pos": 133,
+   "acc": 0.936,
+   "f1": 0.5524,
+   "auroc": 0.9005
+  },
+  "obstructed": {
+   "n": 2000,
+   "pos": 60,
+   "acc": 0.963,
+   "f1": 0.3934,
+   "auroc": 0.888
+  },
+  "unusable": {
+   "n": 2000,
+   "pos": 213,
+   "acc": 0.937,
+   "f1": 0.6927,
+   "auroc": 0.9378
+  }
+ },
+ "usable_gate_test": {
+  "t": 0.4189,
+  "n_usable": 1787,
+  "n_unusable": 213,
+  "false_reject_rate": 0.0381,
+  "catch_rate": 0.6854,
+  "issue_matches_a_voted_flaw": 0.8836,
+  "curve": [
+   {
+    "val_frr_target": 0.01,
+    "t": 0.9298,
+    "test_frr": 0.0056,
+    "test_catch": 0.4507
+   },
+   {
+    "val_frr_target": 0.02,
+    "t": 0.8097,
+    "test_frr": 0.0129,
+    "test_catch": 0.5681
+   },
+   {
+    "val_frr_target": 0.05,
+    "t": 0.4189,
+    "test_frr": 0.0381,
+    "test_catch": 0.6854
+   },
+   {
+    "val_frr_target": 0.1,
+    "t": 0.1527,
+    "test_frr": 0.0778,
+    "test_catch": 0.7653
+   },
+   {
+    "val_frr_target": 0.2,
+    "t": 0.0256,
+    "test_frr": 0.169,
+    "test_catch": 0.9061
+   }
+  ]
+ },
+ "text_test": {
+  "clean": {
+   "n": 2000,
+   "pos": 1342,
+   "acc": 0.8655,
+   "f1": 0.8997,
+   "auroc": 0.9382
+  },
+  "outdoor_walk": {
+   "n": 2000,
+   "pos": 1342,
+   "acc": 0.823,
+   "f1": 0.8621,
+   "auroc": 0.9107
+  },
+  "indoor_walk": {
+   "n": 2000,
+   "pos": 1342,
+   "acc": 0.7925,
+   "f1": 0.8334,
+   "auroc": 0.8884
+  },
+  "indoor_worst": {
+   "n": 2000,
+   "pos": 1342,
+   "acc": 0.6245,
+   "f1": 0.6486,
+   "auroc": 0.7633
+  }
+ },
+ "indoor_test": {
+  "clean": {
+   "n": 7300,
+   "pos": 3220,
+   "acc": 0.8999,
+   "f1": 0.8886,
+   "auroc": 0.9573
+  },
+  "outdoor_walk": {
+   "n": 7300,
+   "pos": 3220,
+   "acc": 0.8903,
+   "f1": 0.8775,
+   "auroc": 0.9525
+  },
+  "indoor_walk": {
+   "n": 7300,
+   "pos": 3220,
+   "acc": 0.8834,
+   "f1": 0.8722,
+   "auroc": 0.949
+  },
+  "indoor_worst": {
+   "n": 7300,
+   "pos": 3220,
+   "acc": 0.847,
+   "f1": 0.8358,
+   "auroc": 0.9206
+  }
+ },
+ "places_reject_rate": {
+  "clean": {
+   "n": 7300,
+   "reject_rate": 0.0007,
+   "mean_p_blur": 0.0271,
+   "mean_p_dark": 0.0451
+  },
+  "outdoor_walk": {
+   "n": 7300,
+   "reject_rate": 0.0018,
+   "mean_p_blur": 0.0388,
+   "mean_p_dark": 0.0512
+  },
+  "indoor_walk": {
+   "n": 7300,
+   "reject_rate": 0.004,
+   "mean_p_blur": 0.1849,
+   "mean_p_dark": 0.0579
+  },
+  "indoor_worst": {
+   "n": 7300,
+   "reject_rate": 0.4219,
+   "mean_p_blur": 0.9869,
+   "mean_p_dark": 0.0626
+  },
+  "note": "Places scenes are all usable, so the reject rate is a false-reject rate; degrade applied at 256 px"
+ },
+ "best_of_test": {
+  "n_scenes": 292,
+  "frames_per_scene": 5,
+  "head_deg_s": [
+   0,
+   15,
+   30,
+   60,
+   90
+  ],
+  "exposure_s": 0.03333333333333333,
+  "light": 0.5,
+  "picked_still": 0.9897,
+  "picked_le_15deg_s": 1.0
+ },
+ "export": {
+  "opset": 17,
+  "input": [
+   1,
+   3,
+   224,
+   224
+  ],
+  "params": 1518975,
+  "torch_params": 1525031,
+  "file_mb": 6.11,
+  "max_abs_logit_diff_vs_torch": 1.049041748046875e-05,
+  "parity_n": 64
+ },
+ "latency": {
+  "cpu": "AMD Ryzen 5 5600X 6-Core Processor",
+  "cores": 12,
+  "runs": 200,
+  "loadavg_1m_at_start": 34.58740234375,
+  "note": "shared dev box; other agents were training, so treat as an upper bound",
+  "single_thread_model_ms": 4.295,
+  "single_thread_run_1280x720_ms": 27.162,
+  "default_threads_model_ms": 17.787,
+  "default_threads_run_1280x720_ms": 34.392,
+  "loadavg_1m_at_end": 30.94091796875
+ }
+}

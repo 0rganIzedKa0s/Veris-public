@@ -1,0 +1,122 @@
+{
+ "_meta": {
+  "url": "http://127.0.0.1:8080",
+  "adapters": {
+   "outdoor": 0,
+   "indoor": 1,
+   "reader": 2
+  },
+  "note": "stand-in adapters (v1 weights x3): timing only, 15W",
+  "time": "2026-11-18 18:08",
+  "command": "bench/orin/expert_bench.py run --n 5 --out orin_experts_standin --note stand-in adapters (v1 weights x3): timing only, 15W"
+ },
+ "outdoor@448": {
+  "n": 5,
+  "ttft_median_s": 0.137,
+  "ttft_min_s": 0.135,
+  "ttft_max_s": 0.144,
+  "tok_s": 10.9,
+  "total_median_s": 3.82,
+  "sample": "The path is a carpeted floor with a red couch on it. There are two people sitting on the couch, one of whom is holding a bottle. A person is standing in the path, holding"
+ },
+ "outdoor@560": {
+  "n": 5,
+  "ttft_median_s": 2.171,
+  "ttft_min_s": 1.98,
+  "ttft_max_s": 2.207,
+  "tok_s": 10.7,
+  "total_median_s": 5.89,
+  "sample": "The image shows a bus on a wet road, likely after rain. The bus has a yellow and white color scheme with some text and numbers on its back. There are also other vehicles visible in the"
+ },
+ "outdoor@768": {
+  "n": 5,
+  "ttft_median_s": 3.491,
+  "ttft_min_s": 2.465,
+  "ttft_max_s": 3.626,
+  "tok_s": 10.7,
+  "total_median_s": 7.22,
+  "sample": "The image shows a well-furnished room with a red couch on the left, a small round table with a white tablecloth in the center, and a television on the right. There are two lamps"
+ },
+ "indoor@448": {
+  "n": 5,
+  "ttft_median_s": 1.423,
+  "ttft_min_s": 1.376,
+  "ttft_max_s": 1.597,
+  "tok_s": 10.7,
+  "total_median_s": 5.12,
+  "sample": "The room is a living area with a hardwood floor. There are two windows on the left and right walls, allowing natural light to enter. A ceiling fan is visible above the couch. The couch is"
+ },
+ "indoor@560": {
+  "n": 5,
+  "ttft_median_s": 2.171,
+  "ttft_min_s": 1.973,
+  "ttft_max_s": 2.174,
+  "tok_s": 10.7,
+  "total_median_s": 5.89,
+  "sample": "The image shows a pizza with various toppings, including mushrooms and possibly ham, on a white plate. In the background, there is a table with a white tablecloth and a glass of beer. The"
+ },
+ "indoor@768": {
+  "n": 5,
+  "ttft_median_s": 2.873,
+  "ttft_min_s": 2.463,
+  "ttft_max_s": 2.878,
+  "tok_s": 10.7,
+  "total_median_s": 6.62,
+  "sample": "The image shows a cluttered office desk with two computer monitors, a keyboard, and various items scattered around. There are also some small figures and a cup on the desk."
+ },
+ "reader@448": {
+  "n": 5,
+  "ttft_median_s": 1.423,
+  "ttft_min_s": 1.378,
+  "ttft_max_s": 1.663,
+  "tok_s": 10.4,
+  "total_median_s": 4.83,
+  "sample": "The image shows a chair, a couch, and a suitcase on a street."
+ },
+ "reader@560": {
+  "n": 5,
+  "ttft_median_s": 2.173,
+  "ttft_min_s": 1.976,
+  "ttft_max_s": 2.186,
+  "tok_s": 10.5,
+  "total_median_s": 5.06,
+  "sample": "The image shows a green motorcycle parked on the side of a street. There are trees and buildings in the background, and a traffic light is visible."
+ },
+ "reader@768": {
+  "n": 5,
+  "ttft_median_s": 2.877,
+  "ttft_min_s": 2.472,
+  "ttft_max_s": 2.881,
+  "tok_s": 10.2,
+  "total_median_s": 3.56,
+  "sample": "The text cannot be read."
+ },
+ "switch": {
+  "first_after_switch": {
+   "n": 10,
+   "ttft_median_s": 1.609,
+   "ttft_min_s": 1.578,
+   "ttft_max_s": 1.637,
+   "tok_s": 10.7,
+   "total_median_s": 5.33
+  },
+  "second_same_expert": {
+   "n": 10,
+   "ttft_median_s": 1.401,
+   "ttft_min_s": 1.267,
+   "ttft_max_s": 1.758,
+   "tok_s": 10.7,
+   "total_median_s": 5.13
+  },
+  "cost_s": 0.208
+ },
+ "planner_text_only": {
+  "n": 5,
+  "ttft_median_s": 0.081,
+  "ttft_min_s": 0.081,
+  "ttft_max_s": 0.277,
+  "tok_s": 14.3,
+  "total_median_s": 2.4,
+  "sample": "You are standing on Main St, facing north, with a bus stop 30 meters ahead on the right and a cafe entrance 8 meters to the left."
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "command": ".venv/bin/python evals/gate_crosscheck.py",
+ "dataset": "COCO val2017 scene subset, data/experts/manifest.jsonl split == val (never used to train the gate)",
+ "n": {
+  "indoor": 150,
+  "outdoor": 150
+ },
+ "note": "scene label = COCO category rule in train/experts/build.py, not a human indoor/outdoor label; wearcam applied at native COCO resolution",
+ "models": {
+  "v1": "data/gate/gate_v1.onnx",
+  "v2": "data/gate/gate.onnx"
+ },
+ "v1": {
+  "clean": {
+   "acc": 0.8367,
+   "indoor_acc": 0.9533,
+   "outdoor_acc": 0.72,
+   "auroc": 0.9522,
+   "usable_rate": 1.0
+  },
+  "outdoor_walk": {
+   "acc": 0.8267,
+   "indoor_acc": 0.94,
+   "outdoor_acc": 0.7133,
+   "auroc": 0.9471,
+   "usable_rate": 1.0
+  },
+  "indoor_walk": {
+   "acc": 0.7867,
+   "indoor_acc": 0.9533,
+   "outdoor_acc": 0.62,
+   "auroc": 0.9489,
+   "usable_rate": 0.9967
+  },
+  "test_frames_indoor_p": {
+   "crossing.jpg": 0.9483,
+   "kitchen.jpg": 0.9713,
+   "sign.jpg": 0.9355
+  }
+ },
+ "v2": {
+  "clean": {
+   "acc": 0.8933,
+   "indoor_acc": 0.92,
+   "outdoor_acc": 0.8667,
+   "auroc": 0.9603,
+   "usable_rate": 1.0
+  },
+  "outdoor_walk": {
+   "acc": 0.9067,
+   "indoor_acc": 0.9267,
+   "outdoor_acc": 0.8867,
+   "auroc": 0.9576,
+   "usable_rate": 1.0
+  },
+  "indoor_walk": {
+   "acc": 0.8967,
+   "indoor_acc": 0.92,
+   "outdoor_acc": 0.8733,
+   "auroc": 0.9613,
+   "usable_rate": 0.9933
+  },
+  "test_frames_indoor_p": {
+   "crossing.jpg": 0.6898,
+   "kitchen.jpg": 0.9098,
+   "sign.jpg": 0.9695
+  }
+ },
+ "v2_plus_reflex_street_classes": {
+  "clean": {
+   "acc": 0.91,
+   "indoor_acc": 0.9133,
+   "outdoor_acc": 0.9067,
+   "auroc": 0.9776
+  },
+  "outdoor_walk": {
+   "acc": 0.9167,
+   "indoor_acc": 0.92,
+   "outdoor_acc": 0.9133,
+   "auroc": 0.972
+  },
+  "indoor_walk": {
+   "acc": 0.9067,
+   "indoor_acc": 0.92,
+   "outdoor_acc": 0.8933,
+   "auroc": 0.9696
+  },
+  "test_frames_indoor_p": {
+   "crossing.jpg": 0.3898,
+   "kitchen.jpg": 0.9098,
+   "sign.jpg": 0.9695
+  }
+ }
+}

@@ -1,0 +1,179 @@
+{
+ "base@768": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.09,
+   "chair_i": 0.0714,
+   "coverage": 0.4676,
+   "side_acc": 1.0,
+   "side_checked": 9,
+   "banned_rate": 0.01,
+   "mean_words": 14.9,
+   "ttft_3070_median_s": 0.314
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.48,
+   "chair_i": 0.2275,
+   "coverage": 0.6549,
+   "side_acc": 0.9231,
+   "side_checked": 26,
+   "banned_rate": 0.4,
+   "mean_words": 58.4,
+   "ttft_3070_median_s": 0.386
+  }
+ },
+ "_meta": {
+  "dataset": "COCO val2017 (held out; training used train2017 only)",
+  "command": "python -m evals.experts_eval --configs base@768 v1@768 expert+gt@448 expert+gt@560 expert+det@448 expert+none@448 expert+fake@448",
+  "scoring": "train/experts/verify.py (CHAIR objects + side agreement)",
+  "ttft_note": "RTX 3070, transformers 4-bit; indicative only, not the board",
+  "time": "2026-11-19 04:19"
+ },
+ "v1@768": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.1,
+   "chair_i": 0.057,
+   "coverage": 0.5592,
+   "side_acc": 1.0,
+   "side_checked": 3,
+   "banned_rate": 0.06,
+   "mean_words": 19.9,
+   "ttft_3070_median_s": 0.473
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.46,
+   "chair_i": 0.209,
+   "coverage": 0.6942,
+   "side_acc": 0.9,
+   "side_checked": 10,
+   "banned_rate": 0.12,
+   "mean_words": 50.5,
+   "ttft_3070_median_s": 0.512
+  }
+ },
+ "expert+gt@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.03,
+   "chair_i": 0.0158,
+   "coverage": 0.787,
+   "side_acc": 0.8706,
+   "side_checked": 85,
+   "banned_rate": 0.02,
+   "mean_words": 29.9,
+   "ttft_3070_median_s": 0.319
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.16,
+   "chair_i": 0.0488,
+   "coverage": 0.8713,
+   "side_acc": 0.9184,
+   "side_checked": 98,
+   "banned_rate": 0.08,
+   "mean_words": 34.3,
+   "ttft_3070_median_s": 0.328
+  }
+ },
+ "expert+gt@560": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.06,
+   "chair_i": 0.0224,
+   "coverage": 0.805,
+   "side_acc": 0.8714,
+   "side_checked": 70,
+   "banned_rate": 0.02,
+   "mean_words": 31.9,
+   "ttft_3070_median_s": 0.336
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.19,
+   "chair_i": 0.0504,
+   "coverage": 0.8825,
+   "side_acc": 0.9375,
+   "side_checked": 96,
+   "banned_rate": 0.09,
+   "mean_words": 35.3,
+   "ttft_3070_median_s": 0.346
+  }
+ },
+ "expert+det@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.12,
+   "chair_i": 0.0765,
+   "coverage": 0.5914,
+   "side_acc": 0.8723,
+   "side_checked": 47,
+   "banned_rate": 0.01,
+   "mean_words": 28.5,
+   "ttft_3070_median_s": 0.314
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.32,
+   "chair_i": 0.1803,
+   "coverage": 0.5533,
+   "side_acc": 0.9107,
+   "side_checked": 56,
+   "banned_rate": 0.01,
+   "mean_words": 29.3,
+   "ttft_3070_median_s": 0.322
+  }
+ },
+ "expert+none@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.13,
+   "chair_i": 0.0943,
+   "coverage": 0.5154,
+   "side_acc": 0.9615,
+   "side_checked": 26,
+   "banned_rate": 0.07,
+   "mean_words": 27.8,
+   "ttft_3070_median_s": 0.318
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.44,
+   "chair_i": 0.2356,
+   "coverage": 0.5991,
+   "side_acc": 0.9767,
+   "side_checked": 43,
+   "banned_rate": 0.03,
+   "mean_words": 32.8,
+   "ttft_3070_median_s": 0.319
+  }
+ },
+ "expert+fake@448": {
+  "outdoor": {
+   "n": 100,
+   "chair_s": 0.17,
+   "chair_i": 0.0682,
+   "coverage": 0.7779,
+   "side_acc": 0.8876,
+   "side_checked": 89,
+   "banned_rate": 0.02,
+   "mean_words": 30.2,
+   "ttft_3070_median_s": 0.317,
+   "fake_echo": 0.13
+  },
+  "indoor": {
+   "n": 100,
+   "chair_s": 0.27,
+   "chair_i": 0.0756,
+   "coverage": 0.8763,
+   "side_acc": 0.9412,
+   "side_checked": 102,
+   "banned_rate": 0.04,
+   "mean_words": 35.2,
+   "ttft_3070_median_s": 0.326,
+   "fake_echo": 0.12
+  }
+ }
+}

@@ -1,0 +1,294 @@
+{
+ "command": "python -m evals.planner_eval",
+ "split": "test",
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "N_scenarios": 7,
+ "N_fixes": 16844,
+ "airgap": {
+  "socket_patched_to_raise": true,
+  "probe_connection_blocked": true,
+  "network_modules_bound_in_veris.planner": []
+ },
+ "notes": [
+  "ground-truth mode: outdoors outdoor_nav; indoors moving indoor_nav; indoors still describe",
+  "planner runs at 1 Hz on every fix; plan(None) on GNSS dropout seconds",
+  "cloud_rules = context_engine.composer.Composer(use_llm=False) on the same local facts",
+  "cloud_rules indoor = situation is a venue type (the arbiter's own rule)"
+ ],
+ "per_scenario": {
+  "sidewalk_crossings": {
+   "planner.situation_acc": 0.931,
+   "planner.indoor_acc": 1.0,
+   "planner.mode_acc": 1.0,
+   "cloud_rules.situation_acc": 0.679,
+   "cloud_rules.indoor_acc": 1.0,
+   "cloud_rules.mode_acc": 1.0,
+   "ticks": 4349
+  },
+  "cafe_sit": {
+   "planner.situation_acc": 0.862,
+   "planner.indoor_acc": 0.952,
+   "planner.mode_acc": 0.912,
+   "cloud_rules.situation_acc": 0.68,
+   "cloud_rules.indoor_acc": 0.913,
+   "cloud_rules.mode_acc": 0.812,
+   "ticks": 3828
+  },
+  "bus_stop": {
+   "planner.situation_acc": 0.896,
+   "planner.indoor_acc": 1.0,
+   "planner.mode_acc": 1.0,
+   "cloud_rules.situation_acc": 0.646,
+   "cloud_rules.indoor_acc": 1.0,
+   "cloud_rules.mode_acc": 0.765,
+   "ticks": 2165
+  },
+  "campus_corridor": {
+   "planner.situation_acc": 0.761,
+   "planner.indoor_acc": 0.92,
+   "planner.mode_acc": 0.866,
+   "cloud_rules.situation_acc": 0.626,
+   "cloud_rules.indoor_acc": 0.764,
+   "cloud_rules.mode_acc": 0.762,
+   "ticks": 2339
+  },
+  "parking_lot": {
+   "planner.situation_acc": 0.606,
+   "planner.indoor_acc": 1.0,
+   "planner.mode_acc": 1.0,
+   "cloud_rules.situation_acc": 0.24,
+   "cloud_rules.indoor_acc": 1.0,
+   "cloud_rules.mode_acc": 1.0,
+   "ticks": 1188
+  },
+  "urban_canyon": {
+   "planner.situation_acc": 0.862,
+   "planner.indoor_acc": 1.0,
+   "planner.mode_acc": 0.999,
+   "cloud_rules.situation_acc": 0.886,
+   "cloud_rules.indoor_acc": 0.999,
+   "cloud_rules.mode_acc": 0.999,
+   "ticks": 1450
+  },
+  "canyon_cafe": {
+   "planner.situation_acc": 0.71,
+   "planner.indoor_acc": 0.909,
+   "planner.mode_acc": 0.867,
+   "cloud_rules.situation_acc": 0.662,
+   "cloud_rules.indoor_acc": 0.867,
+   "cloud_rules.mode_acc": 0.663,
+   "ticks": 1525
+  }
+ },
+ "overall_tick_weighted": {
+  "planner.situation_acc": 0.838,
+  "planner.indoor_acc": 0.97,
+  "planner.mode_acc": 0.949,
+  "cloud_rules.situation_acc": 0.653,
+  "cloud_rules.indoor_acc": 0.935,
+  "cloud_rules.mode_acc": 0.863
+ },
+ "transition_lag_s": {
+  "planner": {
+   "indoor in->out": {
+    "n": 10,
+    "missed": 0,
+    "median_s": 13.5,
+    "mean_s": 12.9,
+    "max_s": 17
+   },
+   "indoor out->in": {
+    "n": 15,
+    "missed": 0,
+    "median_s": 26,
+    "mean_s": 25.3,
+    "max_s": 37
+   },
+   "situation office_building->street_sidewalk": {
+    "n": 5,
+    "missed": 1,
+    "median_s": 12.0,
+    "mean_s": 12,
+    "max_s": 15
+   },
+   "situation parking_lot->street_crossing": {
+    "n": 5,
+    "missed": 0,
+    "median_s": 0,
+    "mean_s": 0,
+    "max_s": 0
+   },
+   "situation parking_lot->street_sidewalk": {
+    "n": 20,
+    "missed": 0,
+    "median_s": 0.0,
+    "mean_s": 1.7,
+    "max_s": 10
+   },
+   "situation restaurant->street_sidewalk": {
+    "n": 5,
+    "missed": 5,
+    "median_s": null,
+    "mean_s": null,
+    "max_s": null
+   },
+   "situation street_crossing->street_sidewalk": {
+    "n": 131,
+    "missed": 6,
+    "median_s": 1,
+    "mean_s": 2.6,
+    "max_s": 25
+   },
+   "situation street_crossing->transit_stop": {
+    "n": 5,
+    "missed": 0,
+    "median_s": 39,
+    "mean_s": 31.6,
+    "max_s": 39
+   },
+   "situation street_sidewalk->office_building": {
+    "n": 5,
+    "missed": 0,
+    "median_s": 26,
+    "mean_s": 24.4,
+    "max_s": 29
+   },
+   "situation street_sidewalk->parking_lot": {
+    "n": 20,
+    "missed": 4,
+    "median_s": 0.0,
+    "mean_s": 1.7,
+    "max_s": 7
+   },
+   "situation street_sidewalk->restaurant": {
+    "n": 10,
+    "missed": 1,
+    "median_s": 25,
+    "mean_s": 24.7,
+    "max_s": 34
+   },
+   "situation street_sidewalk->street_crossing": {
+    "n": 131,
+    "missed": 5,
+    "median_s": 0.0,
+    "mean_s": 0.6,
+    "max_s": 8
+   }
+  },
+  "cloud_rules": {
+   "indoor in->out": {
+    "n": 10,
+    "missed": 0,
+    "median_s": 0.0,
+    "mean_s": 0,
+    "max_s": 0
+   },
+   "indoor out->in": {
+    "n": 15,
+    "missed": 4,
+    "median_s": 5,
+    "mean_s": 12.1,
+    "max_s": 83
+   },
+   "situation office_building->street_sidewalk": {
+    "n": 5,
+    "missed": 0,
+    "median_s": 0,
+    "mean_s": 0.4,
+    "max_s": 2
+   },
+   "situation parking_lot->street_crossing": {
+    "n": 5,
+    "missed": 0,
+    "median_s": 7,
+    "mean_s": 7.4,
+    "max_s": 8
+   },
+   "situation parking_lot->street_sidewalk": {
+    "n": 20,
+    "missed": 0,
+    "median_s": 0.0,
+    "mean_s": 0,
+    "max_s": 0
+   },
+   "situation restaurant->street_sidewalk": {
+    "n": 5,
+    "missed": 0,
+    "median_s": 0,
+    "mean_s": 0,
+    "max_s": 0
+   },
+   "situation street_crossing->street_sidewalk": {
+    "n": 131,
+    "missed": 0,
+    "median_s": 0,
+    "mean_s": 0,
+    "max_s": 0
+   },
+   "situation street_crossing->transit_stop": {
+    "n": 5,
+    "missed": 0,
+    "median_s": 0,
+    "mean_s": 0,
+    "max_s": 0
+   },
+   "situation street_sidewalk->office_building": {
+    "n": 5,
+    "missed": 5,
+    "median_s": null,
+    "mean_s": null,
+    "max_s": null
+   },
+   "situation street_sidewalk->parking_lot": {
+    "n": 20,
+    "missed": 20,
+    "median_s": null,
+    "mean_s": null,
+    "max_s": null
+   },
+   "situation street_sidewalk->restaurant": {
+    "n": 10,
+    "missed": 0,
+    "median_s": 12.5,
+    "mean_s": 19.4,
+    "max_s": 48
+   },
+   "situation street_sidewalk->street_crossing": {
+    "n": 131,
+    "missed": 48,
+    "median_s": 8,
+    "mean_s": 9.2,
+    "max_s": 26
+   }
+  }
+ },
+ "gnss_doorway_lag_s_sampled": [
+  32,
+  15,
+  13,
+  31,
+  19,
+  19,
+  15,
+  25,
+  26,
+  23,
+  34,
+  31,
+  32,
+  12,
+  15
+ ],
+ "ms_per_fix": {
+  "mean": 8.139,
+  "p95": 24.958,
+  "max": 117.952,
+  "n": 16844
+ }
+}

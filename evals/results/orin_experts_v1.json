@@ -1,0 +1,122 @@
+{
+ "_meta": {
+  "url": "http://127.0.0.1:8080",
+  "adapters": {
+   "outdoor": 0,
+   "indoor": 1,
+   "reader": 2
+  },
+  "note": "trained adapters, 15W",
+  "time": "2026-11-19 04:19",
+  "command": "bench/orin/expert_bench.py run --n 6 --out orin_experts --note trained adapters, 15W"
+ },
+ "outdoor@448": {
+  "n": 6,
+  "ttft_median_s": 1.239,
+  "ttft_min_s": 1.205,
+  "ttft_max_s": 1.282,
+  "tok_s": 13.5,
+  "total_median_s": 3.84,
+  "sample": "Two people are ahead, blocking your path. A bench is nearby, and a statue sits on it. The path is clear, with a curb on the left side. This looks like a street with"
+ },
+ "outdoor@560": {
+  "n": 6,
+  "ttft_median_s": 1.924,
+  "ttft_min_s": 1.753,
+  "ttft_max_s": 2.363,
+  "tok_s": 13.6,
+  "total_median_s": 4.69,
+  "sample": "A person is standing ahead, blocking your path. The path is clear to your right. There's a desk with a laptop and a computer mouse on it. A chair is positioned near the desk."
+ },
+ "outdoor@768": {
+  "n": 6,
+  "ttft_median_s": 2.431,
+  "ttft_min_s": 2.181,
+  "ttft_max_s": 3.13,
+  "tok_s": 13.4,
+  "total_median_s": 5.32,
+  "sample": "A person is standing ahead, blocking your path. The path is clear to your right. There's a bench to your left. A car is parked further back."
+ },
+ "indoor@448": {
+  "n": 6,
+  "ttft_median_s": 1.24,
+  "ttft_min_s": 1.104,
+  "ttft_max_s": 1.379,
+  "tok_s": 13.7,
+  "total_median_s": 4.14,
+  "sample": "This is an outdoor area near a building. There are two people ahead, one approaching from the left. A pole is ahead, within reach. A car is ahead, 8 meters away. A"
+ },
+ "indoor@560": {
+  "n": 6,
+  "ttft_median_s": 1.91,
+  "ttft_min_s": 1.735,
+  "ttft_max_s": 1.927,
+  "tok_s": 13.7,
+  "total_median_s": 4.8,
+  "sample": "This is an office setting. There are two people ahead, one near the top left and another further back. A pole is visible near the top center. A car is ahead, slightly to the left"
+ },
+ "indoor@768": {
+  "n": 6,
+  "ttft_median_s": 2.556,
+  "ttft_min_s": 2.204,
+  "ttft_max_s": 2.566,
+  "tok_s": 13.6,
+  "total_median_s": 5.18,
+  "sample": "This is a street scene. There's a person approaching from the right side, near the top. A pole is ahead, blocking your path. A car is ahead, about 8 meters away."
+ },
+ "reader@448": {
+  "n": 6,
+  "ttft_median_s": 1.233,
+  "ttft_min_s": 1.199,
+  "ttft_max_s": 1.391,
+  "tok_s": 13.2,
+  "total_median_s": 2.14,
+  "sample": "There is text, but it is too blurry to read."
+ },
+ "reader@560": {
+  "n": 6,
+  "ttft_median_s": 1.91,
+  "ttft_min_s": 1.74,
+  "ttft_max_s": 1.919,
+  "tok_s": 13.2,
+  "total_median_s": 2.82,
+  "sample": "There is text, but it is too blurry to read."
+ },
+ "reader@768": {
+  "n": 6,
+  "ttft_median_s": 2.555,
+  "ttft_min_s": 2.176,
+  "ttft_max_s": 3.464,
+  "tok_s": 13.1,
+  "total_median_s": 3.47,
+  "sample": "There is text, but it is too blurry to read."
+ },
+ "switch": {
+  "first_after_switch": {
+   "n": 12,
+   "ttft_median_s": 1.367,
+   "ttft_min_s": 1.289,
+   "ttft_max_s": 1.402,
+   "tok_s": 13.6,
+   "total_median_s": 4.29
+  },
+  "second_same_expert": {
+   "n": 12,
+   "ttft_median_s": 1.23,
+   "ttft_min_s": 1.194,
+   "ttft_max_s": 1.553,
+   "tok_s": 13.6,
+   "total_median_s": 4.14
+  },
+  "cost_s": 0.137
+ },
+ "planner_text_only": {
+  "n": 6,
+  "ttft_median_s": 0.081,
+  "ttft_min_s": 0.081,
+  "ttft_max_s": 0.28,
+  "tok_s": 14.2,
+  "total_median_s": 0.99,
+  "sample": "The bus stop is 30 meters ahead on the right."
+ }
+}

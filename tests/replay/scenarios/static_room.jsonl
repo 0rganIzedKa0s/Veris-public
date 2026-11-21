@@ -1,0 +1,10 @@
+# Static room, describe on request. User is stationary; context proposes
+# describe; identical frames = STATIONARY. Mode never leaves describe, every
+# generation's output is spoken (nothing stale, no interrupts, no drops).
+{"type": "config", "describe_duration_s": 2.0, "context_map": {"room": ["describe", "living_room"]}}
+{"t": 0.0, "type": "context", "fix": "room"}
+{"t": 0.0, "type": "frame", "tex": "T", "off": 40}
+{"t": 1.0, "type": "frame", "tex": "T", "off": 40}
+{"t": 3.0, "type": "frame", "tex": "T", "off": 40}
+{"t": 5.0, "type": "frame", "tex": "T", "off": 40}
+{"t": 7.0, "type": "frame", "tex": "T", "off": 40}
